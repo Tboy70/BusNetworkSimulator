@@ -1,2 +1,2 @@
 # BusNetworkSimulator
-UTBM project to simulate a network of bus.
+UTBM project to simulate a network of buses.
