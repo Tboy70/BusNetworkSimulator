@@ -18,7 +18,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<!-- JQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>    
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>    
   </head>
   <body>
 	<h2>GL52 - Bus Network Simulator</h2>
