@@ -41,12 +41,12 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>src/main/ressources/logback.xml</name>
+			<name>src/main/ressources/logback.xml.backup</name>
 			<type>1</type>
 			<location>/home/petrol/Documents/Workspace/BusNetworkSimulator/busNetworkSimulator/src/main/ressources/logback.xml</location>
 		</link>
 		<link>
-			<name>src/test/ressources/logback-test.xml</name>
+			<name>src/test/ressources/logback-test.xml.backup</name>
 			<type>1</type>
 			<location>/home/petrol/Documents/Workspace/BusNetworkSimulator/busNetworkSimulator/src/test/ressources/logback-test.xml</location>
 		</link>

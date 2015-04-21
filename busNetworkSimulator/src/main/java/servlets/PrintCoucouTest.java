@@ -16,14 +16,13 @@ import org.slf4j.LoggerFactory;
 public class PrintCoucouTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static Logger log = LoggerFactory
-			.getLogger("fr.utbm.info.gl52.busnetworksimulator.servlet");
+			.getLogger("fr.utbm.info.gl52.bns.servlet");
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public PrintCoucouTest() {
 		super();
-		System.out.println("Coucou Constructor");
 		// TODO Auto-generated constructor stub
 	}
 
