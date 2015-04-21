@@ -4,4 +4,14 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>PrintCoucouTest</servlet-name>
+  	<display-name>PrintCoucouTest</display-name>
+  	<description></description>
+  	<servlet-class>servlets.PrintCoucouTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PrintCoucouTest</servlet-name>
+  	<url-pattern>/test</url-pattern>
+  </servlet-mapping>
 </web-app>
