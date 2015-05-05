@@ -1,17 +1,17 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+                http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-  	<servlet-name>PrintCoucouTest</servlet-name>
-  	<display-name>PrintCoucouTest</display-name>
-  	<description></description>
-  	<servlet-class>servlets.PrintCoucouTest</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>PrintCoucouTest</servlet-name>
-  	<url-pattern>/test</url-pattern>
-  </servlet-mapping>
+	<servlet>
+		<display-name>PrintcoucouTest</display-name>
+		<servlet-name>PrintCoucouTest</servlet-name>
+		<servlet-class>servlets.PrintCoucouTest</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PrintCoucouTest</servlet-name>
+		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
 </web-app>
