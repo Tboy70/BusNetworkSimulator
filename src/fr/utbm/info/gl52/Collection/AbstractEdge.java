@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public abstract class AbstractEdge implements IEdge<D, N extends TreeNode<D,N> >  {
+public abstract class AbstractEdge<D, N extends AbstractNode<D,N>> implements IEdge<D, N>  {
 
     /**
      * 

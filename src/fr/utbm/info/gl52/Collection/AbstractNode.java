@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public abstract class AbstractNode implements INode {
+public abstract class AbstractNode<D, N extends AbstractNode<D,N>> implements INode<D, N> {
 
     /**
      * 
