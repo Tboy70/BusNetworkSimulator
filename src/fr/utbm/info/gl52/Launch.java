@@ -21,21 +21,4 @@ public class Launch {
         // TODO implement here
     }
 
-    /**
-     * 
-     */
-    public interface Iterator {
-
-        /**
-         * 
-         */
-        public void hasNext();
-
-        /**
-         * 
-         */
-        public void next();
-
-    }
-
 }

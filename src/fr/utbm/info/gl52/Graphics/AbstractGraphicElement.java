@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public abstract class AbstractGraphicElement extends Subscriber implements IGraphic {
+public abstract class AbstractGraphicElement implements IGraphic {
 
     /**
      * 

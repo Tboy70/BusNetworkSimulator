@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public abstract class AbstractLayout extends Subscriber implements ILayout {
+public abstract class AbstractLayout implements ILayout {
 
     /**
      * 
