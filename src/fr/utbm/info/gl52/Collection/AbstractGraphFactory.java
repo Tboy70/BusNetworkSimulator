@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public abstract class AbstractGraphFactory implements IGraphFactory {
+public abstract class AbstractGraphFactory<D, N> implements IGraphFactory<D, N> {
 
     /**
      * 

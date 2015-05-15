@@ -5,6 +5,6 @@ import java.util.*;
 /**
  * 
  */
-public interface ITreeNode {
+public interface ITreeNode<D, N extends ITreeNode<D,N>> extends INode<D, N> {
 
 }

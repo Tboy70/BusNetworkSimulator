@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public class OrientedEdge extends AbstractEdge {
+public class OrientedEdge<D, N extends Node<D, N>> extends AbstractEdge<D, N> {
 
     /**
      * 

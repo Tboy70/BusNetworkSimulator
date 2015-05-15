@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public class QuadTree extends AbstractTree {
+public class QuadTree<D, N extends QuadTreeNode<D,N>> extends AbstractTree<D,N> {
 
     /**
      * 
@@ -13,18 +13,10 @@ public class QuadTree extends AbstractTree {
     public QuadTree() {
     }
 
-
-    /**
-     * 
-     */
-    public class AssociationClass1 {
-
-        /**
-         * 
-         */
-        public AssociationClass1() {
-        }
-
-    }
+	@Override
+	public void addNode(Node n) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

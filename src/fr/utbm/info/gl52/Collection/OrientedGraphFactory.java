@@ -5,13 +5,19 @@ import java.util.*;
 /**
  * 
  */
-public class OrientedGraphFactory extends AbstractGraphFactory {
+public class OrientedGraphFactory<D, N extends OrientedGraph> extends AbstractGraphFactory<D, N> {
 
     /**
      * 
      */
     public OrientedGraphFactory() {
     }
+
+	@Override
+	public N create() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

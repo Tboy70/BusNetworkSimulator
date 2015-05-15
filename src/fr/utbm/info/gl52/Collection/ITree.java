@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public interface ITree {
+public interface ITree<D, N extends ITreeNode<D,N>> extends IGraph<D, N> {
 
     /**
      * @param Node n

@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public abstract class AbstractTree implements ITree {
+public abstract class AbstractTree<D, N extends AbstractTreeNode<D,N>> implements ITree<D,N> {
 
     /**
      * 

@@ -5,13 +5,19 @@ import java.util.*;
 /**
  * 
  */
-public class QuadTreeFactory extends AbstractGraphFactory {
+public class QuadTreeFactory<D, N extends QuadTree> extends AbstractGraphFactory<D, N> {
 
     /**
      * 
      */
     public QuadTreeFactory() {
     }
+
+	@Override
+	public N create() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

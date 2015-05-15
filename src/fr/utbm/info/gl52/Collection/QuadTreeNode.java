@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public class QuadTreeNode extends AbstractTreeNode {
+public class QuadTreeNode<D, N extends QuadTreeNode<D,N>> extends AbstractTreeNode<D,N> {
 
     /**
      * 

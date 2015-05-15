@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public class OrientedGraph extends AbstractGraph {
+public class OrientedGraph<D, N extends Node<D,N>> extends AbstractGraph<D, N> {
 
     /**
      * 

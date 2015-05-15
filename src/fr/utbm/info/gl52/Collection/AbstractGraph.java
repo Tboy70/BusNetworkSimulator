@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public abstract class AbstractGraph extends AbstractTree implements IGraph {
+public abstract class AbstractGraph<D, N extends AbstractNode<D,N>> implements IGraph<D, N> {
 
     /**
      * 
@@ -13,22 +13,17 @@ public abstract class AbstractGraph extends AbstractTree implements IGraph {
     public AbstractGraph() {
     }
 
-
-
-
-
-
     /**
      * @param Edge e
      */
-    public void addEdge(IEdge e) {
+    public void addEdge(IEdge<D, N> e) {
         // TODO implement here
     }
 
     /**
      * @param Edge e
      */
-    public void removeEdge(IEdge e) {
+    public void removeEdge(IEdge<D, N> e) {
         // TODO implement here
     }
 

@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public class Node extends AbstractNode {
+public class Node<D,N extends Node<D,N>> extends AbstractNode<D,N> {
 
     /**
      * 
