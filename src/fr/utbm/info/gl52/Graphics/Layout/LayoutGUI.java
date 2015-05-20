@@ -1,4 +1,4 @@
-package fr.utbm.info.gl52.Graphics;
+package fr.utbm.info.gl52.Graphics.Layout;
 
 
 import fr.utbm.info.gl52.Event.Event;

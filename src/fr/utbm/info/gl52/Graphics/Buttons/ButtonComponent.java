@@ -1,10 +1,12 @@
-package fr.utbm.info.gl52.Graphics;
+package fr.utbm.info.gl52.Graphics.Buttons;
 
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+
+import fr.utbm.info.gl52.Graphics.IComponent;
 
 
 /**

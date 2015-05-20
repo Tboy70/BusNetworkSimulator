@@ -1,9 +1,11 @@
-package fr.utbm.info.gl52.Graphics;
+package fr.utbm.info.gl52.Graphics.Frame;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+
+import fr.utbm.info.gl52.Graphics.Layout.ILayout;
 
 
 /**

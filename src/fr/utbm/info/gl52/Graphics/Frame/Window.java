@@ -1,6 +1,8 @@
-package fr.utbm.info.gl52.Graphics;
+package fr.utbm.info.gl52.Graphics.Frame;
 
 import java.awt.Graphics;
+
+import fr.utbm.info.gl52.Graphics.Layout.LayoutGUI;
 
 
 /**

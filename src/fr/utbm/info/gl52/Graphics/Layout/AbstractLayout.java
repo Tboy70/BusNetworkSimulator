@@ -1,9 +1,12 @@
-package fr.utbm.info.gl52.Graphics;
+package fr.utbm.info.gl52.Graphics.Layout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLayeredPane;
+
+import fr.utbm.info.gl52.Graphics.AbstractComponent;
+import fr.utbm.info.gl52.Graphics.IComponent;
 
 /**
  * 

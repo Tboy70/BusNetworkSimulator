@@ -1,18 +1,21 @@
-package fr.utbm.info.gl52.Graphics;
-
+package fr.utbm.info.gl52.Graphics.Buttons;
 
 import java.awt.event.ActionEvent;
+
 
 /**
  * 
  */
-public class RemoveBusButton extends ButtonComponent {
+public class AddStopButton extends ButtonComponent {
 
-
-	public RemoveBusButton(String text, int x, int y, int h, int w) {
+    public AddStopButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
 		// TODO Auto-generated constructor stub
 	}
+
+	/**
+     * 
+     */
 
 	@Override
 	public void action(ActionEvent evt) {

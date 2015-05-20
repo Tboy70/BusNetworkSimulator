@@ -1,4 +1,4 @@
-package fr.utbm.info.gl52.Graphics;
+package fr.utbm.info.gl52.Graphics.Buttons;
 
 
 import java.awt.event.ActionEvent;
