@@ -1,15 +1,26 @@
 package fr.utbm.info.gl52.Graphics;
 
+import java.awt.event.ActionEvent;
+
 
 /**
  * 
  */
-public class AddStopButton {
+public class AddStopButton extends ButtonComponent {
 
-    /**
+    public AddStopButton(String text, int x, int y, int h, int w) {
+		super(text, x, y, h, w);
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * 
      */
-    public AddStopButton() {
-    }
+
+	@Override
+	public void action(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

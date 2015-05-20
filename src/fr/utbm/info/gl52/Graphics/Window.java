@@ -1,5 +1,7 @@
 package fr.utbm.info.gl52.Graphics;
 
+import java.awt.Graphics;
+
 
 /**
  * 
@@ -7,17 +9,15 @@ package fr.utbm.info.gl52.Graphics;
 public class Window extends AbstractFrame {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 
      */
     public Window() {
+    	super();
+    	listLayout.add(new LayoutGUI());
     }
-
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
 }

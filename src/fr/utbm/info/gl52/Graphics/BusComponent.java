@@ -1,12 +1,11 @@
 package fr.utbm.info.gl52.Graphics;
 
 
-import fr.utbm.info.gl52.Event.Event;
 
 /**
  * 
  */
-public class BusComponent extends AbstractComponent {
+public abstract class BusComponent extends AbstractComponent {
 
     /**
      * 
@@ -20,9 +19,4 @@ public class BusComponent extends AbstractComponent {
 		
 	}
 
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		
-	}
 }

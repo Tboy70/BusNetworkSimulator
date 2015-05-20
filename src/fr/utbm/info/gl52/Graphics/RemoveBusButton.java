@@ -1,33 +1,21 @@
 package fr.utbm.info.gl52.Graphics;
 
 
-import fr.utbm.info.gl52.Event.Event;
+import java.awt.event.ActionEvent;
 
 /**
  * 
  */
 public class RemoveBusButton extends ButtonComponent {
 
-    /**
-     * 
-     */
-    public RemoveBusButton() {
-    }
 
-	@Override
-	public void move(int x, int y) {
-		// TODO Auto-generated method stub
-		
+	public RemoveBusButton(String text, int x, int y, int h, int w) {
+		super(text, x, y, h, w);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void inform(Event e) {
+	public void action(ActionEvent evt) {
 		// TODO Auto-generated method stub
 		
 	}
