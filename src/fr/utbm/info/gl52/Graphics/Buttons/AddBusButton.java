@@ -22,8 +22,7 @@ public class AddBusButton extends ButtonComponent {
     
 	@Override
 	public void action(ActionEvent evt) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("add test");
 	}
 
 }

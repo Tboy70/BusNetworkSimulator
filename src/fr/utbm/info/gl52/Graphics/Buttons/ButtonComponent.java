@@ -5,14 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
+import fr.utbm.info.gl52.Graphics.AbstractComponent;
 import fr.utbm.info.gl52.Graphics.IComponent;
 
 
 /**
  * 
  */
-public abstract class ButtonComponent extends JButton implements IComponent {
+public abstract class ButtonComponent extends AbstractComponent implements IComponent {
 
     /**
 	 * 
@@ -22,25 +24,32 @@ public abstract class ButtonComponent extends JButton implements IComponent {
      * 
      */
 	protected Rectangle bounds;
+	private JButton button;
 	private void init() {
-		this.addActionListener(new ActionListener() {
+		button.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent evt) {
 		        action(evt);
 		      }
 		    });
 	}
     public ButtonComponent(String text, int x, int y, int h, int w) {
-    	super(text);
-    	bounds = new Rectangle(0, 0, h, w);
-    	this.setSize(w,h);
-    	this.setBounds(bounds);
+    	button = new JButton(text);
+    	button.setText(text);
+    	bounds = new Rectangle(x, y, h, w);
+    	button.setSize(w,h);
+    	button.setBounds(bounds);
     	init();
     }
     public void move(int x, int y) {
 		// TODO Auto-generated method stub
 		bounds.setLocation(x, y);
-		setBounds(bounds);
+		button.setBounds(bounds);
 	}
+
+    public JComponent getSwingComponent()
+    {
+    	return button;
+    }
     public abstract void action(ActionEvent evt);
 
 }

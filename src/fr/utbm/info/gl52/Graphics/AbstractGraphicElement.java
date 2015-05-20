@@ -3,12 +3,14 @@ package fr.utbm.info.gl52.Graphics;
 
 import java.awt.Graphics;
 
+import javax.swing.JComponent;
+
 import fr.utbm.info.gl52.Event.Subscriber;
 
 /**
  * 
  */
-public abstract class AbstractGraphicElement implements IGraphic {
+public abstract class AbstractGraphicElement extends AbstractComponent implements IGraphic {
 
     /**
      * 

@@ -1,31 +1,29 @@
 package fr.utbm.info.gl52.Graphics.Layout;
-
-import fr.utbm.info.gl52.Graphics.AbstractComponent;
+import fr.utbm.info.gl52.Graphics.IComponent;
 
 
 /**
  * 
  */
-public interface ILayout {
+public interface ILayout<C extends IComponent> {
 
 
 
     /**
-     * @param int x 
-     * @param int y
+     * @param AbstractComponent c 
      */
-    public void addComponent(int x, int y);
+    public void addComponent(C c);
 
     /**
      * @param AbstractComponent c 
      * @param int x 
      * @param int y
      */
-    public void moveComponent(AbstractComponent c, int x, int y);
+    public void moveComponent(C c, int x, int y);
 
     /**
      * @param AbstractComponent c
      */
-    public void delete(AbstractComponent c);
+    public void delete(C c);
 
 }

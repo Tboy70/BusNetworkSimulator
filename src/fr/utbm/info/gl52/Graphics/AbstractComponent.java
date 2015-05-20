@@ -1,12 +1,12 @@
 package fr.utbm.info.gl52.Graphics;
 
-import java.awt.Graphics;
+import javax.swing.JComponent;
 
 
 /**
  * 
  */
-public abstract class AbstractComponent extends AbstractGraphicElement implements IComponent {
+public abstract class AbstractComponent implements IComponent {
 
     /**
      * 
@@ -14,4 +14,6 @@ public abstract class AbstractComponent extends AbstractGraphicElement implement
 	protected int posX, posY;
     public AbstractComponent() {
     }
+
+    public abstract JComponent getSwingComponent();
 }

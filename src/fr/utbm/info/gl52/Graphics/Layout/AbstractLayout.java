@@ -1,35 +1,41 @@
 package fr.utbm.info.gl52.Graphics.Layout;
 
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
-import fr.utbm.info.gl52.Graphics.IComponent;
 
 /**
  * 
  */
-public abstract class AbstractLayout extends JLayeredPane implements ILayout {
+public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel implements ILayout<C> {
 
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected List<IComponent> listComponents;
+	protected List<C> listComponents;
 	/**
      * 
      */
-    public AbstractLayout() {
-    	listComponents = new ArrayList<IComponent>();
+    public AbstractLayout(int h, int w) {
+    	listComponents = new ArrayList<C>();
+    	setOpaque(false);
+    	setLayout(null);
+    	setBounds(new Rectangle(0,0,h,w));
     }
 
-	public void addComponent(AbstractComponent c) {
+	public void addComponent(C c) {
 		listComponents.add(c);
+		if (c.getSwingComponent() != null)
+			add(c.getSwingComponent());
 	}
 
-	public void moveComponent(AbstractComponent c, int x, int y) {
+	public void moveComponent(C c, int x, int y) {
 		int t;
 		if ((t = listComponents.indexOf(c)) != -1)
 		{
@@ -37,9 +43,16 @@ public abstract class AbstractLayout extends JLayeredPane implements ILayout {
 		}
 	}
 
-	public void delete(AbstractComponent c) {
+	public void delete(C c) {
 		listComponents.remove(c);
+		this.remove(c.getSwingComponent());
 	}
+	   @Override
+	    public void paintComponent(Graphics g) {
+
+	        super.paintComponent(g);
+	        
+	    }
 
 
 }

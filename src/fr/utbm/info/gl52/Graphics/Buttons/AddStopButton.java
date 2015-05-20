@@ -8,7 +8,12 @@ import java.awt.event.ActionEvent;
  */
 public class AddStopButton extends ButtonComponent {
 
-    public AddStopButton(String text, int x, int y, int h, int w) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public AddStopButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
 		// TODO Auto-generated constructor stub
 	}
@@ -16,11 +21,7 @@ public class AddStopButton extends ButtonComponent {
 	/**
      * 
      */
-
-	@Override
 	public void action(ActionEvent evt) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("add test");
 	}
-
 }

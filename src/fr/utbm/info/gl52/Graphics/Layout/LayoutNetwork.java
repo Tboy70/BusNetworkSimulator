@@ -1,23 +1,20 @@
 package fr.utbm.info.gl52.Graphics.Layout;
 
 
-import fr.utbm.info.gl52.Event.Event;
+import fr.utbm.info.gl52.Graphics.AbstractComponent;
 
 /**
  * 
  */
-public class LayoutNetwork extends AbstractLayout {
+public class LayoutNetwork<C extends AbstractComponent> extends AbstractLayout<C> {
+
+	public LayoutNetwork(int h, int w) {
+		super(h, w);
+		// TODO Auto-generated constructor stub
+	}
 
     /**
      * 
      */
-    public LayoutNetwork() {
-    }
-
-	@Override
-	public void addComponent(int x, int y) {
-		// TODO Auto-generated method stub
-		
-	}
-
+    
 }
