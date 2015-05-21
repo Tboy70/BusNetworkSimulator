@@ -8,18 +8,10 @@ public abstract class AbstractTree<D extends ShapedObject, N extends ITreeNode<D
 
 private static final long serialVersionUID = 1L;
 	
-	/******************/
-	/*** ATTRIBUTES ***/
-	/*****************/
-	
 	/**
 	 * Root node of the tree.
 	 */
 	private N root;
-	
-	/********************/
-	/*** CONSTRUCTOR ***/
-	/********************/
 
 	public AbstractTree() {
 		this.root = null;
