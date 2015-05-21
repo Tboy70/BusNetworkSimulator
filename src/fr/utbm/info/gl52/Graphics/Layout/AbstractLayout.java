@@ -3,7 +3,7 @@ package fr.utbm.info.gl52.Graphics.Layout;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.swing.JPanel;
 
@@ -18,7 +18,8 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected List<C> listComponents;
+	protected Collection<C> listComponents;
+	protected int h, w;
 	/**
      * 
      */
@@ -27,6 +28,8 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
     	setOpaque(false);
     	setLayout(null);
     	setBounds(new Rectangle(0,0,h,w));
+    	this.h = h;
+    	this.w = w;
     }
 
 	public void addComponent(C c) {
@@ -37,9 +40,11 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 
 	public void moveComponent(C c, int x, int y) {
 		int t;
-		if ((t = listComponents.indexOf(c)) != -1)
+		if (listComponents.contains(c))
 		{
-			listComponents.get(t).move(x, y);
+			listComponents.remove(c);
+			c.move(x, y);
+			listComponents.add(c);
 		}
 	}
 
@@ -49,9 +54,7 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	}
 	   @Override
 	    public void paintComponent(Graphics g) {
-
-	        super.paintComponent(g);
-	        
+	        super.paintComponent(g);	        
 	    }
 
 
