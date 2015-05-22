@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
-import fr.utbm.info.gl52.Graphics.Buttons.AddBusButton;
+import fr.utbm.info.gl52.Graphics.Buttons.ZoomButton;
 import fr.utbm.info.gl52.Graphics.Layout.AbstractLayout;
 import fr.utbm.info.gl52.Graphics.Layout.LayoutGUI;
 import fr.utbm.info.gl52.Graphics.Layout.LayoutMap;
@@ -32,17 +32,20 @@ public abstract class AbstractFrame extends JFrame implements IFrame, MouseListe
     public AbstractFrame(String title, int h,  int w) {
     	super(title);
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocation(new Point(20,20));;
+        this.setLocation(new Point(locationX,locationY));
         
         setSize(700,700);
         setVisible(true);
     	mainPanel = new JPanel();
     	
-    	AbstractComponent test = new AddBusButton("", 10, 0, 16, 16);
+    	ZoomButton zplus = new ZoomButton("+", 300, 0, 40, 40, 10);
+    	ZoomButton zminus = new ZoomButton("-", 300, 40, 40, 40, -10);
+    	
         JLayeredPane jlp = new JLayeredPane(); 
-    	gui = new LayoutGUI<AbstractComponent>(300, 300);
+    	gui = new LayoutGUI<AbstractComponent>(450, 450);
     	map = new LayoutMap<AbstractGraphicElement>(2000, 2000);
-
+    	zplus.setLayout(map);
+    	zminus.setLayout(map);
         //gui.add(test.getSwingComponent());
         int[] px = {10, 50, 350};
         int[] py = {10, 50, 400};
@@ -60,8 +63,10 @@ public abstract class AbstractFrame extends JFrame implements IFrame, MouseListe
     	map.addComponent(new YellowBus(50, 50));
     	map.addComponent(new YellowBus(350, 400));
     	
-    		//        gui.addComponent(test);
+    	gui.addComponent(zplus);
     	        
+    	gui.addComponent(zminus);
+    	
         jlp.add(map, new Integer(0));
         jlp.add(gui, new Integer(1));
         
@@ -101,6 +106,5 @@ public abstract class AbstractFrame extends JFrame implements IFrame, MouseListe
     public void mouseEntered(MouseEvent e) {}
     @Override
     public void mouseExited(MouseEvent e) {}
-    
 
 }

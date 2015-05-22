@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
+import fr.utbm.info.gl52.Graphics.CardinalSystem;
 import fr.utbm.info.gl52.Graphics.IComponent;
 
 
@@ -16,15 +17,9 @@ import fr.utbm.info.gl52.Graphics.IComponent;
  */
 public abstract class ButtonComponent extends AbstractComponent implements IComponent {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	/**
-     * 
-     */
 	protected Rectangle bounds;
 	private JButton button;
+	protected CardinalSystem placement;
 	private void init() {
 		button.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent evt) {
@@ -32,12 +27,23 @@ public abstract class ButtonComponent extends AbstractComponent implements IComp
 		      }
 		    });
 	}
-    public ButtonComponent(String text, int x, int y, int h, int w) {
+	public ButtonComponent(String text, int x, int y, int h, int w) {
+		button = new JButton(text);
+    	button.setText(text);
+    	bounds = new Rectangle(x, y, h, w);
+    	button.setSize(w,h);
+    	button.setBounds(bounds);
+    	placement = CardinalSystem.NORTHEAST;
+    	init();
+    }
+	    
+	public ButtonComponent(String text, int x, int y, int h, int w, CardinalSystem p) {
     	button = new JButton(text);
     	button.setText(text);
     	bounds = new Rectangle(x, y, h, w);
     	button.setSize(w,h);
     	button.setBounds(bounds);
+    	placement = p;
     	init();
     }
     public void move(int x, int y) {

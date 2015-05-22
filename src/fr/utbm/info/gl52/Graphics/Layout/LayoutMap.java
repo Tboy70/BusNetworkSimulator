@@ -25,11 +25,12 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 	public void addComponent(C c) {
     	listComponents.add(c);
     }
+	
    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
-        
+        g2d.scale(zoom/100, zoom/100);
         g2d.setRenderingHint(
                 RenderingHints.KEY_ANTIALIASING, 
                 RenderingHints.VALUE_ANTIALIAS_ON);
@@ -38,6 +39,7 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
         g2d.fillRect(0, 0, h, w);
         for(C c: listComponents)
         	c.draw(g);
+        g2d.scale(1,1);
     }
 
 }
