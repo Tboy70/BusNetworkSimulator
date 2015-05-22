@@ -12,13 +12,9 @@ import javax.swing.JPanel;
 
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
-import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
-import fr.utbm.info.gl52.Graphics.Buttons.ZoomButton;
 import fr.utbm.info.gl52.Graphics.Layout.AbstractLayout;
 import fr.utbm.info.gl52.Graphics.Layout.LayoutGUI;
 import fr.utbm.info.gl52.Graphics.Layout.LayoutMap;
-import fr.utbm.info.gl52.Graphics.Road.BicyclePathComponent;
-import fr.utbm.info.gl52.Graphics.Road.HighwayComponent;
 
 
 public abstract class AbstractFrame extends JFrame implements IFrame, MouseListener, MouseMotionListener {
@@ -37,36 +33,12 @@ public abstract class AbstractFrame extends JFrame implements IFrame, MouseListe
         setSize(700,700);
         setVisible(true);
     	mainPanel = new JPanel();
-    	
-    	ZoomButton zplus = new ZoomButton("+", 300, 0, 40, 40, 10);
-    	ZoomButton zminus = new ZoomButton("-", 300, 40, 40, 40, -10);
-    	
-        JLayeredPane jlp = new JLayeredPane(); 
+    	JLayeredPane jlp = new JLayeredPane(); 
     	gui = new LayoutGUI<AbstractComponent>(450, 450);
-    	map = new LayoutMap<AbstractGraphicElement>(2000, 2000);
-    	zplus.setLayout(map);
-    	zminus.setLayout(map);
-        //gui.add(test.getSwingComponent());
-        int[] px = {10, 50, 350};
-        int[] py = {10, 50, 400};
-        
-        int[] bpx = {10, 100, 350};
-        int[] bpy = {10, 50, 400};
-        
-        
-    	map.addComponent(new HighwayComponent(px, py));
-    	map.addComponent(new BicyclePathComponent(bpx, bpy));
-    	
+    	map = new LayoutMap<AbstractGraphicElement>(1000, 1000);
+    
+    	map.setLocation(100,100);
     	jlp.setPreferredSize(new Dimension(h, w));
-        
-    	map.addComponent(new YellowBus(10, 10));
-    	map.addComponent(new YellowBus(50, 50));
-    	map.addComponent(new YellowBus(350, 400));
-    	
-    	gui.addComponent(zplus);
-    	        
-    	gui.addComponent(zminus);
-    	
         jlp.add(map, new Integer(0));
         jlp.add(gui, new Integer(1));
         
@@ -75,7 +47,22 @@ public abstract class AbstractFrame extends JFrame implements IFrame, MouseListe
         this.addMouseMotionListener(this);
     	this.setContentPane(jlp);
     }
-
+    public AbstractLayout<AbstractGraphicElement> getMap()
+    {
+    	return map;
+    }
+    public AbstractLayout<AbstractComponent> getGUI()
+    {
+    	return gui;
+    }
+    public void addGraphicElement(AbstractGraphicElement c)
+    {
+    	map.addComponent(c);
+    }
+    public void addGUI(AbstractComponent c)
+    {
+    	gui.addComponent(c);
+    }
     @Override
     public void mouseClicked(MouseEvent e) {}
     @Override
@@ -89,13 +76,13 @@ public abstract class AbstractFrame extends JFrame implements IFrame, MouseListe
 	public void mouseDragged(MouseEvent e) {
 		    int newX = map.getX() - (x-e.getX());
 	        int newY = map.getY() - (y-e.getY());
-	        newX = (newX > 0) ? 0 : newX;
+	       /*newX = (newX > 0) ? 0 : newX;
 	        newY = (newY > 0) ? 0 : newY;
-	        if (Math.abs(newX)+this.getWidth() > map.getWidth())
-	        	newX = this.getWidth()-map.getWidth();
-	        if (Math.abs(newY)+this.getHeight() > map.getHeight())
-	        	newY = this.getHeight()-map.getHeight();
-	        
+	        if (Math.abs(newX)+this.getWidth() > map.getW())
+	        	newX = this.getWidth()-map.getW();
+	        if (Math.abs(newY)+this.getHeight() > map.getH())
+	        	newY = this.getHeight()-map.getH();
+	        */
 	        map.setLocation(newX, newY);
 	        x = e.getX();
 	        y = e.getY();

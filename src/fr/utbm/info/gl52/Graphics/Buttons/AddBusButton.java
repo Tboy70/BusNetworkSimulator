@@ -3,7 +3,9 @@ package fr.utbm.info.gl52.Graphics.Buttons;
 
 import java.awt.event.ActionEvent;
 
+import fr.utbm.info.gl52.Graphics.AbstractComponent;
 import fr.utbm.info.gl52.Graphics.CardinalSystem;
+import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
 
 /**
  * 
@@ -19,7 +21,9 @@ public class AddBusButton extends ButtonComponent {
     
 	@Override
 	public void action(ActionEvent evt) {
-		System.out.println("add test");
+		AbstractComponent c =new YellowBus((int) (Math.random() * m.getHeight()),(int) (Math.random() * m.getWidth())) ; 
+		m.addComponent(c);
+		m.repaint();
 	}
 
 }

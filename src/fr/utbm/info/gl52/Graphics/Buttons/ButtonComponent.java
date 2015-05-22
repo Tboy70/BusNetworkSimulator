@@ -10,6 +10,7 @@ import javax.swing.JComponent;
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
 import fr.utbm.info.gl52.Graphics.CardinalSystem;
 import fr.utbm.info.gl52.Graphics.IComponent;
+import fr.utbm.info.gl52.Graphics.Layout.AbstractLayout;
 
 
 /**
@@ -17,6 +18,7 @@ import fr.utbm.info.gl52.Graphics.IComponent;
  */
 public abstract class ButtonComponent extends AbstractComponent implements IComponent {
 
+	protected AbstractLayout m;
 	protected Rectangle bounds;
 	private JButton button;
 	protected CardinalSystem placement;
@@ -28,7 +30,7 @@ public abstract class ButtonComponent extends AbstractComponent implements IComp
 		    });
 	}
 	public ButtonComponent(String text, int x, int y, int h, int w) {
-		button = new JButton(text);
+		button = new GraphicButton(text);
     	button.setText(text);
     	bounds = new Rectangle(x, y, h, w);
     	button.setSize(w,h);
@@ -38,7 +40,7 @@ public abstract class ButtonComponent extends AbstractComponent implements IComp
     }
 	    
 	public ButtonComponent(String text, int x, int y, int h, int w, CardinalSystem p) {
-    	button = new JButton(text);
+    	button = new GraphicButton(text);
     	button.setText(text);
     	bounds = new Rectangle(x, y, h, w);
     	button.setSize(w,h);
@@ -46,6 +48,11 @@ public abstract class ButtonComponent extends AbstractComponent implements IComp
     	placement = p;
     	init();
     }
+
+	public void setLayout(AbstractLayout<?> l)
+	{
+		m = l;
+	}
     public void move(int x, int y) {
 		// TODO Auto-generated method stub
 		bounds.setLocation(x, y);

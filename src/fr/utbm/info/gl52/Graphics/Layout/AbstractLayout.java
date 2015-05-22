@@ -20,18 +20,22 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	private static final long serialVersionUID = 1L;
 	protected Collection<C> listComponents;
 	protected int h, w;
+	protected final int height, width;
 	protected double zoom;
 	/**
 	 * 
 	 */	
 	public AbstractLayout(int h, int w) {
-		zoom = 100;
+		zoom = 50;
 		listComponents = new ArrayList<C>();
 		setOpaque(false);
+
 		setLayout(null);
 		setBounds(new Rectangle(0,0,h,w));
 		this.h = h;
 		this.w = w;
+		height = h;
+		width = h;
 	}
 
 	public void addComponent(C c) {
@@ -61,16 +65,16 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	{	
 		if (zoom+z >= 20)
 		{
+		
 			zoom += z;
+			w = (int) (width * (zoom/50));
+			h = (int) (height * (zoom/50));
+			
 		}
+		
+		//this.setBounds(0,0, (int) (getWidth()*(zoom/50)), (int) (getHeight()*(zoom/50)));
+		repaint();
 	}
-	public int getWidth()
-	{
-		return w;
-	}
-	public int getHeight()
-	{
-		return h;
-	}
-
+	public int getW() { return w; }
+	public int getH() { return h; }
 }
