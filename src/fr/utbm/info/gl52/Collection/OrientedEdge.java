@@ -3,7 +3,7 @@ package fr.utbm.info.gl52.Collection;
 /**
  * 
  */
-public class OrientedEdge<D> extends AbstractEdge<D, OrientedEdge<D>> {
+public class OrientedEdge<D> extends AbstractEdge<D, Node<D>> {
 
 	private Node<D> nodeStart;
 	
