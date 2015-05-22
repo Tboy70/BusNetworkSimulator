@@ -6,7 +6,7 @@ import javax.swing.JComponent;
 /**
  * 
  */
-public abstract class AbstractComponent implements IComponent {
+public abstract class AbstractComponent extends JComponent implements IComponent {
 
     /**
      * 

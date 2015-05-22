@@ -1,10 +1,8 @@
 package fr.utbm.info.gl52.Graphics.Bus;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.image.ImageObserver;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;

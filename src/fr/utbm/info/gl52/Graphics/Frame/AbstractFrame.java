@@ -71,6 +71,11 @@ public abstract class AbstractFrame extends JFrame implements IFrame, MouseListe
     public void mousePressed(MouseEvent e) {
         x = e.getX();
         y = e.getY();
+        Point local = map.getLocation();
+        int pX = (int) ((x-local.getX()) / (map.getZoom()/100));
+        int pY = (int) ((y-local.getY()) / (map.getZoom()/100)) ;
+        
+        System.out.println(" /zoom:" + map.getZoom() +"Pt:" + pX+"/"+pY + " --- " +map.actionClick(pX,pY));
     }
     @Override
 	public void mouseDragged(MouseEvent e) {

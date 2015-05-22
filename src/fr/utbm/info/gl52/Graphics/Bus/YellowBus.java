@@ -1,9 +1,9 @@
 package fr.utbm.info.gl52.Graphics.Bus;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 
 import javax.swing.ImageIcon;
 
@@ -25,7 +25,11 @@ public class YellowBus extends BusComponent {
         g2d.fillOval(bounds.x-16/2, bounds.y-16/2, 16, 16);
         float dash1[] = {10.0f};
         g2d.setColor(Color.black);
-        g2d.drawOval(bounds.x-16/2, bounds.y-16/2, 16, 16);
-        
+        g2d.drawOval(bounds.x-16/2, bounds.y-16/2, 16, 16);   
 	}
+
+    public boolean intersect(Shape r)
+    {
+    	return bounds.intersects(r.getBounds2D()) || r.intersects(bounds) || bounds.contains(r.getBounds2D()) || r.contains(bounds);
+    }
 }

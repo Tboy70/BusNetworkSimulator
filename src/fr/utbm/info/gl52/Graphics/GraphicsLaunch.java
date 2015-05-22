@@ -3,6 +3,7 @@ package fr.utbm.info.gl52.Graphics;
 
 import java.io.IOException;
 
+import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
 import fr.utbm.info.gl52.Graphics.Buttons.AddBusButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ZoomButton;
 import fr.utbm.info.gl52.Graphics.Frame.Window;
@@ -38,12 +39,9 @@ public class GraphicsLaunch {
         
     	w.addGraphicElement(new HighwayComponent(px, py));
     	w.addGraphicElement(new BicyclePathComponent(bpx, bpy));
-    	w.addGraphicElement(new OneWayRoadComponent(owx, owy));
-        
-    	/*
+    	w.addGraphicElement(new OneWayRoadComponent(owx, owy));      
+    	
     	w.addGraphicElement(new YellowBus(10, 10));
-    	w.addGraphicElement(new YellowBus(50, 50));
-    	w.addGraphicElement(new YellowBus(350, 400));*/
     	
     	w.addGUI(zplus);
     	w.addGUI(zminus);

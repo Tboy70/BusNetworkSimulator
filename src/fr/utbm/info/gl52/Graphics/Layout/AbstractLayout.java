@@ -8,6 +8,7 @@ import java.util.Collection;
 import javax.swing.JPanel;
 
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
+import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 
 /**
  * 
@@ -25,6 +26,11 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	/**
 	 * 
 	 */	
+	public AbstractGraphicElement actionClick(int x, int y)
+	{
+		return null;
+	}
+	public double getZoom() { return zoom; }
 	public AbstractLayout(int h, int w) {
 		zoom = 50;
 		listComponents = new ArrayList<C>();
@@ -65,14 +71,10 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	{	
 		if (zoom+z >= 20)
 		{
-		
 			zoom += z;
-			w = (int) (width * (zoom/50));
-			h = (int) (height * (zoom/50));
-			
+			w = (int) (width * (zoom/100));
+			h = (int) (height * (zoom/100));	
 		}
-		
-		//this.setBounds(0,0, (int) (getWidth()*(zoom/50)), (int) (getHeight()*(zoom/50)));
 		repaint();
 	}
 	public int getW() { return w; }
