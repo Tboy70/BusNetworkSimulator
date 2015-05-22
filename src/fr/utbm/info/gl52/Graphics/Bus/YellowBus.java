@@ -1,11 +1,11 @@
 package fr.utbm.info.gl52.Graphics.Bus;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 
 public class YellowBus extends BusComponent {
 
@@ -21,6 +21,11 @@ public class YellowBus extends BusComponent {
 
         // Pour le moment, on met des piti carrés jaunes.
         g2d.setColor(Color.YELLOW);
-        g2d.fillRect(bounds.x, bounds.y, 16, 16);
+        //g2d.fillRect(bounds.x, bounds.y, 16, 16);
+        g2d.fillOval(bounds.x-16/2, bounds.y-16/2, 16, 16);
+        float dash1[] = {10.0f};
+        g2d.setColor(Color.black);
+        g2d.drawOval(bounds.x-16/2, bounds.y-16/2, 16, 16);
+        
 	}
 }

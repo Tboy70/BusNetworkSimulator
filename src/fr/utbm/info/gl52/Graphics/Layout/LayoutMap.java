@@ -3,6 +3,7 @@ package fr.utbm.info.gl52.Graphics.Layout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 
@@ -28,6 +29,11 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D)g;
+        
+        g2d.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING, 
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, h, w);
         for(C c: listComponents)
