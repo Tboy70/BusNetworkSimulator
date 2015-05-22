@@ -1,18 +1,38 @@
 package fr.utbm.info.gl52.Parser;
 
 import fr.utbm.info.gl52.Collection.IGraph;
-import fr.utbm.set.io.shape.ESRIPoint;
+import fr.utbm.info.gl52.Collection.INode;
 
-public interface IBad {
+/**
+ * Allow to create new graph without duplicated points and polylines
+ * @author Alexandre
+ */
+public interface IBad<D,N extends INode<D,N>> {
 	
-	public void insertNewPoint(ESRIPoint point);
+	/**
+	 * Insert new point to the object
+	 * @param point The point to add
+	 * @return true if added, false otherwise (mainly because it has already be inserted)
+	 */
+	public boolean insertNewPoint(D point);
 	
-	public void insertNewPolyLine(ESRIPoint points[]);
+	/**
+	 * Insert new polyline into the object
+	 * @param points Points of the polyline to insert
+	 * @return true if added, false otherwise (mainly because it has already be inserted)
+	 */
+	public boolean insertNewPolyLine(D points[]);
 	
-	public void addAllTo(IGraph g);
+	/**
+	 * Add all points and polylines inserted to an existing graph and get it back
+	 * @param g Existing graph to add inserted point and polylines
+	 * @return Return the same IGraph with no duplicated points and polylines and inserted points and polylines 
+	 */
+	public IGraph addAllTo(IGraph<D,N> g);
 	
-	public IGraph getGraph();
-	
+	/**
+	 * Delete all points and polylines inserted in this instance
+	 */
 	public void flush();
 
 }
