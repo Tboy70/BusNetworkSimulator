@@ -3,6 +3,7 @@ package fr.utbm.info.gl52.Graphics.Layout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,7 +15,7 @@ import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 /**
  * 
  */
-public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel implements ILayout<C> {
+public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel implements ILayout<C>{
 
 	/**
 	 * 

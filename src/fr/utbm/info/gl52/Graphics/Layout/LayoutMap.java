@@ -5,15 +5,20 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
 
+import fr.utbm.info.gl52.Event.EventService;
+import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 
 
 /**
  * 
  */
-public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<C> {
+public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<C> implements MouseListener, MouseMotionListener {
 
 
 	/**
@@ -21,8 +26,11 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final int HIT_BOX_SIZE = 5;
+	private int x, y;
 	public LayoutMap(int h, int w) {
 		super(h, w);
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
 		// TODO Auto-generated constructor stub
 	}
 	public void addComponent(C c) {
@@ -58,5 +66,51 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		}
 		return null;
 	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		
+		x = e.getX();
+		y = e.getY();
+
+        int pX = (int) ((x) / (getZoom()/100));
+        int pY = (int) ((y) / (getZoom()/100)) ;
+        EventService.getInstance().publish(new LeftClicEvent(pX, pY));
+        System.out.println("Source:"+actionClick(pX,pY));
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+	    int newX = getX() - (x-e.getX());
+        int newY = getY() - (y-e.getY());
+        setLocation(newX, newY);
+        repaint();
+	}
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }

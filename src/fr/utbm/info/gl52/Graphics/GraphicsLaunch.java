@@ -3,6 +3,10 @@ package fr.utbm.info.gl52.Graphics;
 
 import java.io.IOException;
 
+import fr.utbm.info.gl52.Event.EventService;
+import fr.utbm.info.gl52.Event.IEvent;
+import fr.utbm.info.gl52.Event.ISubscriber;
+import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
 import fr.utbm.info.gl52.Graphics.Buttons.AddBusButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ZoomButton;
@@ -12,6 +16,7 @@ import fr.utbm.info.gl52.Graphics.Road.HighwayComponent;
 import fr.utbm.info.gl52.Graphics.Road.OneWayRoadComponent;
 
 public class GraphicsLaunch {
+
 
 	public static void main(String[] args) throws IOException {
 		Window w = new Window("Test", 600,600);
@@ -36,6 +41,8 @@ public class GraphicsLaunch {
         
         int[] bpx = {10, 100, 580};
         int[] bpy = {10, 50, 400};
+        
+        EventService.getInstance().subscribe(LeftClicEvent.class, null, new Controller());
         
     	w.addGraphicElement(new HighwayComponent(px, py));
     	w.addGraphicElement(new BicyclePathComponent(bpx, bpy));

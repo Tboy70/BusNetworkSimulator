@@ -9,7 +9,10 @@ public class RightClicEvent implements IEvent {
     /**
      * 
      */
-    public RightClicEvent() {
+	public int x, y;
+    public RightClicEvent(int px, int py) {
+    	x = px;
+    	y = py;
     }
 
 
