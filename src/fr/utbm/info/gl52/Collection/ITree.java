@@ -1,7 +1,7 @@
 package fr.utbm.info.gl52.Collection;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collection;
 
 import fr.utbm.info.gl52.Utils.maths.Rectangle2f;
 import fr.utbm.info.gl52.Utils.others.ShapedObject;
@@ -9,7 +9,7 @@ import fr.utbm.info.gl52.Utils.others.ShapedObject;
 /**
  * 
  */
-public interface ITree<D extends ShapedObject, N extends ITreeNode<D, N>> extends Iterable<N>, Serializable {
+public interface ITree<D extends ShapedObject, N extends ITreeNode<D, N>> extends Serializable, Collection<N> {
 
 	/**
 	 * To get the borders covered by all the tree nodes.
@@ -30,5 +30,9 @@ public interface ITree<D extends ShapedObject, N extends ITreeNode<D, N>> extend
 	 * @param root the root node of the tree.
 	 */
 	public void setRootNode(N root);
-
+	
+	public boolean addData(D data);
+	
+	public boolean removeData(D data);
+	
 }
