@@ -10,8 +10,8 @@ public class EventTestLaunch {
 		PublisherHello p = new PublisherHello();
 		ISubscriber s = new SubscriberHello();
 
-		EventService.getInstance().subscribe(EventHello.class, null, s);
-		
+		EventService.getInstance().subscribe(EventHello.class, new FilterHello(), s);
+		EventService.getInstance().subscribe(EventHello.class, new FilterBite(), s);		
 		p.test();
 	}
 
