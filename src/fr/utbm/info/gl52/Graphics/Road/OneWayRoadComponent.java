@@ -8,8 +8,6 @@ import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
 
-import fr.utbm.info.gl52.Event.Event;
-
 /**
  * 
  */

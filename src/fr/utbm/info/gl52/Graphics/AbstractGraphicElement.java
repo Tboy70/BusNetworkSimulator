@@ -3,10 +3,6 @@ package fr.utbm.info.gl52.Graphics;
 
 import java.awt.Graphics;
 
-import javax.swing.JComponent;
-
-import fr.utbm.info.gl52.Event.Subscriber;
-
 /**
  * 
  */
