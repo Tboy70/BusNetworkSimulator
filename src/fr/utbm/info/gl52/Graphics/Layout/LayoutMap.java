@@ -39,7 +39,7 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2d.setColor(Color.WHITE);
-		g2d.fillRect(0, 0, getWidth(), getHeight());
+		g2d.fillRect(0, 0, width, height);
 		for(C c: listComponents)
 			c.draw(g);
 		g2d.scale(1,1);

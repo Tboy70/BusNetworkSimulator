@@ -38,7 +38,7 @@ public abstract class AbstractFrame extends JFrame implements IFrame, MouseListe
     	map = new LayoutMap<AbstractGraphicElement>(1000, 1000);
     
     	map.setLocation(100,100);
-    	jlp.setPreferredSize(new Dimension(h, w));
+ //   	jlp.setPreferredSize(new Dimension(h, w));
         jlp.add(map, new Integer(0));
         jlp.add(gui, new Integer(1));
         

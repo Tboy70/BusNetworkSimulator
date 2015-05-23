@@ -1,5 +1,6 @@
 package fr.utbm.info.gl52.Graphics.Layout;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -74,6 +75,11 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 			zoom += z;
 			w = (int) (width * (zoom/100));
 			h = (int) (height * (zoom/100));	
+			this.resize(new Dimension(w,h));
+			
+			System.out.println("Size:"+getWidth()+"/"+getHeight());
+			System.out.println("XSize:"+w+"/"+h);
+			
 		}
 		repaint();
 	}
