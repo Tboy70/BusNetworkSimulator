@@ -1,5 +1,6 @@
 package fr.utbm.info.gl52.Graphics.Buttons;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

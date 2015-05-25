@@ -27,7 +27,10 @@ public class HighwayComponent extends RoadComponent {
     {
     	Graphics2D g2d = (Graphics2D) g;
     	g2d.setColor(new Color(184, 242, 239));
-    	g2d.setStroke(new BasicStroke(10));
+    	if (selected)
+    		g2d.setStroke(new BasicStroke(5));
+    	if (!selected)
+    		g2d.setStroke(new BasicStroke(2));
     	g2d.drawPolyline(Xpts, Ypts, Xpts.length);
     	
     	g2d.setStroke(new BasicStroke(1));

@@ -11,10 +11,12 @@ public abstract class AbstractGraphicElement extends AbstractComponent implement
     /**
      * 
      */
-
+	protected boolean selected = false;
 	protected int posX, posY;
     public AbstractGraphicElement() {
     }
 
 	public abstract void draw(Graphics g);
+	public void select() { selected = true; }
+	public void unselect() { selected = false; }
 }

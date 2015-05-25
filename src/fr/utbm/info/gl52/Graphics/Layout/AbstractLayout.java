@@ -56,7 +56,7 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 		if (listComponents.contains(c))
 		{
 			listComponents.remove(c);
-			c.move(x, y);
+			//c.move(x, y);
 			listComponents.add(c);
 		}
 	}
@@ -76,8 +76,8 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 			zoom += z;
 			w = (int) (width * (zoom/100));
 			h = (int) (height * (zoom/100));	
-			this.resize(new Dimension(w,h));
-			
+			//this.resize(new Dimension(w,h));
+			this.setSize(new Dimension(w,h));
 			System.out.println("Size:"+getWidth()+"/"+getHeight());
 			System.out.println("XSize:"+w+"/"+h);
 			
