@@ -3,19 +3,17 @@ package fr.utbm.info.gl52.Collection;
 /**
  * 
  */
-public interface IEdge<D, N extends INode<D,N>> {
+public interface IEdge<De, E extends IEdge<De,E>> {
 	
-	/**
-	 * To get the user data of the tree node.
-	 * 
-	 * @return D Data of the user.
-	 */
-	public D getData();
+	public void setNodes(Node[] ns);
 	
-	/**
-	 * To set the user data.
-	 * @param data Data of the user.
-	 */
-	public void setData(D data);
+	public Node getNodeA();
+	public Node getNodeB();
+	
+	public void setNodeA(Node A);
+	public void setNodeB(Node B);
+	
+	public void setData(De D);
+	public De getData();
 
 }

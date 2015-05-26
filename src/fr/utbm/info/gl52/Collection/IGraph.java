@@ -3,18 +3,9 @@ package fr.utbm.info.gl52.Collection;
 /**
  * 
  */
-public interface IGraph<D, N extends INode<D,N>> {
+public interface IGraph<Dn, De, N extends INode<Dn,N>, E extends IEdge<De, E>> extends Iterable<E> {
 
-	/**
-	 * To get the data of the tree node.
-	 * 
-	 * @return D Data.
-	 */
-	public D getData();
+	public void addEdge(E edge1);
+	public boolean removeEdge(E e);
 	
-	/**
-	 * To set the data.
-	 * @param data Data.
-	 */
-	public void setData(D data);
 }

@@ -1,45 +1,55 @@
 package fr.utbm.info.gl52.Collection;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 
 /**
  * 
  */
-public abstract class AbstractGraph extends AbstractTree implements IGraph {
+//public interface IGraph<Dn, De, N extends INode<Dn,N>, E extends IEdge<De, E>> {
+public abstract class AbstractGraph<Dn, De, N extends AbstractNode<Dn, N>, E extends AbstractEdge<De, E> >  implements IGraph<Dn, De, N, E> {
 
-	private List<INode> nodes = new ArrayList<INode>();
+	private List<E> listEdge;
+	public AbstractGraph()
+	{
+		listEdge = new ArrayList<E>();
+	}
+	public void addEdge(E e)
+	{
+		listEdge.add(e);
+	}
+	public boolean removeEdge(E e)
+	{
+		return listEdge.remove(e);
+	}
+	@Override
+	public Iterator<E> iterator() {
+		return new fifoIterator();
+	}
 	
-	private List<IEdge> edges = new ArrayList<IEdge>();
-    /**
-     * 
-     */
-    public AbstractGraph() {
-    }
+	private class fifoIterator implements Iterator<E>
+	{
+		private int i = 0;
+		@Override
+		public boolean hasNext() {
+			return (listEdge.size()>i);
+		}
 
-    /**
-     * @param Edge e
-     */
-    public void addEdge(IEdge e) {
-        edges.add(e);
-    }
+		@Override
+		public E next() {
+			E e = listEdge.get(i);
+			++i;
+			return e;
+		}
 
-    /**
-     * @param Edge e
-     */
-    public void removeEdge(IEdge e) {
-        edges.remove(e);
-    }
-    
-    public void addNode(INode n) {
-    	nodes.add(n);
-    }
+		@Override
+		public void remove() {
+			listEdge.remove(i);
+			--i;
+		}
+		
+	}
 
-    public void removeNode(INode n) {
-    	nodes.remove(n);
-    }
-    
-    public void createEdge( Node n1, Node n2) {
-    	OrientedEdge newEdge = new OrientedEdge(n1, n2);
-    	addEdge(newEdge);
-    }
 }

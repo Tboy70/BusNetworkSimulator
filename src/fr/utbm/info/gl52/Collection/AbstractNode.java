@@ -5,34 +5,25 @@ import java.lang.ref.WeakReference;
 /**
  * 
  */
-public abstract class AbstractNode<D, N extends AbstractNode<D,N>> implements INode<D, N> {
+public abstract class AbstractNode<Dn, N extends AbstractNode<Dn,N>> implements INode<Dn, N> {
 
-	/**
-	 * To make the parent node a weak link to his child
-	 */
-	private transient WeakReference<N> parentNode;
-
-	/**
-	 * Constructor of the class.
-	 */
-	public AbstractNode() {
-		this.parentNode = null;
+	private Dn data;
+	
+	public AbstractNode()
+	{
+		data = null;
+	}
+	public AbstractNode(Dn d)
+	{
+		data = d;
+	}
+	public void setData(Dn d)
+	{
+		data = d;
+	}
+	public Dn getData()
+	{
+		return data;
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
-	public N getParentNode() {
-		if (this.parentNode != null) {
-			return this.parentNode.get();
-		}
-		return null;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	public void setParentNode(N iparent) {
-		this.parentNode = new WeakReference<N>(iparent);
-	}
 }
