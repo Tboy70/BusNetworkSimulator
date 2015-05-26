@@ -11,25 +11,38 @@ import java.util.List;
 //public interface IGraph<Dn, De, N extends INode<Dn,N>, E extends IEdge<De, E>> {
 public abstract class AbstractGraph<N extends AbstractNode<?, N>, E extends AbstractEdge<?, E> >  implements IGraph<N, E> {
 
-	private List<E> listEdge;
+	private List<IEdge> listEdge;
+	private List<INode> listNode;
 	public AbstractGraph()
 	{
-		listEdge = new ArrayList<E>();
+		listEdge = new ArrayList<IEdge>();
+		listNode = new ArrayList<INode>();
 	}
 	public void addEdge(E e)
 	{
-		listEdge.add(e);
+		if (!listEdge.contains(e))
+			listEdge.add(e);
+		if (!listNode.contains(e.getNodeA()))
+			listNode.add(e.getNodeA());
+		if (!listNode.contains(e.getNodeB()))
+			listNode.add(e.getNodeB());
 	}
 	public boolean removeEdge(E e)
 	{
+		e.getNodeA().removeEdge(e);
+		if (e.getNodeA().getNumberEdge() == 0)
+			listNode.remove(e.getNodeA());
+		e.getNodeB().removeEdge(e);
+		if (e.getNodeB().getNumberEdge() == 0)
+			listNode.remove(e.getNodeB());
 		return listEdge.remove(e);
 	}
 	@Override
-	public Iterator<E> iterator() {
+	public Iterator<IEdge> iterator() {
 		return new fifoIterator();
 	}
 	
-	private class fifoIterator implements Iterator<E>
+	private class fifoIterator implements Iterator<IEdge>
 	{
 		private int i = 0;
 		@Override
@@ -38,8 +51,8 @@ public abstract class AbstractGraph<N extends AbstractNode<?, N>, E extends Abst
 		}
 
 		@Override
-		public E next() {
-			E e = listEdge.get(i);
+		public IEdge next() {
+			IEdge e = listEdge.get(i);
 			++i;
 			return e;
 		}

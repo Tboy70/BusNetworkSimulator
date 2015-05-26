@@ -5,15 +5,17 @@ package fr.utbm.info.gl52.Collection;
  */
 public interface IEdge<De, E extends IEdge<De,E>> {
 	
-	public void setNodes(Node[] ns);
+	public void setNodes(INode[] ns);
 	
-	public Node getNodeA();
-	public Node getNodeB();
+	public INode getNodeA();
+	public INode getNodeB();
 	
-	public void setNodeA(Node A);
-	public void setNodeB(Node B);
+	public void setNodeA(INode A);
+	public void setNodeB(INode B);
 	
 	public void setData(De D);
 	public De getData();
+    @Override
+    public boolean equals(Object object);
 
 }

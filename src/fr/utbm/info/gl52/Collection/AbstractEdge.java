@@ -7,8 +7,8 @@ package fr.utbm.info.gl52.Collection;
 public abstract class AbstractEdge<De, E extends IEdge<De, E> > implements IEdge<De, E>  {
 
 	private De data;
-	private Node A;
-	private Node B;
+	private INode A;
+	private INode B;
 	public AbstractEdge() {
     	data = null;
     	A = null;
@@ -17,13 +17,13 @@ public abstract class AbstractEdge<De, E extends IEdge<De, E> > implements IEdge
     public AbstractEdge(De D) {
     	data = D;
     }
-    public AbstractEdge(De D, Node A, Node B)
+    public AbstractEdge(De D, INode A, INode B)
     {
     	data = D;
     	this.A = A;
     	this.B = B;
     }
-	public void setNodes(Node[] ns)
+	public void setNodes(INode[] ns)
 	{
 		if (ns.length == 2)
 		{
@@ -32,20 +32,20 @@ public abstract class AbstractEdge<De, E extends IEdge<De, E> > implements IEdge
 		}
 	}
 	
-	public Node getNodeA()
+	public INode getNodeA()
 	{
 		return A;
 	}
-	public Node getNodeB()
+	public INode getNodeB()
 	{
 		return B;
 	}
 	
-	public void setNodeA(Node A)
+	public void setNodeA(INode A)
 	{
 		this.A = A;
 	}
-	public void setNodeB(Node B)
+	public void setNodeB(INode B)
 	{
 		this.B = B;
 	}
@@ -57,5 +57,17 @@ public abstract class AbstractEdge<De, E extends IEdge<De, E> > implements IEdge
 	public De getData()
 	{
 		return data;
+	}
+
+    public boolean equals(Object object)
+	{
+        boolean sameSame = false;
+        if (object != null && object instanceof AbstractEdge)
+        {
+        	AbstractEdge e = (AbstractEdge) object;
+            sameSame = (e.getData().equals(this.getData())) && (e.getNodeA().equals(this.getNodeA())) && (e.getNodeB().equals(this.getNodeB()));
+        }
+
+        return sameSame;		
 	}
 }
