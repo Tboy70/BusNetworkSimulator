@@ -4,7 +4,7 @@ public class LaunchCollection {
 
 	public static void main(String[] args) {
 		System.out.println("Création d'un graphe.");
-		IGraph<Integer, String, Node<Integer>, Edge<String>> graph = new Graph<Integer, String>();
+		IGraph<Node<Integer>, Edge<String>> graph = new Graph<Integer, String>();
 		
 		Node<Integer> node1 = new Node<Integer>(new Integer(1));
 		Node<Integer> node2 = new Node<Integer>(new Integer(2));

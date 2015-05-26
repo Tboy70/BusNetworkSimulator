@@ -9,7 +9,7 @@ import java.util.List;
  * 
  */
 //public interface IGraph<Dn, De, N extends INode<Dn,N>, E extends IEdge<De, E>> {
-public abstract class AbstractGraph<Dn, De, N extends AbstractNode<Dn, N>, E extends AbstractEdge<De, E> >  implements IGraph<Dn, De, N, E> {
+public abstract class AbstractGraph<N extends AbstractNode<?, N>, E extends AbstractEdge<?, E> >  implements IGraph<N, E> {
 
 	private List<E> listEdge;
 	public AbstractGraph()
