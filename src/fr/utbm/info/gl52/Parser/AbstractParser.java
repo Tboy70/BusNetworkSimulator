@@ -1,6 +1,5 @@
 package fr.utbm.info.gl52.Parser;
 
-import fr.utbm.info.gl52.Collection.graph.Graph;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
@@ -15,17 +14,17 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
 	/**
 	 * The file to parse
 	 */
-	private final String file;
+	protected final String file;
 	
 	/**
-	 * Boolean to indicate if the parsing is finished or not
+	 * Once finished parsing
 	 */
-	private boolean finished;
+	protected FinishedParsingCallcack callback;
 	
 	/**
 	 * Graph for importing data
 	 */
-	private IGraph<N, E> graph;
+	protected IGraph<N, E> graph;
 	
 	@SuppressWarnings("unused")
 	private AbstractParser(){
@@ -36,7 +35,6 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
      * Default constructor 
      */
     public AbstractParser(String file) {
-    	this.finished = false;
     	this.file = file;
     	
     	Thread t = new Thread(this);
@@ -50,13 +48,12 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
 	}
 
 	@Override
-	public boolean hasFinished() {
-		return this.finished;
-	}
-
-	@Override
 	public IGraph<N,E> getData() {
 		return this.graph;
 	}
 
+	@Override
+	public void addCallBack(FinishedParsingCallcack c){
+		this.callback = c;
+	}
 }

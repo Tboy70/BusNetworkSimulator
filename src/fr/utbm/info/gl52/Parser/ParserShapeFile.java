@@ -5,22 +5,21 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 
-import fr.utbm.info.gl52.TestShapeFileParser.DisplayShapeFileFactory;
+import fr.utbm.info.gl52.Collection.graph.Edge;
+import fr.utbm.info.gl52.Collection.graph.Graph;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
-import fr.utbm.info.gl52.Collection.graph.INode;
+import fr.utbm.info.gl52.Collection.graph.IGraph;
+import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.set.attr.AttributeProvider;
-import fr.utbm.set.attr.AttributeValue;
-import fr.utbm.set.attr.HeapAttributeProvider;
 import fr.utbm.set.io.shape.AbstractElementFactory;
 import fr.utbm.set.io.shape.ESRIPoint;
 import fr.utbm.set.io.shape.ShapeFileIndexReader;
 import fr.utbm.set.io.shape.ShapeFileReader;
-import fr.utbm.set.io.shape.ShapeMultiPatchType;
 
 /**
  * 
  */
-public class ParserShapeFile<Dn,De> extends AbstractParser<INode<Dn>,IEdge<De>> {
+public final class ParserShapeFile<Dn,De> extends AbstractParser<Node<ESRIPoint>,Edge<String>> {
 	
 	private URL shpResource;
 	private URL shxResource;
@@ -38,7 +37,7 @@ public class ParserShapeFile<Dn,De> extends AbstractParser<INode<Dn>,IEdge<De>> 
 	public void run(){
 		try {
 			ShapeFileIndexReader shxReader = new ShapeFileIndexReader(this.shxResource);
-			ShapeFileReader<Dn> reader = new ShapeFileReader<Dn>(this.shpResource, null, shxReader, new DisplayShapeFileFactory());
+			ShapeFileReader<Dn> reader = new ShapeFileReader<Dn>(this.shpResource, null, shxReader, new DisplayShapeFileFactory(this.callback));
 			
 			Iterator<Dn> i = reader.iterator(); 
 			while(i.hasNext()) // Read
@@ -46,87 +45,51 @@ public class ParserShapeFile<Dn,De> extends AbstractParser<INode<Dn>,IEdge<De>> 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
+	}
+	
+	public synchronized void setGraph(IGraph<Node<ESRIPoint>, Edge<String>> graph){
+		this.graph = graph;		
 	}
 	
 	public class DisplayShapeFileFactory extends AbstractElementFactory<Dn> {
-
-		public DisplayShapeFileFactory() {
-			//
+		
+		private FinishedParsingCallcack c;
+		
+		public DisplayShapeFileFactory(FinishedParsingCallcack c) {
+			this.c = c;
 		}
 
-		public AttributeProvider createAttributeProvider(int elementIndex) {
-			System.out.println("createAttributeProvider : "+ elementIndex);
-			return new HeapAttributeProvider();
+		public Dn createPolyline(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
+			/*System.out.print("createPolyline : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", parts : [");
+			for(int i = 0 ; i < parts.length ; ++i)
+				System.out.print(parts[i]+", ");
+			System.out.print("], points : [");
+			for(int i = 0 ; i < points.length ; ++i)
+				System.out.print(points[i]+", ");
+			System.out.println("], hasZ : "+ hasZ);*/
+			
+			///
+			IGraph<Node<ESRIPoint>, Edge<String>> graph = new Graph<>();
+			Node<ESRIPoint> n = new Node<ESRIPoint>(points[0]);
+			IEdge<String> e;
+			
+			for(int i = 1 ; i < points.length ; ++i){
+				Node<ESRIPoint> m = new Node<ESRIPoint>(points[i]);
+				e = new Edge<String>("coucou", n, m);
+				graph.addEdge(e);
+			}
+			
+			setGraph(graph);
+			
+			return null;
 		}
 		
-		public Dn createPolyline(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
-			System.out.print("createPolyline : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", parts : [");
-			for(int i = 0 ; i < parts.length ; ++i)
-				System.out.print(parts[i]+", ");
-			System.out.print("], points : [");
-			for(int i = 0 ; i < points.length ; ++i)
-				System.out.print(points[i]+", ");
-			System.out.println("], hasZ : "+ hasZ);
-			return null;
-		}
-
-		/** {@inheritDoc}
-		 */
-		@Override
-		public Dn createMultiPoint(AttributeProvider provider, int shapeIndex, ESRIPoint[] points, boolean hasZ) {
-			System.out.print("createMultiPoint : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", points : [");
-			for(int i = 0 ; i < points.length ; ++i)
-				System.out.print(points[i]+", ");
-			System.out.println("], hasZ : "+ hasZ);
-			return null;
-		}
-
-		/** {@inheritDoc}
-		 */
-		@Override
-		public Dn createPoint(AttributeProvider provider, int shape_index, ESRIPoint point) {
-			System.out.print("createPoint : " + provider.toString() + ", shapeIndex : " + shape_index + ", point : "+ point);
-			return null;
-		}
-
-		/** {@inheritDoc}
-		 */
-		@Override
-		public Dn createMultiPatch(AttributeProvider provider, int shapeIndex, int[] parts, ShapeMultiPatchType[] partTypes, ESRIPoint[] points) {
-			System.out.print("createMultiPatch : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", parts : [");
-			for(int i = 0 ; i < parts.length ; ++i)
-				System.out.print(parts[i]+", ");
-			System.out.print("], points : [");
-			for(int i = 0 ; i < points.length ; ++i)
-				System.out.print(points[i]+", ");
-			System.out.print("], partType : [");
-			for(int i = 0 ; i < partTypes.length ; ++i)
-				System.out.print(partTypes[i]+", ");
-			System.out.println("], hasZ");
-			return null;
-		}
-
-		/** {@inheritDoc}
-		 */
-		@Override
-		public void putAttributeIn(Dn element, String attributeName, AttributeValue value) {
-			System.out.println("putAttributeIn : "+ element + ", attributename :"+attributeName + ", AttributeValue : " + value);
-		}
-
-		@Override
-		public Dn createPolygon(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
-			System.out.print("Create Polygon : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", parts : [");
-			for(int i = 0 ; i < parts.length ; ++i)
-				System.out.print(parts[i]+", ");
-			System.out.print("], points : [");
-			for(int i = 0 ; i < points.length ; ++i)
-				System.out.print(points[i]+", ");
-			System.out.println("], hasZ : "+ hasZ);
-			return null;
+		public void postReadingStage(boolean success){
+			if(success)
+				c.finishedSuccess();
+			else
+				c.finishedFailed();
 		}
 	}
-
-
 }

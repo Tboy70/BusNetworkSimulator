@@ -16,14 +16,11 @@ public interface IParser<N extends INode<?>, E extends IEdge<?>> extends Runnabl
 	public void run();
 	
 	/**
-	 * Indicate if the parsing is finished or not
-	 * @return true if the parsing is finished, flase otherwise
-	 */
-	public boolean hasFinished();
-	
-	/**
 	 * Get Graph corresponding to the parsed file
 	 * @return The model graph of the parsed file
 	 */
 	public IGraph<N,E> getData();
+	
+	
+	public void addCallBack(FinishedParsingCallcack c);
 }
