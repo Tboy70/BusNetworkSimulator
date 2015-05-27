@@ -4,11 +4,11 @@ package fr.utbm.info.gl52.Collection.graph;
 /**
  * 
  */
-public abstract class AbstractEdge<De, E extends IEdge<De, E> > implements IEdge<De, E>  {
+public abstract class AbstractEdge<De> implements IEdge<De>  {
 
 	private De data;
-	private INode A;
-	private INode B;
+	private INode<?> A;
+	private INode<?> B;
 	public AbstractEdge() {
     	data = null;
     	A = null;
@@ -17,13 +17,13 @@ public abstract class AbstractEdge<De, E extends IEdge<De, E> > implements IEdge
     public AbstractEdge(De D) {
     	data = D;
     }
-    public AbstractEdge(De D, INode A, INode B)
+    public AbstractEdge(De D, INode<?> A, INode<?> B)
     {
     	data = D;
     	this.A = A;
     	this.B = B;
     }
-	public void setNodes(INode[] ns)
+	public void setNodes(INode<?>[] ns)
 	{
 		if (ns.length == 2)
 		{
@@ -32,20 +32,20 @@ public abstract class AbstractEdge<De, E extends IEdge<De, E> > implements IEdge
 		}
 	}
 	
-	public INode getNodeA()
+	public INode<?> getNodeA()
 	{
 		return A;
 	}
-	public INode getNodeB()
+	public INode<?> getNodeB()
 	{
 		return B;
 	}
 	
-	public void setNodeA(INode A)
+	public void setNodeA(INode<?> A)
 	{
 		this.A = A;
 	}
-	public void setNodeB(INode B)
+	public void setNodeB(INode<?> B)
 	{
 		this.B = B;
 	}

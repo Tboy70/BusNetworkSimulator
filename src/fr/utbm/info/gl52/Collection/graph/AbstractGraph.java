@@ -9,23 +9,23 @@ import java.util.List;
  * 
  */
 //public interface IGraph<Dn, De, N extends INode<Dn,N>, E extends IEdge<De, E>> {
-public abstract class AbstractGraph<N extends AbstractNode<?, N>, E extends AbstractEdge<?, E> >  implements IGraph<N, E> {
+public abstract class AbstractGraph<N extends AbstractNode<?>, E extends AbstractEdge<?>>  implements IGraph<N, E> {
 
-	private List<IEdge> listEdge;
-	private List<INode> listNode;
+	private List<E> listEdge;
+	private List<E> listNode;
 	public AbstractGraph()
 	{
-		listEdge = new ArrayList<IEdge>();
-		listNode = new ArrayList<INode>();
+		listEdge = new ArrayList<E>();
+		listNode = new ArrayList<E>();
 	}
 	public void addEdge(E e)
 	{
 		if (!listEdge.contains(e))
 			listEdge.add(e);
 		if (!listNode.contains(e.getNodeA()))
-			listNode.add(e.getNodeA());
+			listNode.add((E) e.getNodeA());
 		if (!listNode.contains(e.getNodeB()))
-			listNode.add(e.getNodeB());
+			listNode.add((E) e.getNodeB());
 	}
 	public boolean removeEdge(E e)
 	{

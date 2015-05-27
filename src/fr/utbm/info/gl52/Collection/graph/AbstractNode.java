@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * 
  */
-public abstract class AbstractNode<Dn, N extends AbstractNode<Dn,N>> implements INode<Dn, N> {
+public abstract class AbstractNode<Dn> implements INode<Dn> {
 
 	private Dn data;
 	private List<IEdge> listEdge;
