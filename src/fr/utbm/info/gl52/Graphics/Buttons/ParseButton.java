@@ -22,7 +22,7 @@ public class ParseButton extends ButtonComponent {
 	}
 	
 	private void parseDefaultFile(){
-		IParser<INode<Float>, IEdge<Integer>> parser = new ParserShapeFile<Float, Integer>("resources/test.shp", "resources/test.shx");
+		IParser<INode<Float>, IEdge<Integer>> parser = new ParserShapeFile<Float, Integer>("resources/Belfort.shp", "resources/test.shx");
 	}
 
 }
