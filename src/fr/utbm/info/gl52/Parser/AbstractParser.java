@@ -1,13 +1,15 @@
 package fr.utbm.info.gl52.Parser;
 
-import fr.utbm.info.gl52.Collection.graph.Graph;
+import fr.utbm.info.gl52.Collection.graph.IEdge;
+import fr.utbm.info.gl52.Collection.graph.IGraph;
+import fr.utbm.info.gl52.Collection.graph.INode;
 
 
 /**
  * Abstract Parsing class.
  * Launch Thread at construction.
  */
-public class AbstractParser<N,E> implements IParser<N,E> {
+public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IParser<N,E> {
 
 	/**
 	 * The file to parse
@@ -48,7 +50,7 @@ public class AbstractParser<N,E> implements IParser<N,E> {
 	}
 
 	@Override
-	public Graph<N,E> getData() {
+	public IGraph<N,E> getData() {
 
 		return null;
 	}

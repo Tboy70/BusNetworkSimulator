@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
 
-import fr.utbm.info.gl52.Parser.IBad;
 import fr.utbm.set.attr.AttributeProvider;
 import fr.utbm.set.attr.AttributeValue;
 import fr.utbm.set.attr.HeapAttributeProvider;
@@ -30,16 +29,16 @@ public class TestShapeFileParser{
 		this.shxResource = new URL("file:///C:/Users/Alexandre/Desktop/gitEclipse/BusNetworkSimulator/"+ SHX_TEST_FILE);
 	}
 
-	private ShapeFileReader<IBad> createNoShx() throws IOException {
-		return new ShapeFileReader<IBad>(shpResource, new DisplayShapeFileFactory());
+	private ShapeFileReader<Float> createNoShx() throws IOException {
+		return new ShapeFileReader<Float>(shpResource, new DisplayShapeFileFactory());
 	}
 
-	private ShapeFileReader<IBad> createShx() throws IOException {
+	private ShapeFileReader<Float> createShx() throws IOException {
 		ShapeFileIndexReader shxReader = new ShapeFileIndexReader(this.shxResource);
-		return new ShapeFileReader<IBad>(this.shpResource, null, shxReader, new DisplayShapeFileFactory());
+		return new ShapeFileReader<Float>(this.shpResource, null, shxReader, new DisplayShapeFileFactory());
 	}
 
-	public class DisplayShapeFileFactory extends AbstractElementFactory<IBad> {
+	public class DisplayShapeFileFactory extends AbstractElementFactory<Float> {
 
 		public DisplayShapeFileFactory() {
 			//
@@ -50,7 +49,7 @@ public class TestShapeFileParser{
 			return new HeapAttributeProvider();
 		}
 		
-		public IBad createPolyline(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
+		public Float createPolyline(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
 			System.out.print("createPolyline : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", parts : [");
 			for(int i = 0 ; i < parts.length ; ++i)
 				System.out.print(parts[i]+", ");
@@ -64,7 +63,7 @@ public class TestShapeFileParser{
 		/** {@inheritDoc}
 		 */
 		@Override
-		public IBad createMultiPoint(AttributeProvider provider, int shapeIndex, ESRIPoint[] points, boolean hasZ) {
+		public Float createMultiPoint(AttributeProvider provider, int shapeIndex, ESRIPoint[] points, boolean hasZ) {
 			System.out.print("createMultiPoint : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", points : [");
 			for(int i = 0 ; i < points.length ; ++i)
 				System.out.print(points[i]+", ");
@@ -75,7 +74,7 @@ public class TestShapeFileParser{
 		/** {@inheritDoc}
 		 */
 		@Override
-		public IBad createPoint(AttributeProvider provider, int shape_index, ESRIPoint point) {
+		public Float createPoint(AttributeProvider provider, int shape_index, ESRIPoint point) {
 			System.out.print("createPoint : " + provider.toString() + ", shapeIndex : " + shape_index + ", point : "+ point);
 			return null;
 		}
@@ -83,7 +82,7 @@ public class TestShapeFileParser{
 		/** {@inheritDoc}
 		 */
 		@Override
-		public IBad createMultiPatch(AttributeProvider provider, int shapeIndex, int[] parts, ShapeMultiPatchType[] partTypes, ESRIPoint[] points) {
+		public Float createMultiPatch(AttributeProvider provider, int shapeIndex, int[] parts, ShapeMultiPatchType[] partTypes, ESRIPoint[] points) {
 			System.out.print("createMultiPatch : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", parts : [");
 			for(int i = 0 ; i < parts.length ; ++i)
 				System.out.print(parts[i]+", ");
@@ -100,12 +99,12 @@ public class TestShapeFileParser{
 		/** {@inheritDoc}
 		 */
 		@Override
-		public void putAttributeIn(IBad element, String attributeName, AttributeValue value) {
+		public void putAttributeIn(Float element, String attributeName, AttributeValue value) {
 			System.out.println("putAttributeIn : "+ element + ", attributename :"+attributeName + ", AttributeValue : " + value);
 		}
 
 		@Override
-		public IBad createPolygon(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
+		public Float createPolygon(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
 			System.out.print("Create Polygon : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", parts : [");
 			for(int i = 0 ; i < parts.length ; ++i)
 				System.out.print(parts[i]+", ");
@@ -122,8 +121,8 @@ public class TestShapeFileParser{
 
 		try {
 			t.setUp();
-			ShapeFileReader<IBad> shxReader = t.createShx();
-			Iterator<IBad> i = shxReader.iterator(); 
+			ShapeFileReader<Float> shxReader = t.createShx();
+			Iterator<Float> i = shxReader.iterator(); 
 			while(i.hasNext()) // Read
 				i.next();
 		} catch (Exception e) {
