@@ -1,34 +1,17 @@
 package fr.utbm.info.gl52.Event;
 
-import java.util.*;
 
 /**
  * 
  */
 public class EventService extends AbstractEventService {
-
-    /**
-     * 
-     */
-    public EventService() {
-    }
-
-	@Override
-	public void publish(Event e) {
-		// TODO Auto-generated method stub
-		
+	static private EventService singleton = null;
+	private EventService() {
+		super();
 	}
-
-	@Override
-	public void subscribe(Event e, Subscriber s) {
-		// TODO Auto-generated method stub
-		
+	static public EventService getInstance() {
+		if (singleton == null)
+			singleton = new EventService();
+		return singleton;
 	}
-
-	@Override
-	public void unsubscribe(Event e, Subscriber s) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

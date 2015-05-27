@@ -1,22 +1,10 @@
 package fr.utbm.info.gl52.Event;
 
-import java.util.*;
 
-/**
- * 
- */
-public class LeftClicEvent extends Event {
-
-    /**
-     * 
-     */
-    public LeftClicEvent() {
+public class LeftClicEvent implements IEvent {
+	public int x, y;
+    public LeftClicEvent(int px, int py) {
+    	x = px;
+    	y = py;
     }
-
-	@Override
-	public void getType() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
