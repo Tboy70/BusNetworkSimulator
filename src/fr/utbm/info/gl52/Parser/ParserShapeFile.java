@@ -6,7 +6,7 @@ import fr.utbm.info.gl52.Collection.graph.INode;
 /**
  * 
  */
-public class ParserShapeFile<N extends INode<?>,E extends IEdge<?>> extends AbstractParser<N,E> {
+public class ParserShapeFile<Dn,De> extends AbstractParser<INode<Dn>,IEdge<De>> {
 
 	public ParserShapeFile(String file) {
 		super(file);

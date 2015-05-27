@@ -1,5 +1,6 @@
 package fr.utbm.info.gl52.Parser;
 
+import fr.utbm.info.gl52.Collection.graph.Graph;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
@@ -20,6 +21,11 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
 	 * Boolean to indicate if the parsing is finished or not
 	 */
 	private boolean finished;
+	
+	/**
+	 * Graph for importing data
+	 */
+	private IGraph<N, E> graph;
 	
 	@SuppressWarnings("unused")
 	private AbstractParser(){
@@ -45,14 +51,12 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
 
 	@Override
 	public boolean hasFinished() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.finished;
 	}
 
 	@Override
 	public IGraph<N,E> getData() {
-
-		return null;
+		return this.graph;
 	}
 
 }
