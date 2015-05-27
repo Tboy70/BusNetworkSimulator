@@ -12,20 +12,20 @@ import java.util.List;
 public abstract class AbstractGraph<N extends AbstractNode<?>, E extends AbstractEdge<?>>  implements IGraph<N, E> {
 
 	private List<E> listEdge;
-	private List<E> listNode;
+	private List<N> listNode;
 	public AbstractGraph()
 	{
 		listEdge = new ArrayList<E>();
-		listNode = new ArrayList<E>();
+		listNode = new ArrayList<N>();
 	}
 	public void addEdge(E e)
 	{
 		if (!listEdge.contains(e))
 			listEdge.add(e);
 		if (!listNode.contains(e.getNodeA()))
-			listNode.add((E) e.getNodeA());
+			listNode.add((N) e.getNodeA());
 		if (!listNode.contains(e.getNodeB()))
-			listNode.add((E) e.getNodeB());
+			listNode.add((N) e.getNodeB());
 	}
 	public boolean removeEdge(E e)
 	{

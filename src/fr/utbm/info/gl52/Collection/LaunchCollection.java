@@ -25,7 +25,7 @@ public class LaunchCollection {
 		graph.addEdge(edge2);
 		graph.addEdge(edge3);
 		
-		for (IEdge<String, Edge<String>> e : graph)
+		for (IEdge<String> e : graph)
 		{
 			System.out.println("Valeur de l'edge:" + e.getData());
 			System.out.println("Valeur de Node A:" + e.getNodeA().getData());
