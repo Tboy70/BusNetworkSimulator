@@ -36,9 +36,6 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
      */
     public AbstractParser(String file) {
     	this.file = file;
-    	
-    	Thread t = new Thread(this);
-    	t.start();
     }
 
 
