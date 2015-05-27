@@ -1,4 +1,4 @@
-package fr.utbm.info.gl52.Collection;
+package fr.utbm.info.gl52.Collection.graph;
 
 public class Node<Dn> extends AbstractNode<Dn, Node<Dn>> {
 

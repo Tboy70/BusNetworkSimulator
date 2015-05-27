@@ -1,5 +1,11 @@
 package fr.utbm.info.gl52.Collection;
 
+import fr.utbm.info.gl52.Collection.graph.Edge;
+import fr.utbm.info.gl52.Collection.graph.Graph;
+import fr.utbm.info.gl52.Collection.graph.IEdge;
+import fr.utbm.info.gl52.Collection.graph.IGraph;
+import fr.utbm.info.gl52.Collection.graph.Node;
+
 public class LaunchCollection {
 
 	public static void main(String[] args) {

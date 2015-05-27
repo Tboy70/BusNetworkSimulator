@@ -1,4 +1,4 @@
-package fr.utbm.info.gl52.Collection;
+package fr.utbm.info.gl52.Collection.graph;
 
 import java.util.ArrayList;
 import java.util.List;
