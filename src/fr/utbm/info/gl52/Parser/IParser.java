@@ -21,6 +21,7 @@ public interface IParser<N extends INode<?>, E extends IEdge<?>> extends Runnabl
 	 */
 	public IGraph<N,E> getData();
 	
+	public void setGraph(IGraph<N,E> graph);	
 	
 	public void addCallBack(FinishedParsingCallcack c);
 }

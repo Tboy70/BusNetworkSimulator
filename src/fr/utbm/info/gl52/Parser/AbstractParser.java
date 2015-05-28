@@ -48,6 +48,11 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
 	public IGraph<N,E> getData() {
 		return this.graph;
 	}
+	
+	@Override
+	public synchronized void setGraph(IGraph<N, E> graph){
+		this.graph = graph;		
+	}
 
 	@Override
 	public void addCallBack(FinishedParsingCallcack c){

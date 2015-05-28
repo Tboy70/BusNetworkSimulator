@@ -37,7 +37,7 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<Node<ESRIPoint>
 	public void run(){
 		try {
 			ShapeFileIndexReader shxReader = new ShapeFileIndexReader(this.shxResource);
-			ShapeFileReader<Dn> reader = new ShapeFileReader<Dn>(this.shpResource, null, shxReader, new DisplayShapeFileFactory(this.callback));
+			ShapeFileReader<Dn> reader = new ShapeFileReader<>(this.shpResource, null, shxReader, new ShapeFileGraphFactory<Dn>(this.callback, this));
 			
 			Iterator<Dn> i = reader.iterator(); 
 			while(i.hasNext()) // Read
@@ -46,54 +46,5 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<Node<ESRIPoint>
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-	}
-	
-	public synchronized void setGraph(IGraph<Node<ESRIPoint>, Edge<String>> graph){
-		this.graph = graph;		
-	}
-	
-	public class DisplayShapeFileFactory extends AbstractElementFactory<Dn> {
-		
-		private FinishedParsingCallcack c;
-		
-		IGraph<Node<ESRIPoint>, Edge<String>> graph = new Graph<>();
-		
-		public DisplayShapeFileFactory(FinishedParsingCallcack c) {
-			this.c = c;
-		}
-
-		public Dn createPolyline(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
-			/*System.out.print("createPolyline : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", parts : [");
-			for(int i = 0 ; i < parts.length ; ++i)
-				System.out.print(parts[i]+", ");
-			System.out.print("], points : [");
-			for(int i = 0 ; i < points.length ; ++i)
-				System.out.print(points[i]+", ");
-			System.out.println("], hasZ : "+ hasZ);*/
-			
-			///
-			
-			Node<ESRIPoint> n = new Node<ESRIPoint>(points[0]);
-			IEdge<String> e;
-			
-			for(int i = 1 ; i < points.length ; ++i){
-				Node<ESRIPoint> m = new Node<ESRIPoint>(points[i]);
-				e = new Edge<String>("coucou", n, m);
-				this.graph.addEdge((Edge<String>) e);
-			}
-			
-			if(shapeIndex % 1000 == 0)
-				System.out.println(shapeIndex);
-			
-			return null;
-		}
-		
-		public void postReadingStage(boolean success){
-			setGraph(this.graph);
-			if(success)
-				c.finishedSuccess();
-			else
-				c.finishedFailed();
-		}
 	}
 }
