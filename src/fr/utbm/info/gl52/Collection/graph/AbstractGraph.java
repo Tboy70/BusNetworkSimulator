@@ -8,16 +8,19 @@ import java.util.List;
 /**
  * 
  */
-//public interface IGraph<Dn, De, N extends INode<Dn,N>, E extends IEdge<De, E>> {
 public abstract class AbstractGraph<N extends AbstractNode<?>, E extends AbstractEdge<?>>  implements IGraph<N, E> {
 
+	
 	protected List<E> listEdge;
+	
 	protected List<N> listNode;
+	
 	public AbstractGraph()
 	{
 		listEdge = new ArrayList<E>();
 		listNode = new ArrayList<N>();
 	}
+	
 	public void addEdge(E e)
 	{
 		if (!listEdge.contains(e))
@@ -27,6 +30,7 @@ public abstract class AbstractGraph<N extends AbstractNode<?>, E extends Abstrac
 		if (!listNode.contains(e.getNodeB()))
 			listNode.add((N) e.getNodeB());
 	}
+	
 	public boolean removeEdge(E e)
 	{
 		e.getNodeA().removeEdge(e);
@@ -37,6 +41,7 @@ public abstract class AbstractGraph<N extends AbstractNode<?>, E extends Abstrac
 			listNode.remove(e.getNodeB());
 		return listEdge.remove(e);
 	}
+	
 	@Override
 	public Iterator<IEdge> iterator() {
 		return new fifoIterator();
@@ -61,8 +66,12 @@ public abstract class AbstractGraph<N extends AbstractNode<?>, E extends Abstrac
 		public void remove() {
 			listEdge.remove(i);
 			--i;
-		}
-		
+		}	
+	}
+	
+	@Override
+	public String toString() {
+		return "Graph [listEdge=" + listEdge + ", listNode=" + listNode + "]";
 	}
 
 }

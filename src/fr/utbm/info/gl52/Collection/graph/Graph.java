@@ -11,9 +11,4 @@ public class Graph<Dn, De> extends AbstractGraph<Node<Dn>, Edge<De>> {
 	{
 		super();
 	}
-
-	@Override
-	public String toString() {
-		return "Graph [listEdge=" + listEdge + ", listNode=" + listNode + "]";
-	}
 }
