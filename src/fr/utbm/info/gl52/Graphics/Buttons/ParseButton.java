@@ -34,12 +34,15 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 		
     	Thread t = new Thread(parser);
     	t.start();
+    	
+    	System.out.println("Go parsing");
 	}
 
 	@Override
 	public void finishedSuccess() {
-		System.out.println("coucou");
 		IGraph<Node<ESRIPoint>, Edge<String>> g = this.parser.getData();
+		System.out.println("coucou");
+		System.out.println(g);
 	}
 
 	@Override

@@ -11,8 +11,8 @@ import java.util.List;
 //public interface IGraph<Dn, De, N extends INode<Dn,N>, E extends IEdge<De, E>> {
 public abstract class AbstractGraph<N extends AbstractNode<?>, E extends AbstractEdge<?>>  implements IGraph<N, E> {
 
-	private List<E> listEdge;
-	private List<N> listNode;
+	protected List<E> listEdge;
+	protected List<N> listNode;
 	public AbstractGraph()
 	{
 		listEdge = new ArrayList<E>();

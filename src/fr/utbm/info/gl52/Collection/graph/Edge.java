@@ -12,5 +12,9 @@ public class Edge<De> extends AbstractEdge<De> {
     {
     	super(D, A, B);
     }
-
+    
+	@Override
+	public String toString() {
+		return "Edge [data=" + data + "]";
+	}
 }

@@ -6,4 +6,8 @@ public class Node<Dn> extends AbstractNode<Dn> {
 		super(d);
 	}
 
+	@Override
+	public String toString() {
+		return "Node [data=" + data + "]";
+	}	
 }

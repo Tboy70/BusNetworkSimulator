@@ -56,6 +56,8 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<Node<ESRIPoint>
 		
 		private FinishedParsingCallcack c;
 		
+		IGraph<Node<ESRIPoint>, Edge<String>> graph = new Graph<>();
+		
 		public DisplayShapeFileFactory(FinishedParsingCallcack c) {
 			this.c = c;
 		}
@@ -70,22 +72,24 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<Node<ESRIPoint>
 			System.out.println("], hasZ : "+ hasZ);*/
 			
 			///
-			IGraph<Node<ESRIPoint>, Edge<String>> graph = new Graph<>();
+			
 			Node<ESRIPoint> n = new Node<ESRIPoint>(points[0]);
 			IEdge<String> e;
 			
 			for(int i = 1 ; i < points.length ; ++i){
 				Node<ESRIPoint> m = new Node<ESRIPoint>(points[i]);
 				e = new Edge<String>("coucou", n, m);
-				graph.addEdge(e);
+				this.graph.addEdge((Edge<String>) e);
 			}
 			
-			setGraph(graph);
+			if(shapeIndex % 1000 == 0)
+				System.out.println(shapeIndex);
 			
 			return null;
 		}
 		
 		public void postReadingStage(boolean success){
+			setGraph(this.graph);
 			if(success)
 				c.finishedSuccess();
 			else

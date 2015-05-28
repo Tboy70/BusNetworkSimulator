@@ -8,7 +8,7 @@ import java.util.List;
  */
 public abstract class AbstractNode<Dn> implements INode<Dn> {
 
-	private Dn data;
+	protected Dn data;
 	private List<IEdge> listEdge;
 	public AbstractNode()
 	{

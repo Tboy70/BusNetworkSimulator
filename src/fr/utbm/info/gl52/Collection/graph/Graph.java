@@ -13,8 +13,7 @@ public class Graph<Dn, De> extends AbstractGraph<Node<Dn>, Edge<De>> {
 	}
 
 	@Override
-	public void addEdge(IEdge<?> e) {
-		// TODO Auto-generated method stub
-		
+	public String toString() {
+		return "Graph [listEdge=" + listEdge + ", listNode=" + listNode + "]";
 	}
 }

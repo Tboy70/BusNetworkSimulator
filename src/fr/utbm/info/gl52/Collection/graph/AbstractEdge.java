@@ -6,7 +6,7 @@ package fr.utbm.info.gl52.Collection.graph;
  */
 public abstract class AbstractEdge<De> implements IEdge<De>  {
 
-	private De data;
+	protected De data;
 	private INode<?> A;
 	private INode<?> B;
 	public AbstractEdge() {
