@@ -19,7 +19,7 @@ public class QuadTree<D extends SpatialObject> extends AbstractTree<D, QuadTreeN
 
 		if (!checkBounds(data.getShape())) {
 			
-			throw new RuntimeException("can't insert a data that is outside the world : object's position ("+data+")");
+			//throw new RuntimeException("can't insert a data that is outside the world : object's position ("+data+")");
 		}
 		if (this.root == null) {
 			this.root = new QuadTreeNode<>(this.worldSize);
