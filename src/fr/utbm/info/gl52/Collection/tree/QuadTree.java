@@ -1,21 +1,21 @@
 package fr.utbm.info.gl52.Collection.tree;
 
-import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 
 import fr.utbm.info.gl52.Collection.SpatialObject;
 
 public class QuadTree<D extends SpatialObject> extends AbstractTree<D, QuadTreeNode<D>> {
 
-	private Rectangle worldSize;
+	private Rectangle2D.Double worldSize;
 	private QuadTreeNode<D> root;
 
-	public QuadTree(Rectangle r) {
+	public QuadTree(Rectangle2D.Double r) {
 		this.worldSize = r;
 	}
 
 	@Override
-	public void insert(D data) {
+	public boolean insert(D data) {
 
 		if (!checkBounds(data.getShape())) {
 			
@@ -24,7 +24,8 @@ public class QuadTree<D extends SpatialObject> extends AbstractTree<D, QuadTreeN
 		if (this.root == null) {
 			this.root = new QuadTreeNode<>(this.worldSize);
 		}
-		this.root.insert(data);
+	//	System.out.println("============INSERTING============= ");
+		return this.root.insert(data);
 
 		// If data is not set, set the data to this node.
 		// If a data is already set, create 4 childrens, re allocate the node's
