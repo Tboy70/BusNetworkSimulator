@@ -2,6 +2,8 @@ package fr.utbm.info.gl52.Collection.tree;
 
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.utbm.info.gl52.Collection.SpatialObject;
 
@@ -15,18 +17,18 @@ public class QuadTreeNode<D extends SpatialObject> extends AbstractTreeNode<D, Q
 	public static double delta = 1;
 	private QuadTreeNode<D> parent;
 	private Shape s;
-	private QuadTreeNode<D>[] childrens;
+	private List<QuadTreeNode<D>> childrens;
 
 	public QuadTreeNode(Shape r) {
 		super();
 		this.s = r;
-		this.childrens = null;
+		this.childrens = new ArrayList<>(4);
 	}
 
 	public QuadTreeNode(Shape r, D data) {
 		super(data);
 		this.s = r;
-		this.childrens = null;
+		this.childrens = new ArrayList<>(4);
 	}
 
 	@Override
@@ -41,20 +43,22 @@ public class QuadTreeNode<D extends SpatialObject> extends AbstractTreeNode<D, Q
 
 	@Override
 	public QuadTreeNode<D>[] getChildren() {
-		return this.childrens;
+		return (QuadTreeNode<D>[]) this.childrens.toArray();
 	}
 
 	@Override
 	public void insert(QuadTreeNode<D> child) {
 		// Get the child's shape to determine where to put it.
-throw new UnsupportedOperationException("ca arrive");
+		throw new UnsupportedOperationException("ca arrive");
 	}
 
 	public boolean insert(D data) {
+		System.out.println("Insert "+data);
 		// Get the quadrant in which the data will be inserted
 		int quadrant = this.getQuandrant(this.s.getBounds(), data.getShape().getBounds());
-
+		System.out.println("quadrant :"+quadrant);
 		if (quadrant == -1) {
+			System.out.println("Secial Case");
 			// It's a special case where the data's position
 			// is exactly on the Node's bounds.
 			// Thus, it's not possible to determine
@@ -62,33 +66,39 @@ throw new UnsupportedOperationException("ca arrive");
 			this.data = data;
 			return true;
 		}
-		if (this.childrens != null) {
+		if (!this.childrens.isEmpty()) {
+			System.out.println("Node has children : inserting into them");
 			// get the right child in whcich to insert the data
-			 return this.childrens[quadrant].insert(data);
-			
+			return this.childrens.get(quadrant).insert(data);
+
 		}
-		if (this.getData() != null) {
-			if(isSimilarData(data)){
+		if (this.data != null) {
+			System.out.println("Data already set");
+			if (isSimilarData(data)) {
 				return false;
 			}
+			System.out.println("creating children");
 			this.createChildrens();
+			System.out.println("inserting the node's data into a child node");
 			this.insert(this.data);
 			this.data = null;
-			 return this.childrens[quadrant].insert(data);
-			
+			System.out.println("coucou");
+			return this.childrens.get(quadrant).insert(data);
+
 		}
-		//There is no data and no need to create childrens, insert the data here
+		// There is no data and no need to create childrens, insert the data
+		// here
 		this.data = data;
 		return true;
 	}
 
 	public D getData(Shape s) {
 		int quadrant = this.getQuandrant(this.s.getBounds(), s.getBounds());
-		if (quadrant == -1 || this.childrens == null) {
+		if (quadrant == -1 || this.childrens.isEmpty()) {
 			// Special case
 			return this.data;
 		}
-		return this.childrens[quadrant].getData(s);
+		return this.childrens.get(quadrant).getData(s);
 	}
 
 	private boolean isSimilarData(D data) {
@@ -114,17 +124,16 @@ throw new UnsupportedOperationException("ca arrive");
 
 		// NW
 		Rectangle r = new Rectangle(p.x, p.y, w, h);
-		this.childrens[NW] = new QuadTreeNode<>(r);
+		this.childrens.add(NW, new QuadTreeNode<D>(r));
 		// NE
 		r = new Rectangle(p.x + w, p.y, w, h);
-		this.childrens[NE] = new QuadTreeNode<>(r);
+		this.childrens.add(NE, new QuadTreeNode<D>(r));
 		// SW
 		r = new Rectangle(p.x, p.y + h, w, h);
-		this.childrens[SW] = new QuadTreeNode<>(r);
+		this.childrens.add(SW, new QuadTreeNode<D>(r));
 		// SE
 		r = new Rectangle(p.x + w, p.y + h, w, h);
-		this.childrens[SE] = new QuadTreeNode<>(r);
-
+		this.childrens.add(SE, new QuadTreeNode<D>(r));
 	}
 
 	private static int getQuandrant(Rectangle nodeBounds, Rectangle dataBounds) {
@@ -146,7 +155,7 @@ throw new UnsupportedOperationException("ca arrive");
 	public boolean remove(D data) {
 		int quadrant = this.getQuandrant(this.s.getBounds(), data.getShape().getBounds());
 
-		if (quadrant == -1 || this.childrens == null) {
+		if (quadrant == -1 || this.childrens.isEmpty()) {
 			boolean result = false;
 			if (this.data != null) {
 				this.data = null;
@@ -155,7 +164,7 @@ throw new UnsupportedOperationException("ca arrive");
 			this.parent.checkChildrens();
 			return result;
 		}
-		return this.childrens[quadrant].remove(data);
+		return this.childrens.get(quadrant).remove(data);
 
 	}
 
@@ -164,7 +173,7 @@ throw new UnsupportedOperationException("ca arrive");
 			return;
 		}
 		for (int i = 0; i < 4; i++) {
-			if (this.childrens[i].childrens != null || this.childrens[i].data != null) {
+			if (this.childrens.get(i).childrens.isEmpty() || this.childrens.get(i).data != null) {
 
 			}
 		}
@@ -173,7 +182,7 @@ throw new UnsupportedOperationException("ca arrive");
 	@Override
 	public boolean remove(QuadTreeNode<D> child) {
 		throw new UnsupportedOperationException("ca arrive");
-		//return false;
+		// return false;
 	}
 
 }
