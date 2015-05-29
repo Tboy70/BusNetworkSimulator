@@ -53,10 +53,12 @@ public class QuadTreeNode<D extends SpatialObject> extends AbstractTreeNode<D, Q
 	}
 
 	public boolean insert(D data) {
+		System.out.println("Insert "+data);
 		// Get the quadrant in which the data will be inserted
 		int quadrant = this.getQuandrant(this.s.getBounds(), data.getShape().getBounds());
-
+		System.out.println("quadrant :"+quadrant);
 		if (quadrant == -1) {
+			System.out.println("Secial Case");
 			// It's a special case where the data's position
 			// is exactly on the Node's bounds.
 			// Thus, it's not possible to determine
@@ -65,17 +67,22 @@ public class QuadTreeNode<D extends SpatialObject> extends AbstractTreeNode<D, Q
 			return true;
 		}
 		if (!this.childrens.isEmpty()) {
+			System.out.println("Node has children : inserting into them");
 			// get the right child in whcich to insert the data
 			return this.childrens.get(quadrant).insert(data);
 
 		}
-		if (this.getData() != null) {
+		if (this.data != null) {
+			System.out.println("Data already set");
 			if (isSimilarData(data)) {
 				return false;
 			}
+			System.out.println("creating children");
 			this.createChildrens();
+			System.out.println("inserting the node's data into a child node");
 			this.insert(this.data);
 			this.data = null;
+			System.out.println("coucou");
 			return this.childrens.get(quadrant).insert(data);
 
 		}
