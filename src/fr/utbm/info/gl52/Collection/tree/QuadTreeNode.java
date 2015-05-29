@@ -1,7 +1,8 @@
 package fr.utbm.info.gl52.Collection.tree;
 
-import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Double;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class QuadTreeNode<D extends SpatialObject> extends AbstractTreeNode<D, Q
 	private final static int SW = 2;
 	private final static int SE = 3;
 
-	public static double delta = 1;
+	public static double delta = 0.0000000018627D;// java.lang.Double.MAX_VALUE;
 	private QuadTreeNode<D> parent;
 	private Shape s;
 	private List<QuadTreeNode<D>> childrens;
@@ -41,6 +42,7 @@ public class QuadTreeNode<D extends SpatialObject> extends AbstractTreeNode<D, Q
 		return this.parent;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public QuadTreeNode<D>[] getChildren() {
 		return (QuadTreeNode<D>[]) this.childrens.toArray();
@@ -52,108 +54,105 @@ public class QuadTreeNode<D extends SpatialObject> extends AbstractTreeNode<D, Q
 		throw new UnsupportedOperationException("ca arrive");
 	}
 
-	public boolean insert(D data) {
-		System.out.println("Insert "+data);
+	public boolean insert(D d) {
+		// double x = data.getShape().getBounds2D().getX();
+		// double y = data.getShape().getBounds2D().getY();
+		// System.out.println("Insert " + data + " (" + x + ", " + y + ")");
 		// Get the quadrant in which the data will be inserted
-		int quadrant = this.getQuandrant(this.s.getBounds(), data.getShape().getBounds());
-		System.out.println("quadrant :"+quadrant);
+		int quadrant = QuadTreeNode.getQuandrant(this.s.getBounds2D(), d.getShape().getBounds2D());
+		// System.out.println("quadrant :" + quadrant);
 		if (quadrant == -1) {
-			System.out.println("Secial Case");
+			// System.out.println("Secial Case");
 			// It's a special case where the data's position
 			// is exactly on the Node's bounds.
 			// Thus, it's not possible to determine
 			// the quadrant in which to insert the Data
-			this.data = data;
+			this.data = d;
 			return true;
 		}
 		if (!this.childrens.isEmpty()) {
-			System.out.println("Node has children : inserting into them");
-			// get the right child in whcich to insert the data
-			return this.childrens.get(quadrant).insert(data);
-
+			// System.out.println("Node has children : inserting into them");
+			// get the right child in which to insert the data
+			return this.childrens.get(quadrant).insert(d);
 		}
 		if (this.data != null) {
-			System.out.println("Data already set");
-			if (isSimilarData(data)) {
+			// System.out.println("Data already set");
+			if (isSimilarData(d)) {
 				return false;
 			}
-			System.out.println("creating children");
+			// System.out.println("creating children");
 			this.createChildrens();
-			System.out.println("inserting the node's data into a child node");
+			// System.out.println("inserting the node's data into a child node");
 			this.insert(this.data);
 			this.data = null;
-			System.out.println("coucou");
-			return this.childrens.get(quadrant).insert(data);
+			// System.out.println("coucou");
+			return this.childrens.get(quadrant).insert(d);
 
 		}
 		// There is no data and no need to create childrens, insert the data
 		// here
-		this.data = data;
+		this.data = d;
 		return true;
 	}
 
-	public D getData(Shape s) {
-		int quadrant = this.getQuandrant(this.s.getBounds(), s.getBounds());
+	public D getData(Shape d) {
+		int quadrant = QuadTreeNode.getQuandrant(this.s.getBounds(), d.getBounds());
 		if (quadrant == -1 || this.childrens.isEmpty()) {
 			// Special case
 			return this.data;
 		}
-		return this.childrens.get(quadrant).getData(s);
+		return this.childrens.get(quadrant).getData(d);
 	}
 
-	private boolean isSimilarData(D data) {
-		if (this.data == null || data == null) {
+	private boolean isSimilarData(D d) {
+		if (this.data == null || d == null) {
 			throw new RuntimeException("Data are null");
 		}
-		Rectangle r = new Rectangle(this.data.getShape().getBounds());
-		r.x = (int) (r.x - this.delta);
-		r.y = (int) (r.y + this.delta);
-		r.width = (int) (r.width + this.delta);
-		r.height = (int) (r.height + this.delta);
-
-		if (r.contains(data.getShape().getBounds()))
+		Rectangle2D r = this.s.getBounds2D();
+		if (r.getWidth() <= delta && r.getHeight() <= delta) {
+			// System.out.println("similar data");
 			return true;
-
+		}
 		return false;
 	}
 
 	private void createChildrens() {
-		Rectangle p = this.s.getBounds();
-		int h = p.height / 2;
-		int w = p.width / 2;
+		Rectangle2D.Double p = (Double) this.s.getBounds2D();
+		double h = p.height / 2;
+		double w = p.width / 2;
 
 		// NW
-		Rectangle r = new Rectangle(p.x, p.y, w, h);
+		Rectangle2D.Double r = new Rectangle2D.Double(p.x, p.y, w, h);
 		this.childrens.add(NW, new QuadTreeNode<D>(r));
 		// NE
-		r = new Rectangle(p.x + w, p.y, w, h);
+		r = new Rectangle2D.Double(p.x + w, p.y, w, h);
 		this.childrens.add(NE, new QuadTreeNode<D>(r));
 		// SW
-		r = new Rectangle(p.x, p.y + h, w, h);
+		r = new Rectangle2D.Double(p.x, p.y + h, w, h);
 		this.childrens.add(SW, new QuadTreeNode<D>(r));
 		// SE
-		r = new Rectangle(p.x + w, p.y + h, w, h);
+		r = new Rectangle2D.Double(p.x + w, p.y + h, w, h);
 		this.childrens.add(SE, new QuadTreeNode<D>(r));
 	}
 
-	private static int getQuandrant(Rectangle nodeBounds, Rectangle dataBounds) {
-		int mX = nodeBounds.x / 2 + nodeBounds.width;
-		int mY = nodeBounds.y / 2 + nodeBounds.height;
+	private static int getQuandrant(Rectangle2D node, Rectangle2D data) {
+		double mX = node.getX() + node.getWidth() / 2;
+		double mY = node.getY() + node.getHeight() / 2;
 		// TODO if dataBounds == mX || mY, it a special case;
 
-		if (dataBounds.x == mX || dataBounds.y == mY) {
+		if (data.getX() == mX || data.getY() == mY) {
 			// It's a special case
 			return -1;
 		}
-		if (dataBounds.x < mX) {
-			return dataBounds.y < mY ? NW : SW;
+		if (data.getX() < mX) {
+			return data.getY() < mY ? NW : SW;
 		}
-		return dataBounds.y < mY ? NE : SE;
+		return data.getY() < mY ? NE : SE;
 	}
 
 	@Override
-	public boolean remove(D data) {
-		int quadrant = this.getQuandrant(this.s.getBounds(), data.getShape().getBounds());
+	public boolean remove(D d) {
+		int quadrant = QuadTreeNode.getQuandrant(this.s.getBounds(), d.getShape().getBounds());
 
 		if (quadrant == -1 || this.childrens.isEmpty()) {
 			boolean result = false;
@@ -164,7 +163,7 @@ public class QuadTreeNode<D extends SpatialObject> extends AbstractTreeNode<D, Q
 			this.parent.checkChildrens();
 			return result;
 		}
-		return this.childrens.get(quadrant).remove(data);
+		return this.childrens.get(quadrant).remove(d);
 
 	}
 
@@ -172,10 +171,32 @@ public class QuadTreeNode<D extends SpatialObject> extends AbstractTreeNode<D, Q
 		if (this.data != null) {
 			return;
 		}
+		boolean[] childrenHaveData = new boolean[4];
+		int childrenDataCount = 0;
 		for (int i = 0; i < 4; i++) {
-			if (this.childrens.get(i).childrens.isEmpty() || this.childrens.get(i).data != null) {
-
+			if (this.childrens.get(i).data != null) {
+				childrenHaveData[i] = true;
+				childrenDataCount++;
+			} else {
+				childrenHaveData[i] = false;
 			}
+		}
+
+		switch (childrenDataCount) {
+		case 0:
+			this.childrens.clear();
+			break;
+		case 1:
+			for (int i = 0; i < 4; i++) {
+				if (childrenHaveData[i]) {
+					this.data = this.childrens.get(i).data;
+					this.childrens.clear();
+					break;
+				}
+			}
+			break;
+		default:
+			break;
 		}
 	}
 
