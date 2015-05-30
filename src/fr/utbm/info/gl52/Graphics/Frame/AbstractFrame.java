@@ -1,6 +1,9 @@
 package fr.utbm.info.gl52.Graphics.Frame;
 
 import java.awt.Point;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -24,22 +27,20 @@ public abstract class AbstractFrame extends JFrame implements IFrame{
     	super(title);
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocation(new Point(this.locationX,this.locationY));
-        
         setSize(700,700);
         setVisible(true);
     	this.mainPanel = new JPanel();
+    	
     	JLayeredPane jlp = new JLayeredPane(); 
+    	gui.setDoubleBuffered(true);
     	this.gui = new LayoutGUI<>(450, 450);
     	this.map = new LayoutMap<>(1000, 1000);
     
     	this.map.setLocation(100,100);
- //   	jlp.setPreferredSize(new Dimension(h, w));
         jlp.add(this.map, new Integer(0));
         jlp.add(this.gui, new Integer(1));
         
 
-      //  super.addMouseListener(this);
-       // this.addMouseMotionListener(this);
     	this.setContentPane(jlp);
     }
     public AbstractLayout<AbstractGraphicElement> getMap()

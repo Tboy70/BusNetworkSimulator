@@ -28,7 +28,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	}
 	
 	private void parseDefaultFile(){
-		this.parser = new ParserShapeFile<ESRIPoint, String>("resources/Belfort.shp", "resources/test.shx");
+		this.parser = new ParserShapeFile<ESRIPoint, String>("Belfort.shp", "test.shx");
 		this.parser.addCallBack(this);
 		
     	Thread t = new Thread(this.parser);
