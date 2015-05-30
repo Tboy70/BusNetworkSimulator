@@ -9,34 +9,29 @@ import fr.utbm.set.attr.AttributeValue;
 import fr.utbm.set.attr.HeapAttributeProvider;
 import fr.utbm.set.io.shape.AbstractElementFactory;
 import fr.utbm.set.io.shape.ESRIPoint;
-import fr.utbm.set.io.shape.ShapeFileIndexReader;
 import fr.utbm.set.io.shape.ShapeFileReader;
 import fr.utbm.set.io.shape.ShapeMultiPatchType;
 
 @SuppressWarnings("deprecation")
 public class TestShapeFileParser{
 
-	private final String SHP_TEST_FILE = "resources/test.shp"; //$NON-NLS-1$
-	private final String SHX_TEST_FILE = "resources/test.shx"; //$NON-NLS-1$
+	private final String SHP_TEST_FILE = "resources/quartier_polyline.shp"; //$NON-NLS-1$
+	//private final String SHX_TEST_FILE = "resources/test.shx"; //$NON-NLS-1$
 
 	private URL shpResource;
-	private URL shxResource;
+	//private URL shxResource;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	protected void setUp() throws Exception {
 		this.shpResource = new URL("file:///C:/Users/Alexandre/Desktop/gitEclipse/BusNetworkSimulator/"+ this.SHP_TEST_FILE);
-		this.shxResource = new URL("file:///C:/Users/Alexandre/Desktop/gitEclipse/BusNetworkSimulator/"+ this.SHX_TEST_FILE);
+		//this.shxResource = new URL("file:///C:/Users/Alexandre/Desktop/gitEclipse/BusNetworkSimulator/"+ this.SHX_TEST_FILE);
 	}
 
-	private ShapeFileReader<Float> createNoShx() throws IOException {
+	private ShapeFileReader<Float> createReader() throws IOException {
+		//ShapeFileIndexReader shxReader = new ShapeFileIndexReader(this.shxResource);
 		return new ShapeFileReader<>(this.shpResource, new DisplayShapeFileFactory());
-	}
-
-	private ShapeFileReader<Float> createShx() throws IOException {
-		ShapeFileIndexReader shxReader = new ShapeFileIndexReader(this.shxResource);
-		return new ShapeFileReader<>(this.shpResource, null, shxReader, new DisplayShapeFileFactory());
 	}
 
 	public class DisplayShapeFileFactory extends AbstractElementFactory<Float> {
@@ -122,7 +117,7 @@ public class TestShapeFileParser{
 
 		try {
 			t.setUp();
-			ShapeFileReader<Float> shxReader = t.createShx();
+			ShapeFileReader<Float> shxReader = t.createReader();
 			Iterator<Float> i = shxReader.iterator(); 
 			while(i.hasNext()) // Read
 				i.next();
