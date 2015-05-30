@@ -4,6 +4,7 @@
 package fr.utbm.info.gl52.Parser;
 
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 
 import fr.utbm.info.gl52.Collection.graph.Edge;
 import fr.utbm.info.gl52.Collection.graph.Graph;
@@ -32,7 +33,7 @@ public class ShapeFileGraphFactory<Dn> extends AbstractElementFactory<Dn> {
 	
 	public ShapeFileGraphFactory(FinishedParsingCallcack c, IParser parser) {
 		this.graph = new Graph<>();
-		this.qtree = new QuadTree<>(new Rectangle(Integer.MIN_VALUE, Integer.MAX_VALUE));
+		this.qtree = new QuadTree<>(new Rectangle2D.Double(Double.MIN_VALUE, Double.MIN_VALUE, Double.MAX_VALUE, Double.MAX_VALUE));
 		
 		this.c = c;
 		this.parser = parser;
@@ -58,8 +59,8 @@ public class ShapeFileGraphFactory<Dn> extends AbstractElementFactory<Dn> {
 			Node<ESRISpatialObject> m = new Node<ESRISpatialObject>(new ESRISpatialObject(points[i]));
 			e = new Edge<String>("coucou", n, m);
 			
-			this.graph.addEdge((Edge<String>) e);
-			this.qtree.insert(m.getData());
+			if(this.qtree.insert(m.getData()))
+				this.graph.addEdge((Edge<String>) e);
 			
 			n = m;
 		}
