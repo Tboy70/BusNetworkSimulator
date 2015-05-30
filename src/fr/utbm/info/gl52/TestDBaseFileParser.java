@@ -13,6 +13,7 @@ import fr.utbm.set.attr.InvalidAttributeTypeException;
 import fr.utbm.set.io.dbase.DBaseFileField;
 import fr.utbm.set.io.dbase.DBaseFileReader;
 
+@SuppressWarnings("deprecation")
 public class TestDBaseFileParser{
 
 	private static final String DBF_TEST_FILE = "resources\\test.dbf"; //$NON-NLS-1$

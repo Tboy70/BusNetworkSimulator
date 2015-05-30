@@ -17,8 +17,8 @@ public abstract class AbstractGraph<N extends AbstractNode<?>, E extends Abstrac
 	
 	public AbstractGraph()
 	{
-		this.listEdge = new ArrayList<E>();
-		this.listNode = new ArrayList<N>();
+		this.listEdge = new ArrayList<>();
+		this.listNode = new ArrayList<>();
 	}
 	
 	public void addEdge(E e)

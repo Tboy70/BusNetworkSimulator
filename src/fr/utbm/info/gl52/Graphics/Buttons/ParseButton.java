@@ -3,9 +3,7 @@ package fr.utbm.info.gl52.Graphics.Buttons;
 import java.awt.event.ActionEvent;
 
 import fr.utbm.info.gl52.Collection.graph.Edge;
-import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
-import fr.utbm.info.gl52.Collection.graph.INode;
 import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Parser.FinishedParsingCallcack;
 import fr.utbm.info.gl52.Parser.IParser;

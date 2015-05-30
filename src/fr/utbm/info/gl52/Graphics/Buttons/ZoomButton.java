@@ -2,7 +2,6 @@ package fr.utbm.info.gl52.Graphics.Buttons;
 
 import java.awt.event.ActionEvent;
 import fr.utbm.info.gl52.Graphics.CardinalSystem;
-import fr.utbm.info.gl52.Graphics.Layout.AbstractLayout;
 
 public class ZoomButton extends ButtonComponent {
 

@@ -13,6 +13,7 @@ import fr.utbm.set.io.shape.ShapeFileIndexReader;
 import fr.utbm.set.io.shape.ShapeFileReader;
 import fr.utbm.set.io.shape.ShapeMultiPatchType;
 
+@SuppressWarnings("deprecation")
 public class TestShapeFileParser{
 
 	private final String SHP_TEST_FILE = "resources/test.shp"; //$NON-NLS-1$

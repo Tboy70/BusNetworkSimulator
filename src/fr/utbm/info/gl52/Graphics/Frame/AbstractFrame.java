@@ -5,8 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import fr.utbm.info.gl52.Event.EventService;
-import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 import fr.utbm.info.gl52.Graphics.Layout.AbstractLayout;

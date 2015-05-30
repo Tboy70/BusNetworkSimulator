@@ -9,14 +9,13 @@ import javax.swing.JComponent;
 
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
 import fr.utbm.info.gl52.Graphics.CardinalSystem;
-import fr.utbm.info.gl52.Graphics.IComponent;
 import fr.utbm.info.gl52.Graphics.Layout.AbstractLayout;
 
 
 /**
  * 
  */
-public abstract class ButtonComponent extends AbstractComponent implements IComponent {
+public abstract class ButtonComponent extends AbstractComponent {
 
 	/**
 	 * 
