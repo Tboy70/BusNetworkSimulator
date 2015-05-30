@@ -1,6 +1,7 @@
 package fr.utbm.info.gl52.Collection.graph;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * 
  */
-public abstract class AbstractGraph<N extends AbstractNode<?>, E extends AbstractEdge<?>>  implements IGraph<N, E> {
+public abstract class AbstractGraph<N extends INode<?>, E extends IEdge<?>>  implements IGraph<N, E> {
 
 	
 	protected List<E> listEdge;
@@ -23,12 +24,9 @@ public abstract class AbstractGraph<N extends AbstractNode<?>, E extends Abstrac
 	
 	public void addEdge(E e)
 	{
-		//if (!listEdge.contains(e))
-			this.listEdge.add(e);
-		//if (!listNode.contains(e.getNodeA()))
-			this.listNode.add((N) e.getNodeA());
-		//if (!listNode.contains(e.getNodeB()))
-			this.listNode.add((N) e.getNodeB());
+		this.listEdge.add(e);
+		this.listNode.add((N) e.getNodeA());
+		this.listNode.add((N) e.getNodeB());
 	}
 	
 	public boolean removeEdge(E e)
@@ -41,23 +39,50 @@ public abstract class AbstractGraph<N extends AbstractNode<?>, E extends Abstrac
 			this.listNode.remove(e.getNodeB());
 		return this.listEdge.remove(e);
 	}
+
+	@Override
+	public void addNode(N n) {
+		this.listNode.add(n);
+		this.listEdge.addAll((Collection<? extends E>) n.getEdges());
+	}
+
+	@Override
+	public boolean removeNode(N n) {
+		if(n.getNumberEdge() > 0)
+			this.listEdge.removeAll(n.getEdges());
+		return this.listNode.remove(n);
+	}
+
+	@Override
+	public void add(E e){
+		this.listEdge.add(e);
+	}
+	
+	@Override
+	public void add(N n){
+		this.listNode.add(n);
+	}
 	
 	@Override
 	public Iterator<IEdge<?>> iterator() {
 		return new fifoIterator();
 	}
 	
-	private class fifoIterator implements Iterator
+	private class fifoIterator implements Iterator<IEdge<?>>
 	{
 		private int i = 0;
+		
+		public fifoIterator() {
+		}
+
 		@Override
 		public boolean hasNext() {
 			return (AbstractGraph.this.listEdge.size()>this.i);
 		}
 
 		@Override
-		public IEdge next() {
-			IEdge e = AbstractGraph.this.listEdge.get(this.i);
+		public IEdge<?> next() {
+			IEdge<?> e = AbstractGraph.this.listEdge.get(this.i);
 			++this.i;
 			return e;
 		}
