@@ -32,82 +32,92 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		this.addMouseMotionListener(this);
 	}
 	public void addComponent(C c) {
-		listComponents.add(c);
+		this.listComponents.add(c);
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
-		g2d.scale(zoom/100, zoom/100);
+		g2d.scale(this.zoom/100, this.zoom/100);
 		g2d.setRenderingHint(
 				RenderingHints.KEY_ANTIALIASING, 
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2d.setColor(Color.WHITE);
-		g2d.fillRect(0, 0, width, height);
+		g2d.fillRect(0, 0, this.width, this.height);
 		g2d.setColor(Color.LIGHT_GRAY);
 		g2d.setStroke(new BasicStroke(2));
-		g2d.drawRect(0, 0, width-1, height-1);
+		g2d.drawRect(0, 0, this.width-1, this.height-1);
 		
-		for(C c: listComponents)
+		for(C c: this.listComponents)
 			c.draw(g);
 		
 		g2d.scale(1,1);
 		g2d.setColor(Color.red);
-		g2d.draw(new Ellipse2D.Double(clicx, clicy, 8, 8));
+		g2d.draw(new Ellipse2D.Double(this.clicx, this.clicy, 8, 8));
 		g2d.dispose();
 		//super.paintComponent(g);
 	}
 	public AbstractGraphicElement actionClick(int x, int y)
 	{
-		clicx = x;
-		clicy = y;
+		this.clicx = x;
+		this.clicy = y;
 		repaint();
 		Shape ellipse = new Ellipse2D.Double(x, y, 8, 8);
-		for(AbstractGraphicElement e: listComponents)
+		for(AbstractGraphicElement e: this.listComponents)
 		{
 			if (e.intersect(ellipse)) {
-				if (selected != null)
-					selected.unselect();
+				if (this.selected != null)
+					this.selected.unselect();
 				e.select();
-				selected = e;
+				this.selected = e;
 				return e;
 			}		
 		}
-		if (selected != null)
-			selected.unselect();
-		selected = null;
+		if (this.selected != null)
+			this.selected.unselect();
+		this.selected = null;
 		return null;
 	}
 	@Override
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		// Not used for now
+	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
-		x = e.getX();
-		y = e.getY();
+		this.x = e.getX();
+		this.y = e.getY();
 
-        int pX = (int) ((x) / (getZoom()/100));
-        int pY = (int) ((y) / (getZoom()/100)) ;
+        int pX = (int) ((this.x) / (getZoom()/100));
+        int pY = (int) ((this.y) / (getZoom()/100)) ;
         EventService.getInstance().publish(new LeftClicEvent(pX, pY));
         System.out.println("Source:"+actionClick(pX,pY));
 		
 	}
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+		// Not used for now
+	}
 	@Override
-	public void mouseEntered(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {
+		// Not used for now
+	}
 	@Override
-	public void mouseExited(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {
+		// Not used for now
+	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-	    int newX = getX() - (x-e.getX());
-        int newY = getY() - (y-e.getY());
+	    int newX = getX() - (this.x-e.getX());
+        int newY = getY() - (this.y-e.getY());
         setLocation(newX, newY);
         repaint();
 	}
 	@Override
-	public void mouseMoved(MouseEvent e) {}
+	public void mouseMoved(MouseEvent e) {
+		// Not used for now
+	}
 	
 
 }

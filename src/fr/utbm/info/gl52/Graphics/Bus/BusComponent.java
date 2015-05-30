@@ -17,22 +17,25 @@ import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 public abstract class BusComponent extends AbstractGraphicElement{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1599362302718521824L;
+	/**
      * 
      */
 	protected Rectangle bounds;
 	protected ImageIcon image;
     public BusComponent(int x, int y) {
-    	bounds = new Rectangle(x,y,16,16);
+    	this.bounds = new Rectangle(x,y,16,16);
     }
 
 	public void move(int x, int y) {
-		// TODO Auto-generated method stub
-		bounds.setLocation(x, y);
+		this.bounds.setLocation(x, y);
 	}
 	public void draw(Graphics g)
 	{
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(image.getImage(), bounds.x, bounds.y, null);
+        g2d.drawImage(this.image.getImage(), this.bounds.x, this.bounds.y, null);
 	}
 
 	public JComponent getSwingComponent() {

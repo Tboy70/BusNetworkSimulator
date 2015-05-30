@@ -4,12 +4,13 @@ package fr.utbm.info.gl52.Middle;
 /**
  * 
  */
-public class SpecialConnection extends Connection {
+public class SpecialConnection<Dn> extends Connection<Dn> {
 
     /**
      * 
      */
-    public SpecialConnection() {
+    public SpecialConnection(Dn data) {
+    	super(data);
     }
 
 
