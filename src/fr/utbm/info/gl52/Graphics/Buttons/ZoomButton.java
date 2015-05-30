@@ -13,17 +13,14 @@ public class ZoomButton extends ButtonComponent {
 	public ZoomButton(String text, int x, int y, int h, int w, double zoom) {
 		super(text, x, y, h, w);
 		this.zoomFactor = zoom;
-		// TODO Auto-generated constructor stub
 	}
 	public ZoomButton(String text, int x, int y, int h, int w, CardinalSystem p, double zoom) {
 		super(text, x, y, h, w, p);
 		this.zoomFactor = zoom;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void action(ActionEvent evt) {
-		// TODO Auto-generated method stub
 		if (this.m != null)
 		{
 			this.m.zoom(this.zoomFactor);

@@ -23,7 +23,6 @@ public class BicyclePathComponent extends RoadComponent {
 	}
 	@Override
 	public JComponent getSwingComponent() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	public void draw(Graphics g)

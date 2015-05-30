@@ -30,7 +30,6 @@ public abstract class BusComponent extends AbstractGraphicElement{
     }
 
 	public void move(int x, int y) {
-		// TODO Auto-generated method stub
 		this.bounds.setLocation(x, y);
 	}
 	public void draw(Graphics g)

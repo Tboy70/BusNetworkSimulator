@@ -9,7 +9,6 @@ public class Controller implements ISubscriber {
 	public Controller() { }
 	@Override
 	public void inform(IEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getClass() == LeftClicEvent.class)
 		{
 			LeftClicEvent lce = (LeftClicEvent)e;

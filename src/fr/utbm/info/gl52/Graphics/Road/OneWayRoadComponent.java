@@ -20,7 +20,6 @@ public class OneWayRoadComponent extends RoadComponent {
 
 	public OneWayRoadComponent(int[] x, int[] y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void draw(Graphics g)
@@ -39,7 +38,6 @@ public class OneWayRoadComponent extends RoadComponent {
 
 	@Override
 	public JComponent getSwingComponent() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

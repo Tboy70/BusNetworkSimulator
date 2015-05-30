@@ -20,14 +20,11 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	
 	public ParseButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void action(ActionEvent evt) {
 		this.parseDefaultFile();
-		// Load
-		// 
 	}
 	
 	private void parseDefaultFile(){

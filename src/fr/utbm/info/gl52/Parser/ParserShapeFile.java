@@ -42,7 +42,6 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<Node<ESRIPoint>
 			while(i.hasNext()) // Read
 				i.next();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}

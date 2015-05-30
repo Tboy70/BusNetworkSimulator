@@ -13,18 +13,13 @@ import javax.swing.JComponent;
  */
 public class HighwayComponent extends RoadComponent {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -858174210007613239L;
 	public HighwayComponent(int[] x, int[] y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public JComponent getSwingComponent() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	public void draw(Graphics g)

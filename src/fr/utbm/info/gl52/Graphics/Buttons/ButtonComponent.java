@@ -57,7 +57,6 @@ public abstract class ButtonComponent extends AbstractComponent {
 		this.m = l;
 	}
     public void move(int x, int y) {
-		// TODO Auto-generated method stub
 		this.bounds.setLocation(x, y);
 		this.button.setBounds(this.bounds);
 	}

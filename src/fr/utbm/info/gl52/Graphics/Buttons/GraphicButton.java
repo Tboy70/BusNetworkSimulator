@@ -50,10 +50,16 @@ public class GraphicButton extends JButton  {
 		//super.paintComponent(g);
 	}
 
+	/**
+	 * @param evt Not used here, changing just colors when entering 
+	 */
 	public void mouseEntered(java.awt.event.MouseEvent evt) {
 		this.setBackground(Color.GREEN);
 	}
 
+	/**
+	 * @param evt Not used here, changing just colors when exiting
+	 */
 	public void mouseExited(java.awt.event.MouseEvent evt) {
 		this.setBackground(Color.cyan);
 	}
