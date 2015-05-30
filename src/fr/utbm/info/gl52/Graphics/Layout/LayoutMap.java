@@ -80,7 +80,9 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		return null;
 	}
 	@Override
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		// Not used for now
+	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
@@ -94,11 +96,17 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		
 	}
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {
+		// Not used for now
+	}
 	@Override
-	public void mouseEntered(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {
+		// Not used for now
+	}
 	@Override
-	public void mouseExited(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {
+		// Not used for now
+	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
 	    int newX = getX() - (this.x-e.getX());
@@ -107,7 +115,9 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
         repaint();
 	}
 	@Override
-	public void mouseMoved(MouseEvent e) {}
+	public void mouseMoved(MouseEvent e) {
+		// Not used for now
+	}
 	
 
 }

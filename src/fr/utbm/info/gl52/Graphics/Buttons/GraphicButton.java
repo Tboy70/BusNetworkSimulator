@@ -45,7 +45,7 @@ public class GraphicButton extends JButton  {
 		float xMargin = (float)(getWidth()-r.getWidth())/2;
 		float yMargin = (float)(getHeight()-getFont().getSize())/2;
 		// Draw the text in the center 
-		g2.drawString(getText(), xMargin, (float)getFont().getSize() + yMargin);
+		g2.drawString(getText(), xMargin, getFont().getSize() + yMargin);
 		g2.dispose();
 		//super.paintComponent(g);
 	}
