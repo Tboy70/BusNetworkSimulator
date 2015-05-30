@@ -13,6 +13,7 @@ import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Collection.tree.QuadTree;
 import fr.utbm.info.gl52.Middle.Connection;
 import fr.utbm.info.gl52.Middle.MapGraph;
+import fr.utbm.info.gl52.Middle.MapPolyline;
 import fr.utbm.info.gl52.Middle.Segment;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
 import fr.utbm.set.attr.Attribute;
@@ -90,6 +91,8 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 		IEdge<AttributeContainer> e;
 		AttributeContainer attrs;
 		
+		MapPolyline mpoly = new MapPolyline(); 
+		
 		this.qtree.insert(n.getData());
 		
 		for(int i = 1 ; i < points.length ; ++i){
@@ -98,13 +101,19 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 			attrs = this.dbase.next();
 			e = new Segment<>(attrs, n, m);
 			
+			mpoly.add((Segment<?>) e);
+			
 			if(attrs != null){
 				for (Attribute attr : attrs.attributes()) {
 					try {
 						if(attr.getName().equals("SENS") && attr.getValue().toString().equals("Double sens")){
 							e = new Segment<>(attrs, m, n);
 							this.graph.addEdge((Edge<De>) e);
+							mpoly.add((Segment<?>) e);
 						}
+						
+						if(attr.getName().equals("NOM_RUE_D"))
+							mpoly.setName(attr.getValue().toString());
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
