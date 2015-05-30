@@ -96,13 +96,13 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 			INode<ESRISpatialObject> m = new Connection<>(new ESRISpatialObject(points[i]));
 			
 			attrs = this.dbase.next();
-			e = new Segment<AttributeContainer>(attrs, n, m);
+			e = new Segment<>(attrs, n, m);
 			
 			if(attrs != null){
 				for (Attribute attr : attrs.attributes()) {
 					try {
 						if(attr.getName().equals("SENS") && attr.getValue().toString().equals("Double sens")){
-							e = new Segment<AttributeContainer>(attrs, m, n);
+							e = new Segment<>(attrs, m, n);
 							this.graph.addEdge((Edge<De>) e);
 						}
 					} catch (Exception e1) {

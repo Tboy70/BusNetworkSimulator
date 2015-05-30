@@ -24,7 +24,7 @@ public class BusLine implements Serializable{
     }
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -32,7 +32,7 @@ public class BusLine implements Serializable{
 	}
 
 	public List<Itineraire> getlIti() {
-		return lIti;
+		return this.lIti;
 	}
 
 	public void setlIti(List<Itineraire> lIti) {
@@ -46,8 +46,8 @@ public class BusLine implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((lIti == null) ? 0 : lIti.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((this.lIti == null) ? 0 : this.lIti.hashCode());
+		result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
 		return result;
 	}
 
@@ -63,15 +63,15 @@ public class BusLine implements Serializable{
 		if (!(obj instanceof BusLine))
 			return false;
 		BusLine other = (BusLine) obj;
-		if (lIti == null) {
+		if (this.lIti == null) {
 			if (other.lIti != null)
 				return false;
-		} else if (!lIti.equals(other.lIti))
+		} else if (!this.lIti.equals(other.lIti))
 			return false;
-		if (name == null) {
+		if (this.name == null) {
 			if (other.name != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!this.name.equals(other.name))
 			return false;
 		return true;
 	}
@@ -81,6 +81,6 @@ public class BusLine implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "BusLine [name=" + name + ", lIti=" + lIti + "]";
+		return "BusLine [name=" + this.name + ", lIti=" + this.lIti + "]";
 	}
 }

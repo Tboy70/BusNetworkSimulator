@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class BusNetwork implements Serializable{
 
+	private static final long serialVersionUID = -6094149499508306454L;
 	private List<BusLine> lBusLine;
 	
     /**
@@ -20,7 +21,7 @@ public class BusNetwork implements Serializable{
     }
 
 	public List<BusLine> getlBusLine() {
-		return lBusLine;
+		return this.lBusLine;
 	}
 
 	public void setlBusLine(List<BusLine> lBusLine) {
@@ -35,7 +36,7 @@ public class BusNetwork implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((lBusLine == null) ? 0 : lBusLine.hashCode());
+				+ ((this.lBusLine == null) ? 0 : this.lBusLine.hashCode());
 		return result;
 	}
 
@@ -51,10 +52,10 @@ public class BusNetwork implements Serializable{
 		if (!(obj instanceof BusNetwork))
 			return false;
 		BusNetwork other = (BusNetwork) obj;
-		if (lBusLine == null) {
+		if (this.lBusLine == null) {
 			if (other.lBusLine != null)
 				return false;
-		} else if (!lBusLine.equals(other.lBusLine))
+		} else if (!this.lBusLine.equals(other.lBusLine))
 			return false;
 		return true;
 	}
@@ -64,6 +65,6 @@ public class BusNetwork implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "BusNetwork [lBusLine=" + lBusLine + "]";
+		return "BusNetwork [lBusLine=" + this.lBusLine + "]";
 	}
 }

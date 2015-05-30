@@ -20,7 +20,7 @@ public class Stop implements Serializable{
     }
 
     public IEdge<?> getEdge() {
-		return edge;
+		return this.edge;
 	}
 
 	public void setEdge(IEdge<?> edge) {
@@ -28,7 +28,7 @@ public class Stop implements Serializable{
 	}
 
 	public Integer getPourcentage() {
-		return pourcentage;
+		return this.pourcentage;
 	}
 
 	public void setPourcentage(Integer pourcentage) {
@@ -42,9 +42,9 @@ public class Stop implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((edge == null) ? 0 : edge.hashCode());
+		result = prime * result + ((this.edge == null) ? 0 : this.edge.hashCode());
 		result = prime * result
-				+ ((pourcentage == null) ? 0 : pourcentage.hashCode());
+				+ ((this.pourcentage == null) ? 0 : this.pourcentage.hashCode());
 		return result;
 	}
 
@@ -60,15 +60,15 @@ public class Stop implements Serializable{
 		if (!(obj instanceof Stop))
 			return false;
 		Stop other = (Stop) obj;
-		if (edge == null) {
+		if (this.edge == null) {
 			if (other.edge != null)
 				return false;
-		} else if (!edge.equals(other.edge))
+		} else if (!this.edge.equals(other.edge))
 			return false;
-		if (pourcentage == null) {
+		if (this.pourcentage == null) {
 			if (other.pourcentage != null)
 				return false;
-		} else if (!pourcentage.equals(other.pourcentage))
+		} else if (!this.pourcentage.equals(other.pourcentage))
 			return false;
 		return true;
 	}
@@ -78,7 +78,7 @@ public class Stop implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Stop [pourcentage=" + pourcentage + ", edge=" + edge + "]";
+		return "Stop [pourcentage=" + this.pourcentage + ", edge=" + this.edge + "]";
 	}
 
 }

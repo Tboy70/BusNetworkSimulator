@@ -28,7 +28,7 @@ public class Itineraire implements Serializable{
     }
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -42,9 +42,9 @@ public class Itineraire implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((lRoute == null) ? 0 : lRoute.hashCode());
-		result = prime * result + ((lStop == null) ? 0 : lStop.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((this.lRoute == null) ? 0 : this.lRoute.hashCode());
+		result = prime * result + ((this.lStop == null) ? 0 : this.lStop.hashCode());
+		result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
 		return result;
 	}
 
@@ -60,20 +60,20 @@ public class Itineraire implements Serializable{
 		if (!(obj instanceof Itineraire))
 			return false;
 		Itineraire other = (Itineraire) obj;
-		if (lRoute == null) {
+		if (this.lRoute == null) {
 			if (other.lRoute != null)
 				return false;
-		} else if (!lRoute.equals(other.lRoute))
+		} else if (!this.lRoute.equals(other.lRoute))
 			return false;
-		if (lStop == null) {
+		if (this.lStop == null) {
 			if (other.lStop != null)
 				return false;
-		} else if (!lStop.equals(other.lStop))
+		} else if (!this.lStop.equals(other.lStop))
 			return false;
-		if (name == null) {
+		if (this.name == null) {
 			if (other.name != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!this.name.equals(other.name))
 			return false;
 		return true;
 	}
@@ -83,7 +83,7 @@ public class Itineraire implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Itineraire [name=" + name + ", lRoute=" + lRoute + ", lStop="
-				+ lStop + "]";
+		return "Itineraire [name=" + this.name + ", lRoute=" + this.lRoute + ", lStop="
+				+ this.lStop + "]";
 	}	
 }
