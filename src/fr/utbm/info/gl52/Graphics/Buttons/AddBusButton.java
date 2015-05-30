@@ -13,6 +13,11 @@ import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
 public class AddBusButton extends ButtonComponent {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8107668952988309579L;
+
+	/**
      * 
      */
     public AddBusButton(String text, int x, int y, int h, int w, CardinalSystem p) {
@@ -21,9 +26,9 @@ public class AddBusButton extends ButtonComponent {
     
 	@Override
 	public void action(ActionEvent evt) {
-		AbstractComponent c =new YellowBus((int) (Math.random() * m.getHeight()),(int) (Math.random() * m.getWidth())) ; 
-		m.addComponent(c);
-		m.repaint();
+		AbstractComponent c =new YellowBus((int) (Math.random() * this.m.getHeight()),(int) (Math.random() * this.m.getWidth())) ; 
+		this.m.addComponent(c);
+		this.m.repaint();
 	}
 
 }

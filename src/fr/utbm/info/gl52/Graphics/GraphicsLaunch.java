@@ -1,8 +1,6 @@
 package fr.utbm.info.gl52.Graphics;
 
 
-import java.io.IOException;
-
 import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
@@ -18,7 +16,7 @@ import fr.utbm.info.gl52.Graphics.Road.OneWayRoadComponent;
 public class GraphicsLaunch {
 
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		Window w = new Window("Test", 600,600);
 		w.setVisible(true);
 		

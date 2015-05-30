@@ -9,6 +9,10 @@ import java.awt.Graphics;
 public abstract class AbstractGraphicElement extends AbstractComponent implements IGraphic {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8029785793479438477L;
+	/**
      * 
      */
 	protected boolean selected = false;
@@ -17,6 +21,6 @@ public abstract class AbstractGraphicElement extends AbstractComponent implement
     }
 
 	public abstract void draw(Graphics g);
-	public void select() { selected = true; }
-	public void unselect() { selected = false; }
+	public void select() { this.selected = true; }
+	public void unselect() { this.selected = false; }
 }
