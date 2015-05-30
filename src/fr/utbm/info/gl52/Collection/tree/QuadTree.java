@@ -8,7 +8,6 @@ import fr.utbm.info.gl52.Collection.SpatialObject;
 public class QuadTree<D extends SpatialObject> extends AbstractTree<D, QuadTreeNode<D>> {
 
 	private Rectangle2D.Double worldSize;
-	private QuadTreeNode<D> root;
 
 	public QuadTree(Rectangle2D.Double r) {
 		this.worldSize = r;
