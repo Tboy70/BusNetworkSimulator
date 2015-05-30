@@ -1,5 +1,4 @@
 package fr.utbm.info.gl52.Graphics.Buttons;
-
 import java.awt.event.ActionEvent;
 
 import fr.utbm.info.gl52.Collection.graph.Edge;
@@ -12,9 +11,6 @@ import fr.utbm.set.io.shape.ESRIPoint;
 
 public class ParseButton extends ButtonComponent implements FinishedParsingCallcack{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6054097105602086695L;
 	private IParser<Node<ESRIPoint>, Edge<String>> parser;
 	

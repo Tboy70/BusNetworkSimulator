@@ -32,8 +32,9 @@ public abstract class AbstractFrame extends JFrame implements IFrame{
     	this.mainPanel = new JPanel();
     	
     	JLayeredPane jlp = new JLayeredPane(); 
-    	gui.setDoubleBuffered(true);
     	this.gui = new LayoutGUI<>(450, 450);
+      	gui.setDoubleBuffered(true);
+        
     	this.map = new LayoutMap<>(1000, 1000);
     
     	this.map.setLocation(100,100);
