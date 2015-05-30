@@ -10,16 +10,16 @@ public abstract class AbstractEdge<De> implements IEdge<De>  {
 	private INode<?> A;
 	private INode<?> B;
 	public AbstractEdge() {
-    	data = null;
-    	A = null;
-    	B = null;
+    	this.data = null;
+    	this.A = null;
+    	this.B = null;
     }
     public AbstractEdge(De D) {
-    	data = D;
+    	this.data = D;
     }
     public AbstractEdge(De D, INode<?> A, INode<?> B)
     {
-    	data = D;
+    	this.data = D;
     	this.A = A;
     	this.B = B;
     }
@@ -27,18 +27,18 @@ public abstract class AbstractEdge<De> implements IEdge<De>  {
 	{
 		if (ns.length == 2)
 		{
-			A = ns[0];
-			B = ns[1];
+			this.A = ns[0];
+			this.B = ns[1];
 		}
 	}
 	
 	public INode<?> getNodeA()
 	{
-		return A;
+		return this.A;
 	}
 	public INode<?> getNodeB()
 	{
-		return B;
+		return this.B;
 	}
 	
 	public void setNodeA(INode<?> A)
@@ -52,11 +52,11 @@ public abstract class AbstractEdge<De> implements IEdge<De>  {
 	
 	public void setData(De D)
 	{
-		data = D;
+		this.data = D;
 	}
 	public De getData()
 	{
-		return data;
+		return this.data;
 	}
 
     public boolean equals(Object object)

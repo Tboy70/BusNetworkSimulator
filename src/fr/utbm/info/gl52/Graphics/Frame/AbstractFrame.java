@@ -1,10 +1,6 @@
 package fr.utbm.info.gl52.Graphics.Frame;
 
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -29,19 +25,19 @@ public abstract class AbstractFrame extends JFrame implements IFrame{
     public AbstractFrame(String title, int h,  int w) {
     	super(title);
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocation(new Point(locationX,locationY));
+        this.setLocation(new Point(this.locationX,this.locationY));
         
         setSize(700,700);
         setVisible(true);
-    	mainPanel = new JPanel();
+    	this.mainPanel = new JPanel();
     	JLayeredPane jlp = new JLayeredPane(); 
-    	gui = new LayoutGUI<AbstractComponent>(450, 450);
-    	map = new LayoutMap<AbstractGraphicElement>(1000, 1000);
+    	this.gui = new LayoutGUI<>(450, 450);
+    	this.map = new LayoutMap<>(1000, 1000);
     
-    	map.setLocation(100,100);
+    	this.map.setLocation(100,100);
  //   	jlp.setPreferredSize(new Dimension(h, w));
-        jlp.add(map, new Integer(0));
-        jlp.add(gui, new Integer(1));
+        jlp.add(this.map, new Integer(0));
+        jlp.add(this.gui, new Integer(1));
         
 
       //  super.addMouseListener(this);
@@ -50,18 +46,18 @@ public abstract class AbstractFrame extends JFrame implements IFrame{
     }
     public AbstractLayout<AbstractGraphicElement> getMap()
     {
-    	return map;
+    	return this.map;
     }
     public AbstractLayout<AbstractComponent> getGUI()
     {
-    	return gui;
+    	return this.gui;
     }
     public void addGraphicElement(AbstractGraphicElement c)
     {
-    	map.addComponent(c);
+    	this.map.addComponent(c);
     }
     public void addGUI(AbstractComponent c)
     {
-    	gui.addComponent(c);
+    	this.gui.addComponent(c);
     }
 }

@@ -13,6 +13,11 @@ import javax.swing.JComponent;
  */
 public class OneWayRoadComponent extends RoadComponent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7762570721764500437L;
+
 	public OneWayRoadComponent(int[] x, int[] y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
@@ -22,11 +27,11 @@ public class OneWayRoadComponent extends RoadComponent {
     {
     	Graphics2D g2d = (Graphics2D) g;
     	g2d.setColor(Color.black);
-    	if (selected)
+    	if (this.selected)
     		g2d.setStroke(new BasicStroke(3));
-    	if (!selected)
+    	if (!this.selected)
     		g2d.setStroke(new BasicStroke(1));
-    	g2d.drawPolyline(Xpts, Ypts, Xpts.length);
+    	g2d.drawPolyline(this.Xpts, this.Ypts, this.Xpts.length);
     	
     	g2d.setStroke(new BasicStroke(1));
     	

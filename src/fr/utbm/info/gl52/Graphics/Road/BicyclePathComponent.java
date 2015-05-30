@@ -14,6 +14,10 @@ import javax.swing.JComponent;
 public class BicyclePathComponent extends RoadComponent {
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -499548654865876L;
 	public BicyclePathComponent(int[] x, int[] y) {
 		super(x, y);
 	}
@@ -26,15 +30,15 @@ public class BicyclePathComponent extends RoadComponent {
     {
     	Graphics2D g2d = (Graphics2D) g;
     	g2d.setColor(new Color(137, 240, 132));
-    	if (selected)
+    	if (this.selected)
     		g2d.setStroke(new BasicStroke(5));
-    	if (!selected)
+    	if (!this.selected)
     		g2d.setStroke(new BasicStroke(2));
-    	g2d.drawPolyline(Xpts, Ypts, Xpts.length);
+    	g2d.drawPolyline(this.Xpts, this.Ypts, this.Xpts.length);
     	
     	g2d.setStroke(new BasicStroke(1));
     	g2d.setColor(new Color(51, 158, 46));
-    	g2d.drawPolyline(Xpts, Ypts, Xpts.length);
+    	g2d.drawPolyline(this.Xpts, this.Ypts, this.Xpts.length);
     	
     }
 

@@ -5,13 +5,17 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.JButton;
 
 public class GraphicButton extends JButton  {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2889193335246290667L;
 
 	public GraphicButton(String t)
 	{

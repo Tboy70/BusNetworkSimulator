@@ -60,14 +60,14 @@ public class ShapeFileGraphFactory<Dn> extends AbstractElementFactory<Dn> {
 		
 		///
 		
-		Node<ESRISpatialObject> n = new Node<ESRISpatialObject>(new ESRISpatialObject(points[0]));
+		Node<ESRISpatialObject> n = new Node<>(new ESRISpatialObject(points[0]));
 		IEdge<String> e;
 		
 		this.qtree.insert(n.getData());
 		
 		for(int i = 1 ; i < points.length ; ++i){
-			Node<ESRISpatialObject> m = new Node<ESRISpatialObject>(new ESRISpatialObject(points[i]));
-			e = new Edge<String>("coucou", n, m);
+			Node<ESRISpatialObject> m = new Node<>(new ESRISpatialObject(points[i]));
+			e = new Edge<>("coucou", n, m);
 			
 			if(this.qtree.insert(m.getData()))
 				this.graph.addEdge((Edge<String>) e);
@@ -84,8 +84,8 @@ public class ShapeFileGraphFactory<Dn> extends AbstractElementFactory<Dn> {
 	public void postReadingStage(boolean success){
 		this.parser.setGraph(this.graph);
 		if(success)
-			c.finishedSuccess();
+			this.c.finishedSuccess();
 		else
-			c.finishedFailed();
+			this.c.finishedFailed();
 	}
 }

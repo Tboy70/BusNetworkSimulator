@@ -1,7 +1,5 @@
 package fr.utbm.info.gl52.Graphics.Layout;
 
-import java.awt.event.MouseEvent;
-
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
 
 public class LayoutGUI<C extends AbstractComponent> extends AbstractLayout<C> {

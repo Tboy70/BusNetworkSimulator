@@ -34,7 +34,7 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<Node<ESRIPoint>
 	public void run(){
 		try {
 			ShapeFileIndexReader shxReader = new ShapeFileIndexReader(this.shxResource);
-			ShapeFileGraphFactory<Dn> factShape = new ShapeFileGraphFactory<Dn>(this.callback, this);
+			ShapeFileGraphFactory<Dn> factShape = new ShapeFileGraphFactory<>(this.callback, this);
 			ShapeFileReader<Dn> reader = new ShapeFileReader<>(this.shpResource, null, shxReader, factShape);
 			factShape.setBounds(reader.getBoundsFromHeader());
 			

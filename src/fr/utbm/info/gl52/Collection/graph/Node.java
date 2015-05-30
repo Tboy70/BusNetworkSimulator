@@ -8,6 +8,6 @@ public class Node<Dn> extends AbstractNode<Dn> {
 
 	@Override
 	public String toString() {
-		return "Node [data=" + data + "]";
+		return "Node [data=" + this.data + "]";
 	}	
 }

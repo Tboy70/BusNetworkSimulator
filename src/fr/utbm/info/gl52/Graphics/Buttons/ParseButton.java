@@ -14,6 +14,10 @@ import fr.utbm.set.io.shape.ESRIPoint;
 
 public class ParseButton extends ButtonComponent implements FinishedParsingCallcack{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6054097105602086695L;
 	private IParser<Node<ESRIPoint>, Edge<String>> parser;
 	
 	public ParseButton(String text, int x, int y, int h, int w) {
@@ -30,9 +34,9 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	
 	private void parseDefaultFile(){
 		this.parser = new ParserShapeFile<ESRIPoint, String>("resources/Belfort.shp", "resources/test.shx");
-		parser.addCallBack(this);
+		this.parser.addCallBack(this);
 		
-    	Thread t = new Thread(parser);
+    	Thread t = new Thread(this.parser);
     	t.start();
     	
     	System.out.println("Go parsing");

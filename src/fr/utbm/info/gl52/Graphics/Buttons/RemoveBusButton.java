@@ -8,6 +8,11 @@ import java.awt.event.ActionEvent;
  */
 public class RemoveBusButton extends ButtonComponent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8488307773545412155L;
+
 	public RemoveBusButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
 		// TODO Auto-generated constructor stub
