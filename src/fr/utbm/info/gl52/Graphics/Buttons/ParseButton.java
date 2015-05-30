@@ -40,7 +40,6 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	@Override
 	public void finishedSuccess() {
 		IGraph<INode<ESRIPoint>, IEdge<String>> g = this.parser.getData();
-		System.out.println("coucou");
 		System.out.println(g);
 	}
 
