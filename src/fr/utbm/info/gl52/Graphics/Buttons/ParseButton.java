@@ -30,7 +30,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	}
 	
 	private void parseDefaultFile(){
-		this.parser = new ParserShapeFile<>("resources/Belfort.shp", "resources/test.shx");
+		this.parser = new ParserShapeFile<>("resources/quartier_polyline.shp");
 		this.parser.addFinishedCallback(this);
 		
     	Thread t = new Thread(this.parser);

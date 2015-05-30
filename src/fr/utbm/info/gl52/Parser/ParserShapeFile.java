@@ -16,8 +16,8 @@ import fr.utbm.set.io.shape.ShapeFileReader;
  */
 public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn>,IEdge<De>>> {
 	
-	private URL shpResource;
-	private URL shxResource;
+	private URL shpResource = null;
+	private URL shxResource = null;
 	
 	public ParserShapeFile(String shp, String shx) {
 		super(shp);
@@ -31,11 +31,31 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 		}
 	}
 	
+	public ParserShapeFile(String shp) {
+		super(shp);
+		try {
+//			this.shpResource = new URL("file:///home/petrol/Documents/Workspace/BusNetworkSimulator/"+shp);
+//			this.shxResource= new URL("file:///home/petrol/Documents/Workspace/BusNetworkSimulator/"+shx);
+			this.shpResource = new URL("file:///C:/Users/Alexandre/Desktop/gitEclipse/BusNetworkSimulator/"+ shp);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void run(){
 		try {
-			ShapeFileIndexReader shxReader = new ShapeFileIndexReader(this.shxResource);
+			ShapeFileIndexReader shxReader = null;
+			ShapeFileReader<Dn> reader = null;
 			ShapeFileGraphFactory<Dn> factShape = new ShapeFileGraphFactory<>(this.callback, this);
-			ShapeFileReader<Dn> reader = new ShapeFileReader<>(this.shpResource, null, shxReader, factShape);
+			
+			if(this.shxResource != null)
+				shxReader = new ShapeFileIndexReader(this.shxResource);
+			if(this.shxResource != null){
+				reader = new ShapeFileReader<>(this.shpResource, null, shxReader, factShape);
+			}else{
+				reader = new ShapeFileReader<>(this.shpResource, factShape);
+			}
+			
 			factShape.setBounds(reader.getBoundsFromHeader());
 			
 			Iterator<Dn> i = reader.iterator(); 
