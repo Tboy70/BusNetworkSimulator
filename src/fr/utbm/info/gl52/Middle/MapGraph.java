@@ -14,13 +14,22 @@ public class MapGraph<Dn,De> extends Graph<Dn,De> implements Serializable{
 
 	private static final long serialVersionUID = 7723868339903190574L;
 	private List<MapPolyline> lMapPolyline;
-	
-    /**
+
+	/**
      * 
      */
     public MapGraph() {
     	this.lMapPolyline = new LinkedList<>();
     }
+
+	/**
+	 * @param element
+	 * @see java.util.List#add(java.lang.Object)
+	 */
+	public void addMapPolyline(MapPolyline element) {
+		this.lMapPolyline.add(element);
+	}
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -59,6 +68,6 @@ public class MapGraph<Dn,De> extends Graph<Dn,De> implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "MapGraph [lMapPolyline=" + this.lMapPolyline + "]";
+		return "MapGraph [lMapPolyline=" + this.lMapPolyline + ";" + super.toString() + "]";
 	}
 }
