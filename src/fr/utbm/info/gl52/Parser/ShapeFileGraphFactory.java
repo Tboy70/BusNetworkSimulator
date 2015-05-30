@@ -22,7 +22,7 @@ import fr.utbm.set.io.shape.ESRIPoint;
  *
  */
 @SuppressWarnings("deprecation")
-public class ShapeFileGraphFactory<Dn> extends AbstractElementFactory<Dn> {
+public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 	
 	private FinishedParsingCallcack c;
 	

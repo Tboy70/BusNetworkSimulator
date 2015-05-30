@@ -46,7 +46,7 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 		try {
 			ShapeFileIndexReader shxReader = null;
 			ShapeFileReader<Dn> reader = null;
-			ShapeFileGraphFactory<Dn> factShape = new ShapeFileGraphFactory<>(this.callback, this);
+			ShapeFileGraphFactory<Dn,De> factShape = new ShapeFileGraphFactory<>(this.callback, this);
 			
 			if(this.shxResource != null)
 				shxReader = new ShapeFileIndexReader(this.shxResource);
