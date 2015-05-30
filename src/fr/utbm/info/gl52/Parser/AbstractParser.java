@@ -55,7 +55,7 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
 	}
 
 	@Override
-	public void addCallBack(FinishedParsingCallcack c){
+	public void addFinishedCallback(FinishedParsingCallcack c){
 		this.callback = c;
 	}
 }
