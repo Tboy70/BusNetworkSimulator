@@ -4,6 +4,7 @@
 package fr.utbm.info.gl52.Middle;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,11 +19,49 @@ public class MapPolyline implements Serializable{
 	private String name;
 	
 	private List<Segment<?>> lseg;
-	
+
 	public MapPolyline(){
 		this.lseg = new LinkedList<>();
 	}
 
+	
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#add(java.lang.Object)
+	 */
+	public boolean add(Segment<?> arg0) {
+		return lseg.add(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @param arg1
+	 * @return
+	 * @see java.util.List#addAll(int, java.util.Collection)
+	 */
+	public boolean addAll(int arg0, Collection<? extends Segment<?>> arg1) {
+		return lseg.addAll(arg0, arg1);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#remove(int)
+	 */
+	public Segment<?> remove(int arg0) {
+		return lseg.remove(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#removeAll(java.util.Collection)
+	 */
+	public boolean removeAll(Collection<?> arg0) {
+		return lseg.removeAll(arg0);
+	}
+	
 	public String getName() {
 		return this.name;
 	}
