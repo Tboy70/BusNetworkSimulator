@@ -11,7 +11,7 @@ public abstract class AbstractTree<D, N extends AbstractTreeNode<D,N> > implemen
 	
 	public AbstractTree()
 	{
-		this.root = null;
+		this(null);
 	}
 	
 	@Override
