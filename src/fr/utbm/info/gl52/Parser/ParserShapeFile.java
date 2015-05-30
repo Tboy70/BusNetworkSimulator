@@ -8,6 +8,7 @@ import java.util.Iterator;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
+import fr.utbm.set.io.shape.ESRIPoint;
 import fr.utbm.set.io.shape.ShapeFileIndexReader;
 import fr.utbm.set.io.shape.ShapeFileReader;
 
@@ -18,6 +19,8 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 	
 	private URL shpResource = null;
 	private URL shxResource = null;
+	
+	private ParserDBase<Dn,De> dbase = null;
 	
 	public ParserShapeFile(String shp, String shx) {
 		super(shp);
@@ -31,7 +34,7 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 		}
 	}
 	
-	public ParserShapeFile(String shp) {
+	public ParserShapeFile(String shp, IParser<IGraph<INode<ESRIPoint>,IEdge<String>>> p) {
 		super(shp);
 		try {
 //			this.shpResource = new URL("file:///home/petrol/Documents/Workspace/BusNetworkSimulator/"+shp);
@@ -40,13 +43,15 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+		
+		this.dbase = (ParserDBase) p;
 	}
-	
+
 	public void run(){
 		try {
 			ShapeFileIndexReader shxReader = null;
 			ShapeFileReader<Dn> reader = null;
-			ShapeFileGraphFactory<Dn,De> factShape = new ShapeFileGraphFactory<>(this.callback, this);
+			ShapeFileGraphFactory<Dn,De> factShape = new ShapeFileGraphFactory<>(this.callback, this, this.dbase);
 			
 			if(this.shxResource != null)
 				shxReader = new ShapeFileIndexReader(this.shxResource);

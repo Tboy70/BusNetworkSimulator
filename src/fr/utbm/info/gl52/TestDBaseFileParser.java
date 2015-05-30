@@ -68,29 +68,34 @@ public class TestDBaseFileParser{
 		System.out.println("=========================================="); //$NON-NLS-1$
 
 		boolean first = true;
-
+		int i = 0;
 		for(AttributeContainer attrs : reader) {
-			if (first) {
-				first = false;
-			}
-			else {
-				System.out.println("------------------------------------------"); //$NON-NLS-1$
-			}
-			for(Attribute attr : attrs.attributes()) {
-				try {
-					System.out.println(Locale.getString(DBaseFileReader.class, "RECORD_VALUE", //$NON-NLS-1$ 
-							columnize(attr.getName(), 10),
-							attr.getValue(), attr.getType()));
+			if(i >= 183){
+				if (first) {
+					first = false;
 				}
-				catch (InvalidAttributeTypeException e) {
-					System.out.println(Locale.getString(DBaseFileReader.class, "INVALID_ATTRIBUTE_TYPE",  //$NON-NLS-1$
-							columnize(attr.getName(), 10), attr.getType()));
+				else {
+					System.out.println("------------------------------------------"); //$NON-NLS-1$
 				}
-				catch (AttributeNotInitializedException e) {
-					System.out.println(Locale.getString(DBaseFileReader.class, "ATTRIBUTE_NOT_INITIALIZED", //$NON-NLS-1$ 
-							columnize(attr.getName(), 10)));
+				for(Attribute attr : attrs.attributes()) {
+					try {
+						if(attr.getValue().toString().length() != 0){
+							System.out.println(Locale.getString(DBaseFileReader.class, "RECORD_VALUE", //$NON-NLS-1$ 
+									columnize(attr.getName(), 10),
+									attr.getValue(), attr.getType()));
+						}
+					}
+					catch (InvalidAttributeTypeException e) {
+						System.out.println(Locale.getString(DBaseFileReader.class, "INVALID_ATTRIBUTE_TYPE",  //$NON-NLS-1$
+								columnize(attr.getName(), 10), attr.getType()));
+					}
+					catch (AttributeNotInitializedException e) {
+						System.out.println(Locale.getString(DBaseFileReader.class, "ATTRIBUTE_NOT_INITIALIZED", //$NON-NLS-1$ 
+								columnize(attr.getName(), 10)));
+					}
 				}
 			}
+			i++;
 		}
 	}
 

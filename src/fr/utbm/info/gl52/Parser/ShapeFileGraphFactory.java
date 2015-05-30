@@ -28,17 +28,20 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 	
 	private IParser parser;
 	
-	IGraph<Node<ESRIPoint>, Edge<String>> graph;
+	private IGraph<Node<Dn>, Edge<De>> graph;
 	
-	QuadTree<ESRISpatialObject> qtree = null;
+	private QuadTree<ESRISpatialObject> qtree = null;
 
 	private ESRIBounds bounds;
+
+	private ParserDBase<Dn, De> dbase;
 	
-	public ShapeFileGraphFactory(FinishedParsingCallcack c, IParser parser) {
+	public ShapeFileGraphFactory(FinishedParsingCallcack c, IParser parser, ParserDBase<Dn,De> dbase) {
 		this.graph = new Graph<>();
 		
 		this.c = c;
 		this.parser = parser;
+		this.dbase = dbase;
 	}
 	
 	public void setBounds(ESRIBounds b){
@@ -71,7 +74,7 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 			e = new Edge<>("coucou", n, m);
 			
 			if(this.qtree.insert(m.getData()))
-				this.graph.addEdge((Edge<String>) e);
+				this.graph.addEdge((Edge<De>) e);
 			
 			n = m;
 		}
