@@ -13,6 +13,7 @@ import fr.utbm.set.io.shape.ShapeFileIndexReader;
 import fr.utbm.set.io.shape.ShapeFileReader;
 import fr.utbm.set.io.shape.ShapeMultiPatchType;
 
+@SuppressWarnings("deprecation")
 public class TestShapeFileParser{
 
 	private final String SHP_TEST_FILE = "resources/test.shp"; //$NON-NLS-1$
@@ -25,17 +26,17 @@ public class TestShapeFileParser{
 	 * {@inheritDoc}
 	 */
 	protected void setUp() throws Exception {
-		this.shpResource = new URL("file:///C:/Users/Alexandre/Desktop/gitEclipse/BusNetworkSimulator/"+ SHP_TEST_FILE);
-		this.shxResource = new URL("file:///C:/Users/Alexandre/Desktop/gitEclipse/BusNetworkSimulator/"+ SHX_TEST_FILE);
+		this.shpResource = new URL("file:///C:/Users/Alexandre/Desktop/gitEclipse/BusNetworkSimulator/"+ this.SHP_TEST_FILE);
+		this.shxResource = new URL("file:///C:/Users/Alexandre/Desktop/gitEclipse/BusNetworkSimulator/"+ this.SHX_TEST_FILE);
 	}
 
 	private ShapeFileReader<Float> createNoShx() throws IOException {
-		return new ShapeFileReader<Float>(shpResource, new DisplayShapeFileFactory());
+		return new ShapeFileReader<>(this.shpResource, new DisplayShapeFileFactory());
 	}
 
 	private ShapeFileReader<Float> createShx() throws IOException {
 		ShapeFileIndexReader shxReader = new ShapeFileIndexReader(this.shxResource);
-		return new ShapeFileReader<Float>(this.shpResource, null, shxReader, new DisplayShapeFileFactory());
+		return new ShapeFileReader<>(this.shpResource, null, shxReader, new DisplayShapeFileFactory());
 	}
 
 	public class DisplayShapeFileFactory extends AbstractElementFactory<Float> {

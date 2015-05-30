@@ -6,7 +6,6 @@ import fr.utbm.info.gl52.Event.ISubscriber;
 public class EventTestLaunch {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		PublisherHello p = new PublisherHello();
 		ISubscriber s = new SubscriberHello();
 

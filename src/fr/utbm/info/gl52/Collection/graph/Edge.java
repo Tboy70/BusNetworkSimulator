@@ -8,13 +8,13 @@ public class Edge<De> extends AbstractEdge<De> {
     public Edge(De D) {
     	super(D);
     }
-    public Edge(De D, Node A, Node B)
+    public Edge(De D, Node<?> A, Node<?> B)
     {
     	super(D, A, B);
     }
     
 	@Override
 	public String toString() {
-		return "Edge [data=" + data + "]";
+		return "Edge [data=" + this.data + "]";
 	}
 }

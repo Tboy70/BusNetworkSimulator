@@ -14,12 +14,12 @@ public abstract class AbstractEventService implements IEventService {
      */
 	private List<EventTuple> listTuples;
     protected AbstractEventService() {
-    	listTuples = new ArrayList<EventTuple>();
+    	this.listTuples = new ArrayList<>();
     }
     
     public void publish(IEvent e)
     {
-    	for (EventTuple eTuple : listTuples)
+    	for (EventTuple eTuple : this.listTuples)
     	{
     		if (eTuple.eventType == e.getClass())
     		{
@@ -41,7 +41,7 @@ public abstract class AbstractEventService implements IEventService {
      */
     public void subscribe(Class<? extends IEvent> eT, IFilter f, ISubscriber s)
     {
-    	listTuples.add(new EventTuple(eT, f, s));
+    	this.listTuples.add(new EventTuple(eT, f, s));
     }
 
     /**
@@ -50,7 +50,7 @@ public abstract class AbstractEventService implements IEventService {
      */
     public void unsubscribe(Class<? extends IEvent> eT, IFilter f, ISubscriber s)
     {
-    	listTuples.remove(new EventTuple(eT, f, s));
+    	this.listTuples.remove(new EventTuple(eT, f, s));
     }
 
 
