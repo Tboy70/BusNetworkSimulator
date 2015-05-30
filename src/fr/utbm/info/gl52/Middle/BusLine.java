@@ -4,12 +4,12 @@ package fr.utbm.info.gl52.Middle;
 /**
  * 
  */
-public class Line {
+public class BusLine {
 
     /**
      * 
      */
-    public Line() {
+    public BusLine() {
     }
 
 
