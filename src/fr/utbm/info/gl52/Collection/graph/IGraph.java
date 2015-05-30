@@ -1,5 +1,7 @@
 package fr.utbm.info.gl52.Collection.graph;
 
+import java.util.List;
+
 /**
  * Simple generic graph with no redundant check for objects
  */
@@ -42,4 +44,8 @@ public interface IGraph<N extends INode<?>, E extends IEdge<?>> extends Iterable
 	 * @param n The node to add
 	 */
 	public void add(N n);
+	
+	public List<IEdge<?>> getNeighbours(INode<?> A);
+	
 }
+

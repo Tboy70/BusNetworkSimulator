@@ -64,6 +64,12 @@ public abstract class AbstractGraph<N extends INode<?>, E extends IEdge<?>>  imp
 	}
 	
 	@Override
+	public List<IEdge<?>> getNeighbours(INode<?> A) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public Iterator<IEdge<?>> iterator() {
 		return new fifoIterator();
 	}

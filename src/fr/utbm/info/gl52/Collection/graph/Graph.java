@@ -1,5 +1,7 @@
 package fr.utbm.info.gl52.Collection.graph;
 
+import java.util.List;
+
 
 /**
  * Graphe non orienté
@@ -11,4 +13,5 @@ public class Graph<Dn, De> extends AbstractGraph<Node<Dn>, Edge<De>> {
 	{
 		super();
 	}
+
 }

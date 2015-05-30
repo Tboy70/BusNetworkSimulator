@@ -9,6 +9,8 @@ import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.geom.Ellipse2D;
 
 import fr.utbm.info.gl52.Event.EventService;
@@ -48,10 +50,10 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		g2d.setColor(Color.LIGHT_GRAY);
 		g2d.setStroke(new BasicStroke(2));
 		g2d.drawRect(0, 0, this.width-1, this.height-1);
-		
+
 		for(C c: this.listComponents)
 			c.draw(g);
-		
+
 		g2d.scale(1,1);
 		g2d.setColor(Color.red);
 		g2d.draw(new Ellipse2D.Double(this.clicx, this.clicy, 8, 8));
@@ -85,15 +87,15 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		
+
 		this.x = e.getX();
 		this.y = e.getY();
 
-        int pX = (int) ((this.x) / (getZoom()/100));
-        int pY = (int) ((this.y) / (getZoom()/100)) ;
-        EventService.getInstance().publish(new LeftClicEvent(pX, pY));
-        System.out.println("Source:"+actionClick(pX,pY));
-		
+		int pX = (int) ((this.x) / (getZoom()/100));
+		int pY = (int) ((this.y) / (getZoom()/100)) ;
+		EventService.getInstance().publish(new LeftClicEvent(pX, pY));
+		System.out.println("Source:"+actionClick(pX,pY));
+
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
@@ -109,15 +111,15 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-	    int newX = getX() - (this.x-e.getX());
-        int newY = getY() - (this.y-e.getY());
-        setLocation(newX, newY);
-        repaint();
+		int newX = getX() - (this.x-e.getX());
+		int newY = getY() - (this.y-e.getY());
+		setLocation(newX, newY);
+		repaint();
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// Not used for now
 	}
-	
+
 
 }

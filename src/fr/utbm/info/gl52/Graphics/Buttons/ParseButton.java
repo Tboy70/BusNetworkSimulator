@@ -1,5 +1,4 @@
 package fr.utbm.info.gl52.Graphics.Buttons;
-
 import java.awt.event.ActionEvent;
 
 import fr.utbm.info.gl52.Collection.graph.IEdge;
@@ -15,9 +14,6 @@ import fr.utbm.set.io.shape.ESRIPoint;
 @SuppressWarnings("deprecation")
 public class ParseButton extends ButtonComponent implements FinishedParsingCallcack{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6054097105602086695L;
 	private IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> shapeParser;
 	private IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> dbaseParser;
@@ -32,6 +28,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	}
 	
 	private void parseDefaultFile(){
+
 		this.dbaseParser = new ParserDBase<>("resources\\quartier_polyline.dbf");
 		this.shapeParser = new ParserShapeFile<>("resources/quartier_polyline.shp", this.dbaseParser);
 		this.shapeParser.addFinishedCallback(this);
