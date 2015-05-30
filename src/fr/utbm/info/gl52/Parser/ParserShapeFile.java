@@ -50,11 +50,10 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 			
 			if(this.shxResource != null)
 				shxReader = new ShapeFileIndexReader(this.shxResource);
-			if(this.shxResource != null){
+			if(this.shxResource != null)
 				reader = new ShapeFileReader<>(this.shpResource, null, shxReader, factShape);
-			}else{
+			else
 				reader = new ShapeFileReader<>(this.shpResource, factShape);
-			}
 			
 			factShape.setBounds(reader.getBoundsFromHeader());
 			
