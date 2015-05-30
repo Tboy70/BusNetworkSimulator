@@ -3,7 +3,6 @@
  */
 package fr.utbm.info.gl52.Parser;
 
-import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 
 import fr.utbm.info.gl52.Collection.graph.Edge;
