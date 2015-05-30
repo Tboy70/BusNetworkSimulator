@@ -11,12 +11,12 @@ public abstract class AbstractTree<D, N extends AbstractTreeNode<D,N> > implemen
 	
 	public AbstractTree()
 	{
-		root = null;
+		this.root = null;
 	}
 	
 	@Override
 	public N getRoot() {
-		return root;
+		return this.root;
 	}
 
 	@Override

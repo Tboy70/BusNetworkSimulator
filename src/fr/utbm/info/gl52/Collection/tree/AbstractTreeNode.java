@@ -14,7 +14,7 @@ public abstract class AbstractTreeNode<D, N extends AbstractTreeNode<D,N> > impl
 	
 	@Override
 	public D getData() {
-		return data;
+		return this.data;
 	}
 
 	@Override

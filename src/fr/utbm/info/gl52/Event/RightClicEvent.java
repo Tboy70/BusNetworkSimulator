@@ -1,22 +1,19 @@
 package fr.utbm.info.gl52.Event;
 
-import java.util.*;
 
 /**
  * 
  */
-public class RightClicEvent extends Event {
+public class RightClicEvent implements IEvent {
 
     /**
      * 
      */
-    public RightClicEvent() {
+	public int x, y;
+    public RightClicEvent(int px, int py) {
+    	this.x = px;
+    	this.y = py;
     }
 
-	@Override
-	public void getType() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -6,50 +6,75 @@ import java.util.List;
 /**
  * 
  */
-public abstract class AbstractNode<Dn, N extends AbstractNode<Dn,N>> implements INode<Dn, N> {
+public abstract class AbstractNode<Dn> implements INode<Dn> {
 
-	private Dn data;
+	protected Dn data;
 	private List<IEdge> listEdge;
 	public AbstractNode()
 	{
-		listEdge = new ArrayList<IEdge>();
-		data = null;
+		this.listEdge = new ArrayList<>();
+		this.data = null;
 	}
 	public void addEdge(IEdge e)
 	{
-		if (!listEdge.contains(e))
-			listEdge.add(e);
+		if (!this.listEdge.contains(e))
+			this.listEdge.add(e);
 	}
 	public boolean removeEdge(IEdge e)
 	{
-		return listEdge.remove(e);
+		return this.listEdge.remove(e);
 	}
 	public AbstractNode(Dn d)
 	{
-		data = d;
+		this.data = d;
 	}
 	public void setData(Dn d)
 	{
-		data = d;
+		this.data = d;
 	}
 	public Dn getData()
 	{
-		return data;
+		return this.data;
 	}
 	public int getNumberEdge()
 	{
-		return listEdge.size();
+		return this.listEdge.size();
 	}
 	
-    public boolean equals(Object object)
-	{
-        boolean sameSame = false;
-        if (object != null && object instanceof AbstractNode)
-        {
-        	AbstractNode n = (AbstractNode) object;
-            sameSame = (n.getData().equals(this.getData()));
-        }
-
-        return sameSame;		
+    /* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.data == null) ? 0 : this.data.hashCode());
+		result = prime * result
+				+ ((this.listEdge == null) ? 0 : this.listEdge.hashCode());
+		return result;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AbstractNode))
+			return false;
+		AbstractNode<?> other = (AbstractNode<?>) obj;
+		if (this.data == null) {
+			if (other.data != null)
+				return false;
+		} else if (!this.data.equals(other.data))
+			return false;
+		if (this.listEdge == null) {
+			if (other.listEdge != null)
+				return false;
+		} else if (!this.listEdge.equals(other.listEdge))
+			return false;
+		return true;
 	}
 }

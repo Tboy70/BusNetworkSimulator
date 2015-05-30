@@ -18,11 +18,47 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>org.arakhne-maven</id>
+			<name>Arakhnê.org Snapshots</name>
+			<url>http://download.tuxfamily.org/arakhne/maven/</url>
+		</repository>
+		<repository>
+			<id>fr.utbm.set-maven</id>
+			<name>SeT Laboratory Snapshots</name>
+			<url>https://devmas-set.utbm.fr/maven/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>org.arakhne-maven</id>
+			<name>Arakhnê.org Snapshots</name>
+			<url>http://download.tuxfamily.org/arakhne/maven/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>fr.utbm.set-maven</id>
+			<name>SeT Laboratory Snapshots</name>
+			<url>https://devmas-set.utbm.fr/maven/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.arakhne.afc.core</groupId>
 			<artifactId>vmutils</artifactId>
 			<version>11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>vecmath</artifactId>
+			<version>1.5.2</version>
 		</dependency>
 	</dependencies>
 

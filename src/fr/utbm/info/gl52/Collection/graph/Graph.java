@@ -1,7 +1,7 @@
 package fr.utbm.info.gl52.Collection.graph;
 
 
-/*
+/**
  * Graphe non orienté
  * Orientation faisable en fonction de l'utilisation de NodeA et de NodeB
  */
