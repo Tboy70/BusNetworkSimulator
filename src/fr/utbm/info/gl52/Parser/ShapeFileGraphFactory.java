@@ -14,6 +14,7 @@ import fr.utbm.info.gl52.Collection.tree.QuadTree;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
 import fr.utbm.set.attr.AttributeProvider;
 import fr.utbm.set.io.shape.AbstractElementFactory;
+import fr.utbm.set.io.shape.ESRIBounds;
 import fr.utbm.set.io.shape.ESRIPoint;
 
 /**
@@ -28,17 +29,27 @@ public class ShapeFileGraphFactory<Dn> extends AbstractElementFactory<Dn> {
 	
 	IGraph<Node<ESRIPoint>, Edge<String>> graph;
 	
-	QuadTree<ESRISpatialObject> qtree;
+	QuadTree<ESRISpatialObject> qtree = null;
+
+	private ESRIBounds bounds;
 	
 	public ShapeFileGraphFactory(FinishedParsingCallcack c, IParser parser) {
 		this.graph = new Graph<>();
-		this.qtree = new QuadTree<>(new Rectangle2D.Double(Double.MIN_VALUE, Double.MIN_VALUE, Double.MAX_VALUE, Double.MAX_VALUE));
 		
 		this.c = c;
 		this.parser = parser;
 	}
+	
+	public void setBounds(ESRIBounds b){
+		this.bounds = b;
+		this.qtree = new QuadTree<>(new Rectangle2D.Double(this.bounds.minx, this.bounds.miny, this.bounds.maxx, this.bounds.maxy));
+	}
 
 	public Dn createPolyline(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
+		assert(this.bounds != null);
+		if(this.bounds == null)
+			throw new RuntimeException("No bounds have been set");
+		
 		/*System.out.print("createPolyline : " + provider.toString() + ", shapeIndex : " + shapeIndex + ", parts : [");
 		for(int i = 0 ; i < parts.length ; ++i)
 			System.out.print(parts[i]+", ");
