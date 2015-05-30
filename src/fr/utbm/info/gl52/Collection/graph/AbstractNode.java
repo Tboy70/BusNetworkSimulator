@@ -9,18 +9,18 @@ import java.util.List;
 public abstract class AbstractNode<Dn> implements INode<Dn> {
 
 	protected Dn data;
-	private List<IEdge> listEdge;
+	private List<IEdge<?>> listEdge;
 	public AbstractNode()
 	{
 		this.listEdge = new ArrayList<>();
 		this.data = null;
 	}
-	public void addEdge(IEdge e)
+	public void addEdge(IEdge<?> e)
 	{
 		if (!this.listEdge.contains(e))
 			this.listEdge.add(e);
 	}
-	public boolean removeEdge(IEdge e)
+	public boolean removeEdge(IEdge<?> e)
 	{
 		return this.listEdge.remove(e);
 	}
@@ -42,6 +42,13 @@ public abstract class AbstractNode<Dn> implements INode<Dn> {
 	}
 	
     /* (non-Javadoc)
+	 * @see fr.utbm.info.gl52.Collection.graph.INode#getEdges()
+	 */
+	@Override
+	public List<IEdge<?>> getEdges() {
+		return this.getEdges();
+	}
+	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

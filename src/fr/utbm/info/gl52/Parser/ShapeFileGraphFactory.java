@@ -12,7 +12,11 @@ import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Collection.tree.QuadTree;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
+import fr.utbm.set.attr.Attribute;
+import fr.utbm.set.attr.AttributeContainer;
+import fr.utbm.set.attr.AttributeNotInitializedException;
 import fr.utbm.set.attr.AttributeProvider;
+import fr.utbm.set.attr.InvalidAttributeTypeException;
 import fr.utbm.set.io.shape.AbstractElementFactory;
 import fr.utbm.set.io.shape.ESRIBounds;
 import fr.utbm.set.io.shape.ESRIPoint;
@@ -22,23 +26,26 @@ import fr.utbm.set.io.shape.ESRIPoint;
  *
  */
 @SuppressWarnings("deprecation")
-public class ShapeFileGraphFactory<Dn> extends AbstractElementFactory<Dn> {
+public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 	
 	private FinishedParsingCallcack c;
 	
 	private IParser parser;
 	
-	IGraph<Node<ESRIPoint>, Edge<String>> graph;
+	private IGraph<Node<Dn>, Edge<De>> graph;
 	
-	QuadTree<ESRISpatialObject> qtree = null;
+	private QuadTree<ESRISpatialObject> qtree = null;
 
 	private ESRIBounds bounds;
+
+	private ParserDBase<Dn, De> dbase;
 	
-	public ShapeFileGraphFactory(FinishedParsingCallcack c, IParser parser) {
+	public ShapeFileGraphFactory(FinishedParsingCallcack c, IParser parser, ParserDBase<Dn,De> dbase) {
 		this.graph = new Graph<>();
 		
 		this.c = c;
 		this.parser = parser;
+		this.dbase = dbase;
 	}
 	
 	public void setBounds(ESRIBounds b){
@@ -61,7 +68,7 @@ public class ShapeFileGraphFactory<Dn> extends AbstractElementFactory<Dn> {
 		
 		///
 		
-		Node<ESRISpatialObject> n = new Node<>(new ESRISpatialObject(points[0]));
+		/*Node<ESRISpatialObject> n = new Node<>(new ESRISpatialObject(points[0]));
 		IEdge<String> e;
 		
 		this.qtree.insert(n.getData());
@@ -71,7 +78,40 @@ public class ShapeFileGraphFactory<Dn> extends AbstractElementFactory<Dn> {
 			e = new Edge<>("coucou", n, m);
 			
 			if(this.qtree.insert(m.getData()))
-				this.graph.addEdge((Edge<String>) e);
+				this.graph.addEdge((Edge<De>) e);
+			
+			n = m;
+		}*/
+		
+		///
+		
+		Node<ESRISpatialObject> n = new Node<>(new ESRISpatialObject(points[0]));
+		IEdge<AttributeContainer> e;
+		AttributeContainer attrs;
+		
+		this.qtree.insert(n.getData());
+		
+		for(int i = 1 ; i < points.length ; ++i){
+			Node<ESRISpatialObject> m = new Node<>(new ESRISpatialObject(points[i]));
+			
+			attrs = this.dbase.next();
+			e = new Edge<>(attrs, n, m);
+			
+			if(attrs != null){
+				for (Attribute attr : attrs.attributes()) {
+					try {
+						if(attr.getName().equals("SENS") && attr.getValue().toString().equals("Double sens")){
+							e = new Edge<>(attrs, m, n);
+							this.graph.addEdge((Edge<De>) e);
+						}
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+			
+			if(this.qtree.insert(m.getData()))
+				this.graph.addEdge((Edge<De>) e);
 			
 			n = m;
 		}

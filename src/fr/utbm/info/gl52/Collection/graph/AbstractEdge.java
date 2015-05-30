@@ -82,7 +82,7 @@ public abstract class AbstractEdge<De> implements IEdge<De>  {
 			return false;
 		if (!(obj instanceof AbstractEdge))
 			return false;
-		AbstractEdge other = (AbstractEdge) obj;
+		AbstractEdge<?> other = (AbstractEdge<?>) obj;
 		if (this.A == null) {
 			if (other.A != null)
 				return false;

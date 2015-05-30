@@ -1,15 +1,13 @@
 package fr.utbm.info.gl52.Parser;
 
-import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
-import fr.utbm.info.gl52.Collection.graph.INode;
 
 
 /**
  * Abstract Parsing class.
  * Launch Thread at construction.
  */
-public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IParser<N,E> {
+public class AbstractParser<G extends IGraph<?,?>> implements IParser<G> {
 
 	/**
 	 * The file to parse
@@ -24,7 +22,7 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
 	/**
 	 * Graph for importing data
 	 */
-	protected IGraph<N, E> graph;
+	protected G graph;
 	
 	@SuppressWarnings("unused")
 	private AbstractParser(){
@@ -45,17 +43,17 @@ public class AbstractParser<N extends INode<?>,E extends IEdge<?>> implements IP
 	}
 
 	@Override
-	public IGraph<N,E> getData() {
+	public G getData() {
 		return this.graph;
 	}
 	
 	@Override
-	public synchronized void setGraph(IGraph<N, E> graph){
+	public synchronized void setGraph(G graph){
 		this.graph = graph;		
 	}
 
 	@Override
-	public void addCallBack(FinishedParsingCallcack c){
+	public void addFinishedCallback(FinishedParsingCallcack c){
 		this.callback = c;
 	}
 }
