@@ -3,7 +3,9 @@ package fr.utbm.info.gl52.Graphics.Buttons;
 import java.awt.event.ActionEvent;
 
 import fr.utbm.info.gl52.Collection.graph.Edge;
+import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
+import fr.utbm.info.gl52.Collection.graph.INode;
 import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Parser.FinishedParsingCallcack;
 import fr.utbm.info.gl52.Parser.IParser;
@@ -16,7 +18,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	 * 
 	 */
 	private static final long serialVersionUID = 6054097105602086695L;
-	private IParser<Node<ESRIPoint>, Edge<String>> parser;
+	private IParser<IGraph<INode<ESRIPoint>,IEdge<String>>> parser;
 	
 	public ParseButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
@@ -28,7 +30,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	}
 	
 	private void parseDefaultFile(){
-		this.parser = new ParserShapeFile<ESRIPoint, String>("resources/Belfort.shp", "resources/test.shx");
+		this.parser = new ParserShapeFile<>("resources/Belfort.shp", "resources/test.shx");
 		this.parser.addFinishedCallback(this);
 		
     	Thread t = new Thread(this.parser);
@@ -39,7 +41,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 
 	@Override
 	public void finishedSuccess() {
-		IGraph<Node<ESRIPoint>, Edge<String>> g = this.parser.getData();
+		IGraph<INode<ESRIPoint>, IEdge<String>> g = this.parser.getData();
 		System.out.println("coucou");
 		System.out.println(g);
 	}
