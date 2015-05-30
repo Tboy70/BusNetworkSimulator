@@ -8,7 +8,7 @@ public class Edge<De> extends AbstractEdge<De> {
     public Edge(De D) {
     	super(D);
     }
-    public Edge(De D, Node<?> A, Node<?> B)
+    public Edge(De D, INode<?> A, INode<?> B)
     {
     	super(D, A, B);
     }
