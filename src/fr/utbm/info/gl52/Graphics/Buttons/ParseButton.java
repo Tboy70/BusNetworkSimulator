@@ -9,16 +9,18 @@ import fr.utbm.info.gl52.Parser.FinishedParsingCallcack;
 import fr.utbm.info.gl52.Parser.IParser;
 import fr.utbm.info.gl52.Parser.ParserDBase;
 import fr.utbm.info.gl52.Parser.ParserShapeFile;
+import fr.utbm.set.attr.AttributeContainer;
 import fr.utbm.set.io.shape.ESRIPoint;
 
+@SuppressWarnings("deprecation")
 public class ParseButton extends ButtonComponent implements FinishedParsingCallcack{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6054097105602086695L;
-	private IParser<IGraph<INode<ESRIPoint>,IEdge<String>>> shapeParser;
-	private IParser<IGraph<INode<ESRIPoint>,IEdge<String>>> dbaseParser;
+	private IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> shapeParser;
+	private IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> dbaseParser;
 	
 	public ParseButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
@@ -31,7 +33,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	
 	private void parseDefaultFile(){
 		this.dbaseParser = new ParserDBase<>("resources\\quartier_polyline.dbf");
-		this.shapeParser = new ParserShapeFile<ESRIPoint,String>("resources/quartier_polyline.shp", this.dbaseParser);
+		this.shapeParser = new ParserShapeFile<ESRIPoint,AttributeContainer>("resources/quartier_polyline.shp", this.dbaseParser);
 		this.shapeParser.addFinishedCallback(this);
 		
     	Thread t = new Thread(this.shapeParser);
@@ -42,7 +44,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 
 	@Override
 	public void finishedSuccess() {
-		IGraph<INode<ESRIPoint>, IEdge<String>> g = this.shapeParser.getData();
+		IGraph<INode<ESRIPoint>, IEdge<AttributeContainer>> g = this.shapeParser.getData();
 		System.out.println(g);
 	}
 

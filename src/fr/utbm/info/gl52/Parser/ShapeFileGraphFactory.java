@@ -12,6 +12,7 @@ import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Collection.tree.QuadTree;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
+import fr.utbm.set.attr.AttributeContainer;
 import fr.utbm.set.attr.AttributeProvider;
 import fr.utbm.set.io.shape.AbstractElementFactory;
 import fr.utbm.set.io.shape.ESRIBounds;
@@ -64,7 +65,7 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 		
 		///
 		
-		Node<ESRISpatialObject> n = new Node<>(new ESRISpatialObject(points[0]));
+		/*Node<ESRISpatialObject> n = new Node<>(new ESRISpatialObject(points[0]));
 		IEdge<String> e;
 		
 		this.qtree.insert(n.getData());
@@ -72,6 +73,26 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 		for(int i = 1 ; i < points.length ; ++i){
 			Node<ESRISpatialObject> m = new Node<>(new ESRISpatialObject(points[i]));
 			e = new Edge<>("coucou", n, m);
+			
+			if(this.qtree.insert(m.getData()))
+				this.graph.addEdge((Edge<De>) e);
+			
+			n = m;
+		}*/
+		
+		///
+		
+		Node<ESRISpatialObject> n = new Node<>(new ESRISpatialObject(points[0]));
+		IEdge<AttributeContainer> e;
+		AttributeContainer attr;
+		
+		this.qtree.insert(n.getData());
+		
+		for(int i = 1 ; i < points.length ; ++i){
+			Node<ESRISpatialObject> m = new Node<>(new ESRISpatialObject(points[i]));
+			
+			attr = this.dbase.next();
+			e = new Edge<>(attr, n, m);
 			
 			if(this.qtree.insert(m.getData()))
 				this.graph.addEdge((Edge<De>) e);
