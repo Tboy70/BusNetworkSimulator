@@ -15,11 +15,10 @@ import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
  */
 public abstract class RoadComponent extends AbstractGraphicElement {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 2161929120384646945L;
+	
 	/**
+	 * 
      */
 	protected int[] Xpts;
 	protected int[] Ypts;
@@ -29,7 +28,7 @@ public abstract class RoadComponent extends AbstractGraphicElement {
     }
     public void move(int x, int y)
     {
-    	
+    	// Not used for now
     }
     public void draw(Graphics g)
     {
