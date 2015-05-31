@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
+import fr.utbm.info.gl52.Graphics.GraphicsLaunch;
 import fr.utbm.info.gl52.Parser.FinishedParsingCallcack;
 import fr.utbm.info.gl52.Parser.IParser;
 import fr.utbm.info.gl52.Parser.ParserDBase;
@@ -41,8 +42,10 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 
 	@Override
 	public void finishedSuccess() {
+		System.out.println("Finished");
 		IGraph<INode<ESRIPoint>, IEdge<AttributeContainer>> g = this.shapeParser.getData();
-		System.out.println(g);
+		//System.out.println(g);
+		GraphicsLaunch.addGraph(g);
 	}
 
 	@Override
