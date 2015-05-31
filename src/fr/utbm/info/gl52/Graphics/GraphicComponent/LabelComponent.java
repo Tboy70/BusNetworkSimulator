@@ -9,11 +9,11 @@ public class LabelComponent  extends AbstractComponent {
 	private LabelGraphic label;
 	public LabelComponent(String message, int x, int y, int w, int h)
 	{
-		label = new LabelGraphic(message,x,y,w,h);
+		this.label = new LabelGraphic(message,x,y,w,h);
 	}
 	@Override
 	public JComponent getSwingComponent() {
-		return label;
+		return this.label;
 	}
 
 }

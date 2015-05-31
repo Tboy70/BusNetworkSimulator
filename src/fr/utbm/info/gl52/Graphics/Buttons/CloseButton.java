@@ -16,16 +16,16 @@ public class CloseButton extends ButtonComponent {
 	private IFrame f;
 	public CloseButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
-		f = null;
+		this.f = null;
 	}
 	public void setFrame(IFrame frame)
 	{
-		f = frame;
+		this.f = frame;
 	}
 
 	@Override
 	public void action(ActionEvent evt) {
-		EventService.getInstance().publish(new CloseEvent(f));
+		EventService.getInstance().publish(new CloseEvent(this.f));
 	}
 
 

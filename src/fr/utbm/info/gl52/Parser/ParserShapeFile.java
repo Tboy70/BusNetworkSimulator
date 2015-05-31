@@ -8,15 +8,12 @@ import java.util.Iterator;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
-import fr.utbm.set.attr.AttributeContainer;
-import fr.utbm.set.io.shape.ESRIPoint;
 import fr.utbm.set.io.shape.ShapeFileIndexReader;
 import fr.utbm.set.io.shape.ShapeFileReader;
 
 /**
  * 
  */
-@SuppressWarnings("deprecation")
 public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn>,IEdge<De>>> {
 	
 	private URL shpResource = null;

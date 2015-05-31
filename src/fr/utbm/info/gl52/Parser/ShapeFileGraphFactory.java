@@ -4,8 +4,6 @@
 package fr.utbm.info.gl52.Parser;
 
 import java.awt.geom.Rectangle2D;
-import java.util.List;
-
 import fr.utbm.info.gl52.Collection.graph.Edge;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;

@@ -6,7 +6,7 @@ public class CloseEvent implements IEvent {
 	public IFrame frame;
 	public CloseEvent(IFrame f)
 	{
-		frame = f;
+		this.frame = f;
 	}
 
 }

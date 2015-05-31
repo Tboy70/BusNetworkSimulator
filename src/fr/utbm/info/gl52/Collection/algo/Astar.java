@@ -34,81 +34,81 @@ public class Astar {
 	{
 		this.graph = g;
 		this.meta = meta;
-		closedList = new ArrayList<INode<?>>();
-		openList = new ArrayList<INode<?>>();
-		cost = new HashMap<INode<?>, Double>();
-		path = new HashMap<INode<?>, INode<?>>();
+		this.closedList = new ArrayList<>();
+		this.openList = new ArrayList<>();
+		this.cost = new HashMap<>();
+		this.path = new HashMap<>();
 
-		shortestPath = new LinkedList<INode<?>>();	
+		this.shortestPath = new LinkedList<>();	
 	}
 	public List<INode<?>> getPath()
 	{
-		INode<?> temp = end;
-		while (!path.isEmpty())
+		INode<?> temp = this.end;
+		while (!this.path.isEmpty())
 		{
-			shortestPath.add(temp);
-			temp = path.remove(temp);
+			this.shortestPath.add(temp);
+			temp = this.path.remove(temp);
 		}
-		return shortestPath;
+		return this.shortestPath;
 	}
 	public double run(INode<?> start, INode<?> end)
 	{
 		this.start = start;
 		this.end = end;
-		openList.add(start);
-		cost.put(start, (double) 0);
-		while (!openList.isEmpty())
+		this.openList.add(start);
+		this.cost.put(start, (double) 0);
+		while (!this.openList.isEmpty())
 		{
-			Collections.sort(openList, new ArrayComparator());
-			current = openList.remove(0);
-			if (current == end)
-				return score;
-			openList.remove(current);
-			closedList.add(current);
-			for (IEdge<?> edge : graph.getNeighbours(current))
+			Collections.sort(this.openList, new ArrayComparator());
+			this.current = this.openList.remove(0);
+			if (this.current == end)
+				return this.score;
+			this.openList.remove(this.current);
+			this.closedList.add(this.current);
+			for (IEdge<?> edge : this.graph.getNeighbours(this.current))
 			{
 				boolean neighborIsBetter = false;
 				INode<?> neighbor;
-				if (current == edge.getNodeA())
+				if (this.current == edge.getNodeA())
 					neighbor = edge.getNodeB();
 				else
 					neighbor = edge.getNodeA();
-				if (!closedList.contains(neighbor))
+				if (!this.closedList.contains(neighbor))
 				{
-					double neighborDistanceFromStart = cost.get(current) + meta.f(current, neighbor);
-					if(!openList.contains(neighbor)) {
-						openList.add(neighbor);
+					double neighborDistanceFromStart = this.cost.get(this.current) + this.meta.f(this.current, neighbor);
+					if(!this.openList.contains(neighbor)) {
+						this.openList.add(neighbor);
 						neighborIsBetter = true;
 						//if neighbor is closer to start it could also be better
 					}
-					else if(neighborDistanceFromStart < cost.get(current)) {
+					else if(neighborDistanceFromStart < this.cost.get(this.current)) {
 						neighborIsBetter = true;
 					}
 					// set neighbors parameters if it is better
 					if (neighborIsBetter) {
-						path.put(neighbor, current);
-						cost.put(neighbor, neighborDistanceFromStart);
+						this.path.put(neighbor, this.current);
+						this.cost.put(neighbor, neighborDistanceFromStart);
 					}
 				}
 			}
 		}
-		return score;
+		return this.score;
 	}
 	public void flush()
 	{
-		closedList.clear();
-		openList.clear();
-		shortestPath.clear();
-		path.clear();
-		score = 0;
+		this.closedList.clear();
+		this.openList.clear();
+		this.shortestPath.clear();
+		this.path.clear();
+		this.score = 0;
 	}
 	private class ArrayComparator implements Comparator<INode<?>> {
 		@Override
 		public int compare(INode<?> A, INode<?> B)
 		{
-			if (meta.f(A, current) > meta.f(B, current))
+			if (Astar.this.meta.f(A, Astar.this.current) > Astar.this.meta.f(B, Astar.this.current))
 				return -1;
-			else if (meta.f(A, current) < meta.f(B, current))
+			else if (Astar.this.meta.f(A, Astar.this.current) < Astar.this.meta.f(B, Astar.this.current))
 				return 1;
 			else
 				return 0;

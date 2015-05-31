@@ -33,7 +33,7 @@ public abstract class AbstractFrame extends JFrame implements IFrame, ISubscribe
 		setVisible(true);
 		this.mainPanel = new JPanel();
 
-		jlp = new JLayeredPane();
+		this.jlp = new JLayeredPane();
 
 		//Inscription à l'evenement pour fermer la fenetre.
 		EventService.getInstance().subscribe(CloseEvent.class, null, this);

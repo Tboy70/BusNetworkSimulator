@@ -1,7 +1,5 @@
 package fr.utbm.info.gl52.Collection.graph;
 
-import java.util.List;
-
 
 /**
  * Graphe non orienté
