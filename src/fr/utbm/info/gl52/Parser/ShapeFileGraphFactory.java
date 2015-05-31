@@ -95,10 +95,12 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 		
 		this.qtree.insert(n.getData());
 		
+		attrs = this.dbase.next();
+		
 		for(int i = 1 ; i < points.length ; ++i){
 			INode<ESRISpatialObject> m = new Connection<>(new ESRISpatialObject(points[i]));
 			
-			attrs = this.dbase.next();
+			
 			e = new Segment<>(attrs, n, m);
 			
 			mpoly.add((Segment<?>) e);
@@ -127,9 +129,6 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 		}
 		
 		((MapGraph)this.graph).addMapPolyline(mpoly);
-		
-		if(shapeIndex % 1000 == 0)
-			System.out.println(shapeIndex);
 		
 		return null;
 	}
