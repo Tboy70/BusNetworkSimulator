@@ -36,7 +36,7 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 		}
 	}
 	
-	public ParserShapeFile(String shp, IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> p) {
+	public ParserShapeFile(String shp, IParser<IGraph<INode<Dn>,IEdge<De>>> p) {
 		super(shp);
 		try {
 //			this.shpResource = new URL("file:///home/petrol/Documents/Workspace/BusNetworkSimulator/"+shp);
@@ -46,7 +46,7 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 			e.printStackTrace();
 		}
 		
-		this.dbase = (ParserDBase) p;
+		this.dbase = (ParserDBase<Dn, De>) p;
 	}
 
 	public void run(){
