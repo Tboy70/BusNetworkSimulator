@@ -54,6 +54,7 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 	public void setBounds(ESRIBounds b){
 		this.bounds = b;
 		this.qtree = new QuadTree<>(new Rectangle2D.Double(this.bounds.minx, this.bounds.miny, this.bounds.maxx, this.bounds.maxy));
+		((MapGraph)this.graph).setMapBounds(b);
 	}
 
 	public Dn createPolyline(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {

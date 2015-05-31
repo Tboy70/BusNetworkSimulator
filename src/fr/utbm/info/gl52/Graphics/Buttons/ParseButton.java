@@ -44,13 +44,12 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	public void finishedSuccess() {
 		System.out.println("Finished");
 		IGraph<INode<ESRIPoint>, IEdge<AttributeContainer>> g = this.shapeParser.getData();
-		//System.out.println(g);
 		GraphicsLaunch.addGraph(g);
 	}
 
 	@Override
 	public void finishedFailed() {
-		System.out.println("Problème !!!!");
+		System.out.println("Problème parser !!!!");
 	}
 
 }
