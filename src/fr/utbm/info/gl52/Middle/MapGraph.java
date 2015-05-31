@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fr.utbm.info.gl52.Collection.graph.Graph;
+import fr.utbm.set.io.shape.ESRIBounds;
 
 
 /**
@@ -15,6 +16,8 @@ public class MapGraph<Dn,De> extends Graph<Dn,De> implements Serializable{
 	private static final long serialVersionUID = 7723868339903190574L;
 	private List<MapPolyline> lMapPolyline;
 
+	private ESRIBounds mapBounds;
+	
 	/**
      * 
      */
@@ -69,5 +72,13 @@ public class MapGraph<Dn,De> extends Graph<Dn,De> implements Serializable{
 	@Override
 	public String toString() {
 		return "MapGraph [lMapPolyline=" + this.lMapPolyline + ";" + super.toString() + "]";
+	}
+
+	public ESRIBounds getMapBounds() {
+		return this.mapBounds;
+	}
+
+	public void setMapBounds(ESRIBounds mapBounds) {
+		this.mapBounds = mapBounds;
 	}
 }
