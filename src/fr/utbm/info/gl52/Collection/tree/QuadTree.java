@@ -49,6 +49,6 @@ public class QuadTree<D extends SpatialObject> extends AbstractTree<D, QuadTreeN
 			throw new RuntimeException("QuadTree not initialized");
 		}
 		
-		return null;
+		return this.root.getData();
 	}
 }
