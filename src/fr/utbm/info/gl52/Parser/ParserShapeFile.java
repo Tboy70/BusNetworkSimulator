@@ -21,24 +21,14 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 	
 	private ParserDBase<Dn,De> dbase = null;
 	
-	public ParserShapeFile(String shp, String shx) {
-		super(shp);
-		try {
-//			this.shpResource = new URL("file:///home/petrol/Documents/Workspace/BusNetworkSimulator/"+shp);
-//			this.shxResource= new URL("file:///home/petrol/Documents/Workspace/BusNetworkSimulator/"+shx);
-			this.shpResource = new URL("file:///C:\\Users\\Florent\\git\\BusNetworkSimulator"+ shp);
-			this.shxResource = new URL("file:///C:\\Users\\Florent\\git\\BusNetworkSimulator"+ shx);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public ParserShapeFile(String shp, IParser<IGraph<INode<Dn>,IEdge<De>>> p) {
 		super(shp);
 		try {
 //			this.shpResource = new URL("file:///home/petrol/Documents/Workspace/BusNetworkSimulator/"+shp);
-//			this.shxResource= new URL("file:///home/petrol/Documents/Workspace/BusNetworkSimulator/"+shx);
-			this.shpResource = new URL("file:///C:\\Users\\Florent\\git\\BusNetworkSimulator"+ shp);
+			this.shpResource = new URL("file:///C:\\Users\\Alexandre\\Desktop\\gitEclipse\\BusNetworkSimulator\\"+shp);
+//			this.shpResource = new URL("file:///C:\\Users\\Florent\\git\\BusNetworkSimulator"+ shp);
+			
+			this.shpResource = new URL("file:///" + System.getProperty("user.dir") + "\\" + shp);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
