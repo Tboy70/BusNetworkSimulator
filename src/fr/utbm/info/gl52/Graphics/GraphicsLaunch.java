@@ -8,6 +8,7 @@ import fr.utbm.info.gl52.Collection.graph.INode;
 import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
+import fr.utbm.info.gl52.Event.PopupEvent;
 import fr.utbm.info.gl52.Graphics.Buttons.AddBusButton;
 import fr.utbm.info.gl52.Graphics.Buttons.CenterButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ParseButton;
@@ -26,7 +27,7 @@ public class GraphicsLaunch {
 	public static Window w;
 
 	public static void main(String[] args) {
-		w = new Window("Test", 600,600);
+		w = new Window("BusNetwork",700,700);
 		w.setVisible(true);
 		
 		ZoomButton zplus = new ZoomButton("+", 0, 200, 40, 40, 10);
@@ -41,14 +42,15 @@ public class GraphicsLaunch {
     	center.setLayout(w.getMap());
     	parse.setLayout(w.getMap());
 
-    	EventService.getInstance().subscribe(LeftClicEvent.class, null, new Controller());
+    	Controller c = new Controller();
+    	EventService.getInstance().subscribe(LeftClicEvent.class, null, c);
+    	EventService.getInstance().subscribe(PopupEvent.class, null, c);
     	
     	w.addGUI(zplus);
     	w.addGUI(zminus);
     	w.addGUI(busButt);
     	w.addGUI(center);
     	w.addGUI(parse);
-    	
     	w.repaint();
 
 	}

@@ -10,6 +10,8 @@ import java.util.List;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
+import fr.utbm.info.gl52.Event.EventService;
+import fr.utbm.info.gl52.Event.PopupEvent;
 import fr.utbm.set.attr.AttributeContainer;
 import fr.utbm.set.io.dbase.DBaseFileField;
 import fr.utbm.set.io.dbase.DBaseFileReader;
@@ -21,7 +23,7 @@ import fr.utbm.set.io.dbase.DBaseFileReader;
 @SuppressWarnings("deprecation")
 public class ParserDBase<Dn,De> extends AbstractParser<IGraph<INode<Dn>,IEdge<De>>> implements Iterator<AttributeContainer> {
 
-	private static final String DBF_TEST_FILE = "resources\\quartier_polyline.dbf"; //$NON-NLS-1$
+	private static final String DBF_TEST_FILE = "resources/quartier_polyline.dbf"; //$NON-NLS-1$
 
 	private DBaseFileReader reader;
 	
@@ -32,13 +34,14 @@ public class ParserDBase<Dn,De> extends AbstractParser<IGraph<INode<Dn>,IEdge<De
 	public ParserDBase(String file) {
 		super(file);
 		
-		File f = new File("C:\\Users\\Alexandre\\Desktop\\gitEclipse\\BusNetworkSimulator\\"+ DBF_TEST_FILE);
+		File f = new File("/mnt/Windows/Users/Florent/git/BusNetworrkSimulator/"+ DBF_TEST_FILE);
 		try {
 			this.reader = new DBaseFileReader(f);
 			this.reader.readDBFHeader();
 			this.fields = this.reader.readDBFFields();
 		}catch(Exception e){
-			throw new RuntimeException("Problème in DBase parser at init");
+			EventService.getInstance().publish(new PopupEvent(e.getMessage()));
+			throw new RuntimeException("Problï¿½me in DBase parser at init");
 		}
 		
 		this.it = this.reader.iterator();
