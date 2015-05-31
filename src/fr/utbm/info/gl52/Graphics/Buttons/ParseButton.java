@@ -30,7 +30,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	
 	private void parseDefaultFile(){
 
-		this.dbaseParser = new ParserDBase<>("resources\\quartier_polyline.dbf");
+		this.dbaseParser = new ParserDBase<>("resources/quartier_polyline.dbf");
 		this.shapeParser = new ParserShapeFile<>("resources/quartier_polyline.shp", this.dbaseParser);
 		this.shapeParser.addFinishedCallback(this);
 		
