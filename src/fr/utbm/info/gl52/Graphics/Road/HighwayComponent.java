@@ -17,7 +17,9 @@ public class HighwayComponent extends RoadComponent {
 	public HighwayComponent(int[] x, int[] y) {
 		super(x, y);
 	}
-
+	public HighwayComponent(int[] x, int[] y, SensRoad sens) {
+		super(x, y, sens);
+	}
 	@Override
 	public JComponent getSwingComponent() {
 		return null;
@@ -30,12 +32,13 @@ public class HighwayComponent extends RoadComponent {
     		g2d.setStroke(new BasicStroke(5));
     	if (!this.selected)
     		g2d.setStroke(new BasicStroke(2));
+    	this.drawArrowRoad(g2d);
     	g2d.drawPolyline(this.Xpts, this.Ypts, this.Xpts.length);
     	
     	g2d.setStroke(new BasicStroke(1));
     	g2d.setColor(new Color(93, 163, 160));
-    	g2d.drawPolyline(this.Xpts, this.Ypts, this.Xpts.length);
-    	
+    	g2d.drawPolyline(this.Xpts, this.Ypts, this.Xpts.length);	
+    	this.drawArrowRoad(g2d);
     }
 
 
