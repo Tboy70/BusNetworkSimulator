@@ -34,7 +34,7 @@ public class ParserDBase<Dn,De> extends AbstractParser<IGraph<INode<Dn>,IEdge<De
 	public ParserDBase(String file) {
 		super(file);
 		
-		File f = new File("C:\\Users\\Florent\\git\\BusNetworkSimulator\\"+ DBF_TEST_FILE);
+		File f = new File("/home/alexandre/Desktop/backupNikk/gitEclipse/BusNetworkSimulator/"+ DBF_TEST_FILE);
 		try {
 			this.reader = new DBaseFileReader(f);
 			this.reader.readDBFHeader();

@@ -2,6 +2,7 @@ package fr.utbm.info.gl52.Graphics;
 
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import fr.utbm.info.gl52.Collection.graph.Edge;
@@ -12,6 +13,7 @@ import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Event.PopupEvent;
+import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
 import fr.utbm.info.gl52.Graphics.Buttons.AddBusButton;
 import fr.utbm.info.gl52.Graphics.Buttons.CenterButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ParseButton;
@@ -38,9 +40,22 @@ public class GraphicsLaunch {
     	AddBusButton busButt = new AddBusButton("A", 0, 280, 40, 40, CardinalSystem.NORTHEAST);
     	CenterButton center = new CenterButton("C",0, 320, 40, 40);
     	ParseButton parse = new ParseButton("P",0, 360, 40, 40);
-        
+
+    	for (int i = 0; i < 100; i++)
+    	{
+    		Random rand = new Random();
+
+    		int x = rand.nextInt((1000 - 0) + 1) + 0;
+    		int y = rand.nextInt((1000 - 0) + 1) + 0;
+    		w.addNetworkElement(new YellowBus(x,y) );
+    	}
+    	
     	zplus.setLayout(w.getMap());
     	zminus.setLayout(w.getMap());
+    	
+    	zplus.setLayout(w.getNetwork());
+    	zminus.setLayout(w.getNetwork());
+    	
     	busButt.setLayout(w.getMap());
     	center.setLayout(w.getMap());
     	parse.setLayout(w.getMap());

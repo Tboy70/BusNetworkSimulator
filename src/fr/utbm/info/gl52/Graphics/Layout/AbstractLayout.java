@@ -81,8 +81,6 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 			this.h = (int) (this.height * (this.zoom/100));	
 			//this.resize(new Dimension(w,h));
 			this.setSize(new Dimension(this.w,this.h));
-			System.out.println("Size:"+getWidth()+"/"+getHeight());
-			System.out.println("XSize:"+this.w+"/"+this.h);
 			
 		}
 		repaint();

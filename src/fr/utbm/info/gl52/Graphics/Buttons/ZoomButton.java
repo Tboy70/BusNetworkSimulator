@@ -1,7 +1,9 @@
 package fr.utbm.info.gl52.Graphics.Buttons;
 
 import java.awt.event.ActionEvent;
+
 import fr.utbm.info.gl52.Graphics.CardinalSystem;
+import fr.utbm.info.gl52.Graphics.Layout.AbstractLayout;
 
 public class ZoomButton extends ButtonComponent {
 
@@ -21,10 +23,10 @@ public class ZoomButton extends ButtonComponent {
 
 	@Override
 	public void action(ActionEvent evt) {
-		if (this.m != null)
+		for (AbstractLayout<?> m : this.m)
 		{
-			this.m.zoom(this.zoomFactor);
-			this.m.repaint();
+			m.zoom(this.zoomFactor);
+			m.repaint();
 		}
 	}
 }
