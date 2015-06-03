@@ -8,12 +8,12 @@ package fr.utbm.info.gl52.Graphics.Layout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JComponent;
-
-public class MouseManager implements MouseListener, MouseMotionListener {
+public class MouseManager implements MouseListener, MouseMotionListener, MouseWheelListener {
 	private int x, y;
 	private List<AbstractLayout<?>> l;
 	public MouseManager(int x, int y)
@@ -64,6 +64,16 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+	    if (e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
+	    	for (AbstractLayout<?> al : l)
+			{
+	    		al.zoom(e.getUnitsToScroll());
+			}
+	    }
 		
 	}
 

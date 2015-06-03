@@ -37,7 +37,7 @@ public class Window extends AbstractFrame {
 		
 		this.jlp.addMouseListener(this.mouse);
 		this.jlp.addMouseMotionListener(this.mouse);
-		
+		this.jlp.addMouseWheelListener(this.mouse);
     	this.jlp.add(this.map, new Integer(0));
         this.jlp.add(this.network, new Integer(1));
 
