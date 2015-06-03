@@ -46,7 +46,7 @@ public class YellowBus extends BusComponent {
 		int y = rand.nextInt((1 - (-1)) + 1) + (-1);
 		int newX = x + bounds.x;
 		int newY = y + bounds.y;
-		if (newX > 0 && newX < 1000 && newY > 0 && newY < 1000)
+		if (newX > 0 && newX < 800 && newY > 0 && newY < 800)
 			bounds.setLocation(newX, newY);
 	}
 }

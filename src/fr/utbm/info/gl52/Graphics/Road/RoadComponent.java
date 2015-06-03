@@ -61,7 +61,7 @@ public abstract class RoadComponent extends AbstractGraphicElement {
 		for (int i = 0; i < this.Xpts.length-1; ++i)
 		{
 			Line2D line = new Line2D.Double(this.Xpts[i], this.Ypts[i],this.Xpts[i+1], this.Ypts[i+1]);
-			System.out.println(line+"X1:"+this.Xpts[i]+"Y1:"+this.Ypts[i]+"X2:"+this.Xpts[i+1]+"Y2:"+this.Ypts[i+1]);
+			//System.out.println(line+"X1:"+this.Xpts[i]+"Y1:"+this.Ypts[i]+"X2:"+this.Xpts[i+1]+"Y2:"+this.Ypts[i+1]);
 			if (line.intersects(r.getBounds2D()))
 				return true;
 		}

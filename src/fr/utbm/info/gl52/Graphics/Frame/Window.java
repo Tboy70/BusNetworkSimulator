@@ -21,12 +21,17 @@ public class Window extends AbstractFrame {
 	 */
 	public Window(String title, int h, int w) {
 		super(title, h, w);
-    	this.gui = new LayoutGUI<>(h, w);
+		int wx, wy;
+		wx = 800;
+		wy = 800;
+		this.gui = new LayoutGUI<>(h, w);
       	this.gui.setDoubleBuffered(true);
-    	this.map = new LayoutMap<>(1000, 1000);
-    	this.network = new LayoutNetwork<BusComponent>(1000, 1000);
-    	this.map.setLocation(100,100);
-    	this.network.setLocation(100,100);
+    	this.map = new LayoutMap<>(wx, wy);
+    	this.network = new LayoutNetwork<BusComponent>(wx, wy);
+    	
+
+    	this.map.setLocation((int) ((wx - h) * this.map.getZoom()/100),(int) ((wy - w) * this.map.getZoom()/100));
+    	this.network.setLocation((int) ((wx - h) * this.map.getZoom()/100),(int) ((wy - w) * this.map.getZoom()/100));
     	this.mouse.add(map);
     	this.mouse.add(network);
 		

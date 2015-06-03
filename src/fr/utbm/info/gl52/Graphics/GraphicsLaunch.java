@@ -41,12 +41,12 @@ public class GraphicsLaunch {
     	CenterButton center = new CenterButton("C",0, 320, 40, 40);
     	ParseButton parse = new ParseButton("P",0, 360, 40, 40);
 
-    	for (int i = 0; i < 100; i++)
+    	for (int i = 0; i < 10; i++)
     	{
     		Random rand = new Random();
 
-    		int x = rand.nextInt((1000 - 0) + 1) + 0;
-    		int y = rand.nextInt((1000 - 0) + 1) + 0;
+    		int x = rand.nextInt((800 - 0) + 1) + 0;
+    		int y = rand.nextInt((800 - 0) + 1) + 0;
     		w.addNetworkElement(new YellowBus(x,y) );
     	}
     	

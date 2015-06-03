@@ -37,7 +37,7 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	}
 	public double getZoom() { return this.zoom; }
 	public AbstractLayout(int h, int w) {
-		this.zoom = 50;
+		this.zoom = 68;
 		this.listComponents = new ArrayList<>();
 		setOpaque(false);
 
@@ -49,13 +49,13 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 		this.width = h;
 	}
 
-	public void addComponent(C c) {
+	public synchronized void addComponent(C c) {
 		this.listComponents.add(c);
 		if (c.getSwingComponent() != null)
 			add(c.getSwingComponent());
 	}
 
-	public void moveComponent(C c, int x, int y) {
+	public synchronized void moveComponent(C c, int x, int y) {
 		if (this.listComponents.contains(c))
 		{
 			this.listComponents.remove(c);
@@ -64,7 +64,7 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 		}
 	}
 
-	public void delete(C c) {
+	public synchronized void delete(C c) {
 		this.listComponents.remove(c);
 		this.remove(c.getSwingComponent());
 	}

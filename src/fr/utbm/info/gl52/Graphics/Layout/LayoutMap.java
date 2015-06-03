@@ -10,10 +10,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
+import fr.utbm.info.gl52.Graphics.Bus.BusComponent;
 
 
 /**
@@ -28,13 +32,14 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 	private int x, y;
 	public LayoutMap(int h, int w) {
 		super(h, w);
+		listComponents = Collections.synchronizedList(new ArrayList());
 	}
 	public void addComponent(C c) {
 		this.listComponents.add(c);
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
+	public synchronized void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.scale(this.zoom/100, this.zoom/100);
 		g2d.setRenderingHint(
@@ -47,8 +52,16 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		g2d.setStroke(new BasicStroke(2));
 		g2d.drawRect(0, 0, this.width-1, this.height-1);
 
-		for(C c: this.listComponents)
-			c.draw(g);
+		/*for(C c: this.listComponents)
+			c.draw(g);*/
+		synchronized(listComponents) {
+			Iterator i = listComponents.iterator(); 
+			while (i.hasNext())
+			{
+				AbstractGraphicElement b = (AbstractGraphicElement) i.next();
+				b.draw(g2d);
+			}
+		}
 
 		g2d.scale(1,1);
 		g2d.setColor(Color.red);

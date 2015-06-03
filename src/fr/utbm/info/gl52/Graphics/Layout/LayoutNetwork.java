@@ -30,7 +30,7 @@ public class LayoutNetwork<C extends BusComponent> extends AbstractLayout<C> imp
 		super(h, w);
 		listComponents = Collections.synchronizedList(new ArrayList());
 		t = new Thread(this);
-		//t.start();
+		t.start();
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class LayoutNetwork<C extends BusComponent> extends AbstractLayout<C> imp
 		while (true)
 		{
 			try {
-				Thread.sleep(20);
+				Thread.sleep(30);
 				synchronized(listComponents) {
 					Iterator i = listComponents.iterator(); 
 					while (i.hasNext())
@@ -54,7 +54,7 @@ public class LayoutNetwork<C extends BusComponent> extends AbstractLayout<C> imp
 
 		}
 	}
-	public void paintComponent(Graphics g) {
+	public synchronized void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.scale(this.zoom/100, this.zoom/100);
 		g2d.setRenderingHint(
