@@ -25,6 +25,7 @@ import fr.utbm.info.gl52.Middle.MapGraph;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
 import fr.utbm.set.attr.Attribute;
 import fr.utbm.set.attr.AttributeContainer;
+import fr.utbm.set.attr.AttributeException;
 import fr.utbm.set.io.shape.ESRIBounds;
 import fr.utbm.set.io.shape.ESRIPoint;
 
@@ -83,6 +84,8 @@ public class GraphicsLaunch {
 				IEdge<AttributeContainer> eT = (Edge<AttributeContainer>)e;
 				INode<ESRISpatialObject> A = (Node<ESRISpatialObject>)eT.getNodeA();
 				INode<ESRISpatialObject> B = (Node<ESRISpatialObject>)eT.getNodeB();
+				//for(String s: eT.getData().getAllAttributeNames())
+				//	System.out.println(""+s);
 				int px[] = {(int)A.getData().x - (int)b.minx,(int)B.getData().x - (int)b.minx};
 				int py[] = {(int)A.getData().y - (int)b.miny,(int)B.getData().y - (int)b.miny};
 				SensRoad sens = eT.getData().getAttribute("SENS").equals("Double sens") ? SensRoad.SANS : SensRoad.DROIT;

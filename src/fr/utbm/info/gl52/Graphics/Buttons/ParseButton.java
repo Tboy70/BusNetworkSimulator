@@ -35,7 +35,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	}
 
 	private void parseDefaultFile(){
-
+		int p = 0;
 		JFileChooser fc = new JFileChooser(new File("."));
 		File file;
 		String fs = "";
@@ -43,25 +43,34 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 			file = fc.getSelectedFile();
 			this.dbaseParser = new ParserDBase<>(file.getAbsolutePath());
 			fs = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf('.'));
+			++p;
 		}
 		File f1 = new File(fs+".shp");
-		if (!f1.exists())
+		if (p == 1)
 		{
-			if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
-				file = fc.getSelectedFile();
-				this.shapeParser = new ParserShapeFile<>(file.getAbsolutePath(), this.dbaseParser);
+			if (!f1.exists())
+			{
+				if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
+					file = fc.getSelectedFile();
+					this.shapeParser = new ParserShapeFile<>(file.getAbsolutePath(), this.dbaseParser);
+					++p;
+				}
+			}
+			else
+			{
+				this.shapeParser = new ParserShapeFile<>(f1.getAbsolutePath(), this.dbaseParser);
+				++p;
 			}
 		}
-		else
+		if (p == 2)
 		{
-			this.shapeParser = new ParserShapeFile<>(f1.getAbsolutePath(), this.dbaseParser);
+			this.shapeParser.addFinishedCallback(this);
+
+			Thread t = new Thread(this.shapeParser);
+			t.start();
+
+			System.out.println("Go parsing");
 		}
-		this.shapeParser.addFinishedCallback(this);
-
-		Thread t = new Thread(this.shapeParser);
-		t.start();
-
-		System.out.println("Go parsing");
 	}
 
 	@Override
