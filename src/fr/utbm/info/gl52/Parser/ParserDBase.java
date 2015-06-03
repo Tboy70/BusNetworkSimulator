@@ -23,7 +23,7 @@ import fr.utbm.set.io.dbase.DBaseFileReader;
 @SuppressWarnings("deprecation")
 public class ParserDBase<Dn,De> extends AbstractParser<IGraph<INode<Dn>,IEdge<De>>> implements Iterator<AttributeContainer> {
 
-	private static final String DBF_TEST_FILE = "resources/quartier_polyline.dbf"; //$NON-NLS-1$
+//	private static final String DBF_TEST_FILE = "resources/quartier_polyline.dbf"; //$NON-NLS-1$
 
 	private DBaseFileReader reader;
 	
@@ -33,8 +33,6 @@ public class ParserDBase<Dn,De> extends AbstractParser<IGraph<INode<Dn>,IEdge<De
 	
 	public ParserDBase(String file) {
 		super(file);
-		
-		File f = new File("/home/alexandre/Desktop/backupNikk/gitEclipse/BusNetworkSimulator/"+ DBF_TEST_FILE);
 //		File f = new File("C:\\Users\\Florent\\git\\BusNetworkSimulator\\"+ DBF_TEST_FILE);
 //		File f = new File(System.getProperty("user.dir") + "/"+ DBF_TEST_FILE);
 		File f = new File(file);
