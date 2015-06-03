@@ -51,13 +51,15 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		/*int newX = (this.x-e.getX());
+		int newX = (this.x-e.getX());
 		int newY = (this.y-e.getY());
 		for (AbstractLayout<?> al : l)
 		{
 			al.setLocation((int)al.getLocation().getX()-newX, (int) al.getLocation().getY()-newY);
 			al.repaint();
-		}*/
+		}
+		this.x = e.getX();
+		this.y = e.getY();
 	}
 	@Override
 	public void mouseMoved(MouseEvent e) {

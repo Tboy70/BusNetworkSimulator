@@ -57,13 +57,6 @@ public class LayoutNetwork<C extends BusComponent> extends AbstractLayout<C> imp
 	public synchronized void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.scale(this.zoom/100, this.zoom/100);
-		g2d.setRenderingHint(
-				RenderingHints.KEY_ANTIALIASING, 
-				RenderingHints.VALUE_ANTIALIAS_ON);
-
-		//g2d.clearRect(0, 0, this.width, this.height);
-		g2d.setColor(Color.green);
-		g2d.drawRect(0, 0, this.width, this.height);
 		for(C c: this.listComponents)
 			c.draw(g);
 
