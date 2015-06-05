@@ -2,6 +2,8 @@ package fr.utbm.info.gl52.Graphics.Buttons;
 
 import java.awt.event.ActionEvent;
 
+import fr.utbm.info.gl52.Graphics.Layout.AbstractLayout;
+
 public class CenterButton extends ButtonComponent {
 
 	/**
@@ -15,7 +17,8 @@ public class CenterButton extends ButtonComponent {
 
 	@Override
 	public void action(ActionEvent evt) {
-		this.m.setLocation(0, 0);
+		for (AbstractLayout<?> m : this.m)
+			m.setLocation(0, 0);
 	}
 
 }

@@ -27,13 +27,17 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	/**
 	 * 
 	 */	
+	public void flush()
+	{
+		listComponents.removeAll(listComponents);
+	}
 	public AbstractGraphicElement actionClick(int x, int y)
 	{
 		return null;
 	}
 	public double getZoom() { return this.zoom; }
 	public AbstractLayout(int h, int w) {
-		this.zoom = 50;
+		this.zoom = 68;
 		this.listComponents = new ArrayList<>();
 		setOpaque(false);
 
@@ -45,13 +49,13 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 		this.width = h;
 	}
 
-	public void addComponent(C c) {
+	public synchronized void addComponent(C c) {
 		this.listComponents.add(c);
 		if (c.getSwingComponent() != null)
 			add(c.getSwingComponent());
 	}
 
-	public void moveComponent(C c, int x, int y) {
+	public synchronized void moveComponent(C c, int x, int y) {
 		if (this.listComponents.contains(c))
 		{
 			this.listComponents.remove(c);
@@ -60,7 +64,7 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 		}
 	}
 
-	public void delete(C c) {
+	public synchronized void delete(C c) {
 		this.listComponents.remove(c);
 		this.remove(c.getSwingComponent());
 	}
@@ -77,8 +81,6 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 			this.h = (int) (this.height * (this.zoom/100));	
 			//this.resize(new Dimension(w,h));
 			this.setSize(new Dimension(this.w,this.h));
-			System.out.println("Size:"+getWidth()+"/"+getHeight());
-			System.out.println("XSize:"+this.w+"/"+this.h);
 			
 		}
 		repaint();

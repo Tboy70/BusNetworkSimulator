@@ -23,7 +23,7 @@ import fr.utbm.set.io.dbase.DBaseFileReader;
 @SuppressWarnings("deprecation")
 public class ParserDBase<Dn,De> extends AbstractParser<IGraph<INode<Dn>,IEdge<De>>> implements Iterator<AttributeContainer> {
 
-	private static final String DBF_TEST_FILE = "resources/quartier_polyline.dbf"; //$NON-NLS-1$
+//	private static final String DBF_TEST_FILE = "resources/quartier_polyline.dbf"; //$NON-NLS-1$
 
 	private DBaseFileReader reader;
 	

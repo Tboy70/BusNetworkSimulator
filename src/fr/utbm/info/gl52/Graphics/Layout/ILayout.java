@@ -25,5 +25,6 @@ public interface ILayout<C extends IComponent> {
      * @param AbstractComponent c
      */
     public void delete(C c);
+    public void flush();
 
 }

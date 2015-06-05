@@ -41,4 +41,5 @@ public abstract class BusComponent extends AbstractGraphicElement{
 	public JComponent getSwingComponent() {
 		return null;
 	}
+	public abstract void update();
 }

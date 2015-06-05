@@ -3,6 +3,8 @@ package fr.utbm.info.gl52.Graphics.Buttons;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -21,7 +23,7 @@ public abstract class ButtonComponent extends AbstractComponent {
 	 * 
 	 */
 	private static final long serialVersionUID = -3341644248986327368L;
-	protected AbstractLayout m;
+	protected List<AbstractLayout<?>> m;
 	protected Rectangle bounds;
 	private JButton button;
 	protected CardinalSystem placement;
@@ -39,6 +41,7 @@ public abstract class ButtonComponent extends AbstractComponent {
     	this.button.setSize(w,h);
     	this.button.setBounds(this.bounds);
     	this.placement = CardinalSystem.NORTHEAST;
+    	this.m = new ArrayList<AbstractLayout<?>>();
     	init();
     }
 	    
@@ -49,12 +52,13 @@ public abstract class ButtonComponent extends AbstractComponent {
     	this.button.setSize(w,h);
     	this.button.setBounds(this.bounds);
     	this.placement = p;
+    	this.m = new ArrayList<AbstractLayout<?>>();
     	init();
     }
 
 	public void setLayout(AbstractLayout<?> l)
 	{
-		this.m = l;
+		this.m.add(l);
 	}
     public void move(int x, int y) {
 		this.bounds.setLocation(x, y);

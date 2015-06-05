@@ -1,5 +1,11 @@
 package fr.utbm.info.gl52.Graphics.Buttons;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.net.MalformedURLException;
+
+import javax.swing.JFileChooser;
 
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
@@ -14,11 +20,11 @@ import fr.utbm.set.io.shape.ESRIPoint;
 
 @SuppressWarnings("deprecation")
 public class ParseButton extends ButtonComponent implements FinishedParsingCallcack{
-	
+
 	private static final long serialVersionUID = 6054097105602086695L;
 	private IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> shapeParser;
 	private IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> dbaseParser;
-	
+
 	public ParseButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
 	}
@@ -27,17 +33,44 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	public void action(ActionEvent evt) {
 		this.parseDefaultFile();
 	}
-	
-	private void parseDefaultFile(){
 
-		this.dbaseParser = new ParserDBase<>("resources/quartier_polyline.dbf");
-		this.shapeParser = new ParserShapeFile<>("resources/quartier_polyline.shp", this.dbaseParser);
-		this.shapeParser.addFinishedCallback(this);
-		
-    	Thread t = new Thread(this.shapeParser);
-    	t.start();
-    	
-    	System.out.println("Go parsing");
+	private void parseDefaultFile(){
+		int p = 0;
+		JFileChooser fc = new JFileChooser(new File("."));
+		File file;
+		String fs = "";
+		if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
+			file = fc.getSelectedFile();
+			this.dbaseParser = new ParserDBase<>(file.getAbsolutePath());
+			fs = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf('.'));
+			++p;
+		}
+		File f1 = new File(fs+".shp");
+		if (p == 1)
+		{
+			if (!f1.exists())
+			{
+				if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
+					file = fc.getSelectedFile();
+					this.shapeParser = new ParserShapeFile<>(file.getAbsolutePath(), this.dbaseParser);
+					++p;
+				}
+			}
+			else
+			{
+				this.shapeParser = new ParserShapeFile<>(f1.getAbsolutePath(), this.dbaseParser);
+				++p;
+			}
+		}
+		if (p == 2)
+		{
+			this.shapeParser.addFinishedCallback(this);
+
+			Thread t = new Thread(this.shapeParser);
+			t.start();
+
+			System.out.println("Go parsing");
+		}
 	}
 
 	@Override
@@ -49,7 +82,6 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 
 	@Override
 	public void finishedFailed() {
-		System.out.println("Problème parser !!!!");
+		System.out.println("Problï¿½me parser !!!!");
 	}
-
 }

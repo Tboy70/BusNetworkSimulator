@@ -5,6 +5,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
 
 import javax.swing.JComponent;
 
@@ -30,9 +31,10 @@ public class OneWayRoadComponent extends RoadComponent {
     		g2d.setStroke(new BasicStroke(3));
     	if (!this.selected)
     		g2d.setStroke(new BasicStroke(1));
+
     	g2d.drawPolyline(this.Xpts, this.Ypts, this.Xpts.length);
-    	
-    	g2d.setStroke(new BasicStroke(1));
+    	this.drawArrowRoad(g2d);
+     	g2d.setStroke(new BasicStroke(1));
     	
     }
 
