@@ -6,18 +6,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-import fr.utbm.info.gl52.Event.EventService;
-import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
-import fr.utbm.info.gl52.Graphics.Bus.BusComponent;
 
 
 /**

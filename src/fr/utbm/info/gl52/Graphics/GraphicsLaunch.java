@@ -1,10 +1,7 @@
 package fr.utbm.info.gl52.Graphics;
 
 
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
-
 import fr.utbm.info.gl52.Collection.graph.Edge;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
@@ -23,9 +20,7 @@ import fr.utbm.info.gl52.Graphics.Road.HighwayComponent;
 import fr.utbm.info.gl52.Graphics.Road.SensRoad;
 import fr.utbm.info.gl52.Middle.MapGraph;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
-import fr.utbm.set.attr.Attribute;
 import fr.utbm.set.attr.AttributeContainer;
-import fr.utbm.set.attr.AttributeException;
 import fr.utbm.set.io.shape.ESRIBounds;
 import fr.utbm.set.io.shape.ESRIPoint;
 

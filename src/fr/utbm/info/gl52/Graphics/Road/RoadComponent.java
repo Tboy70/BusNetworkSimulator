@@ -4,9 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
 import java.awt.Shape;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
