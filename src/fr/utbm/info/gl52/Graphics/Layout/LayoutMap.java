@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
+
 import fr.utbm.info.gl52.Graphics.Road.RoadComponent;
 import fr.utbm.info.gl52.Middle.Connection;
 

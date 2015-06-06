@@ -1,9 +1,11 @@
 package fr.utbm.info.gl52.Graphics;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;

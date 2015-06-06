@@ -33,8 +33,13 @@ public final class ParserShapeFile<Dn,De> extends AbstractParser<IGraph<INode<Dn
 	
 	public ParserShapeFile(String shp, IParser<IGraph<INode<Dn>,IEdge<De>>> p) {
 		super(shp);
+		
 		try {
-			this.shpResource = new URL("file://" + shp);
+			if(shp.charAt(0) != '/') // linux/windows
+				this.shpResource = new URL("file:///" + shp);
+			else
+				this.shpResource = new URL("file://" + shp);
+			
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
