@@ -13,6 +13,8 @@ import java.util.Iterator;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 
+import fr.utbm.info.gl52.Graphics.Road.RoadComponent;
+
 
 /**
  * 
@@ -74,6 +76,8 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 					this.selected.unselect();
 				e.select();
 				this.selected = e;
+				RoadComponent r = (RoadComponent) e;
+				System.out.println("Rue: "+r.getName());
 				return e;
 			}		
 		}

@@ -8,6 +8,9 @@ import java.awt.Shape;
 import java.awt.geom.Line2D;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
+import fr.utbm.info.gl52.Middle.MapPolyline;
+import fr.utbm.set.attr.AttributeContainer;
+import fr.utbm.set.attr.AttributeException;
 
 
 /**
@@ -23,15 +26,21 @@ public abstract class RoadComponent extends AbstractGraphicElement {
 	protected int[] Xpts;
 	protected int[] Ypts;
 	protected SensRoad sens;
+	MapPolyline mapPl;
 	public RoadComponent(int[] x, int[] y) {
 		this.Xpts = x;
 		this.Ypts = y;
 		sens = SensRoad.SANS;
 	}
-	public RoadComponent(int[] x, int[] y, SensRoad sens) {
+	public String getName()
+	{
+		return mapPl.getName();
+	}
+	public RoadComponent(int[] x, int[] y, SensRoad sens, MapPolyline m) {
 		this.Xpts = x;
 		this.Ypts = y;
 		this.sens = sens;
+		this.mapPl = m;
 	}
 	
 	public void move(int x, int y)
@@ -89,5 +98,9 @@ public abstract class RoadComponent extends AbstractGraphicElement {
         x = x0 - barb * Math.cos(theta - phi);
         y = y0 - barb * Math.sin(theta - phi);
         g2.draw(new Line2D.Double(x0, y0, x, y));
+    }
+    public void update()
+    {
+    	
     }
 }

@@ -70,9 +70,8 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 	public void mouseWheelMoved(MouseWheelEvent e) {
 	    if (e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
 	    	for (AbstractLayout<?> al : l)
-			{
-	    		al.zoom(e.getUnitsToScroll());
-			}
+				al.zoom(e.getUnitsToScroll());
+			
 	    }
 		
 	}

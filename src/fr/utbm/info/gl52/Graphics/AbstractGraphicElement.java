@@ -23,4 +23,5 @@ public abstract class AbstractGraphicElement extends AbstractComponent implement
 	public abstract void draw(Graphics g);
 	public void select() { this.selected = true; }
 	public void unselect() { this.selected = false; }
+	public abstract void update();
 }

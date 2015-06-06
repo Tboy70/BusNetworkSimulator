@@ -15,7 +15,7 @@ import fr.utbm.info.gl52.Graphics.Bus.BusComponent;
 /**
  * 
  */
-public class LayoutNetwork<C extends BusComponent> extends AbstractLayout<C> implements Runnable {
+public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLayout<C> implements Runnable {
 
 	private static final long serialVersionUID = -8388992835805072885L;
 	private Thread t;
@@ -40,7 +40,8 @@ public class LayoutNetwork<C extends BusComponent> extends AbstractLayout<C> imp
 					Iterator i = listComponents.iterator(); 
 					while (i.hasNext())
 					{
-						BusComponent b = (BusComponent) i.next();
+						
+						AbstractGraphicElement b = (AbstractGraphicElement) i.next();
 						b.update();
 					}
 				}

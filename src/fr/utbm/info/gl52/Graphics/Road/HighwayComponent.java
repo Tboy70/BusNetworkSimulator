@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
 
+import fr.utbm.info.gl52.Middle.MapPolyline;
+
 
 /**
  * 
@@ -17,8 +19,8 @@ public class HighwayComponent extends RoadComponent {
 	public HighwayComponent(int[] x, int[] y) {
 		super(x, y);
 	}
-	public HighwayComponent(int[] x, int[] y, SensRoad sens) {
-		super(x, y, sens);
+	public HighwayComponent(int[] x, int[] y, SensRoad sens, MapPolyline mapPl) {
+		super(x, y, sens, mapPl);
 	}
 	@Override
 	public JComponent getSwingComponent() {
