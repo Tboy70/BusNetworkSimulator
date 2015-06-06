@@ -99,4 +99,8 @@ public abstract class RoadComponent extends AbstractGraphicElement {
         y = y0 - barb * Math.sin(theta - phi);
         g2.draw(new Line2D.Double(x0, y0, x, y));
     }
+    public void update()
+    {
+    	
+    }
 }
