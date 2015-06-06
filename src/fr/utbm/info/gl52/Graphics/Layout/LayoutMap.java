@@ -13,6 +13,7 @@ import java.util.Iterator;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 import fr.utbm.info.gl52.Graphics.Road.RoadComponent;
+import fr.utbm.info.gl52.Middle.Connection;
 
 
 /**
@@ -23,6 +24,8 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 	private static final long serialVersionUID = 1L;
 	private static final int HIT_BOX_SIZE = 2;
 	private AbstractGraphicElement selected = null;
+	private Connection start = null;
+	private Connection end = null;
 	private int clicx=0, clicy=0;
 	private int x, y;
 	public LayoutMap(int h, int w) {
@@ -47,8 +50,6 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		g2d.setStroke(new BasicStroke(2));
 		g2d.drawRect(0, 0, this.width-1, this.height-1);
 
-		/*for(C c: this.listComponents)
-			c.draw(g);*/
 		synchronized(listComponents) {
 			Iterator i = listComponents.iterator(); 
 			while (i.hasNext())
@@ -75,8 +76,25 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 					this.selected.unselect();
 				e.select();
 				this.selected = e;
-				RoadComponent r = (RoadComponent) e;
-				System.out.println("Rue: "+r.getName());
+				if (e.getClass().getSuperclass() == RoadComponent.class)
+				{
+					RoadComponent r = (RoadComponent) e;
+					if (start == null)
+					{
+						start = (Connection)r.getPolyline().getListSegment().get(0).getNodeA();
+					}
+					else if (end == null)
+					{
+						end = (Connection)r.getPolyline().getListSegment().get(r.getPolyline().getListSegment().size()-1).getNodeB();
+					}
+					
+					if (start != null && end != null)
+					{
+						System.out.println("Start:"+start.toString());
+						System.out.println("End:"+end.toString());
+					}
+					System.out.println("Rue: "+r.getName());
+				}
 				return e;
 			}		
 		}

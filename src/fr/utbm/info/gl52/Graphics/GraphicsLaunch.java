@@ -32,6 +32,7 @@ import fr.utbm.set.io.shape.ESRIPoint;
 public class GraphicsLaunch {
 
 	public static Window w;
+	public static IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> graph;
 
 	public static void main(String[] args) {
 		w = new Window("BusNetwork",700,700);
@@ -74,6 +75,7 @@ public class GraphicsLaunch {
 	
 	public static void addGraph(IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> g){
 		ESRIBounds b = ((MapGraph)g).getMapBounds();
+		graph = g;
 		w.getMap().flush();
 		List<MapPolyline> lMap = ((MapGraph)g).getlMapPolyline();  
 		for (MapPolyline p :  lMap)
