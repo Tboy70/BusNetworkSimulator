@@ -1,11 +1,10 @@
 package fr.utbm.info.gl52.Graphics;
 
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
-import fr.utbm.info.gl52.Collection.graph.Edge;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
@@ -22,10 +21,10 @@ import fr.utbm.info.gl52.Graphics.Frame.Window;
 import fr.utbm.info.gl52.Graphics.Road.HighwayComponent;
 import fr.utbm.info.gl52.Graphics.Road.SensRoad;
 import fr.utbm.info.gl52.Middle.MapGraph;
+import fr.utbm.info.gl52.Middle.MapPolyline;
+import fr.utbm.info.gl52.Middle.Segment;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
-import fr.utbm.set.attr.Attribute;
 import fr.utbm.set.attr.AttributeContainer;
-import fr.utbm.set.attr.AttributeException;
 import fr.utbm.set.io.shape.ESRIBounds;
 import fr.utbm.set.io.shape.ESRIPoint;
 
@@ -46,7 +45,6 @@ public class GraphicsLaunch {
     	for (int i = 0; i < 10; i++)
     	{
     		Random rand = new Random();
-
     		int x = rand.nextInt((800 - 0) + 1) + 0;
     		int y = rand.nextInt((800 - 0) + 1) + 0;
     		w.addNetworkElement(new YellowBus(x,y) );
@@ -72,27 +70,59 @@ public class GraphicsLaunch {
     	w.addGUI(center);
     	w.addGUI(parse);
     	w.repaint();
-
 	}
 	
 	public static void addGraph(IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> g){
 		ESRIBounds b = ((MapGraph)g).getMapBounds();
 		w.getMap().flush();
-		for(IEdge<?> e: g)
+		List<MapPolyline> lMap = ((MapGraph)g).getlMapPolyline();  
+		for (MapPolyline p :  lMap)
+		{
+			boolean bFirstPoint = false;
+			ArrayList<Integer> px = new ArrayList<Integer>();
+			ArrayList<Integer> py = new ArrayList<Integer>();
+			SensRoad sens = SensRoad.SANS;
+			for (Segment s : p.getListSegment())
+			{
+				
+				AttributeContainer attrs = (AttributeContainer) s.getData();
+				INode<ESRISpatialObject> A = (Node<ESRISpatialObject>)s.getNodeA();
+				INode<ESRISpatialObject> B = (Node<ESRISpatialObject>)s.getNodeB();
+				if (!bFirstPoint)
+				{
+					bFirstPoint = true;
+					px.add((int)A.getData().x - (int)b.minx);
+					py.add((int)A.getData().y - (int)b.miny);
+					sens = attrs.getAttribute("SENS").equals("Double sens") ? SensRoad.SANS : SensRoad.DROIT;
+				}
+				px.add((int)B.getData().x - (int)b.minx);
+				py.add((int)B.getData().y - (int)b.miny);
+				
+			}
+			
+			w.addGraphicElement(new HighwayComponent(toPrimitive(px.toArray(new Integer[px.size()])), toPrimitive(py.toArray(new Integer[py.size()])), sens, p));
+		}
+		
+		/*for(IEdge<?> e: g)
     	{
 			if(e != null){
 				IEdge<AttributeContainer> eT = (Edge<AttributeContainer>)e;
 				INode<ESRISpatialObject> A = (Node<ESRISpatialObject>)eT.getNodeA();
 				INode<ESRISpatialObject> B = (Node<ESRISpatialObject>)eT.getNodeB();
-				//for(String s: eT.getData().getAllAttributeNames())
-				//	System.out.println(""+s);
 				int px[] = {(int)A.getData().x - (int)b.minx,(int)B.getData().x - (int)b.minx};
 				int py[] = {(int)A.getData().y - (int)b.miny,(int)B.getData().y - (int)b.miny};
 				SensRoad sens = eT.getData().getAttribute("SENS").equals("Double sens") ? SensRoad.SANS : SensRoad.DROIT;
 				w.addGraphicElement(new HighwayComponent(px, py, sens));
 			}
-    	}
-		
+    	}	*/
 		w.repaint();
+	}
+	public static int[] toPrimitive(Integer[] IntegerArray) {
+		 
+		int[] result = new int[IntegerArray.length];
+		for (int i = 0; i < IntegerArray.length; i++) {
+			result[i] = IntegerArray[i].intValue();
+		}
+		return result;
 	}
 }

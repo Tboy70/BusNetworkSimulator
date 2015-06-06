@@ -4,12 +4,13 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
 import java.awt.Shape;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
+import fr.utbm.info.gl52.Middle.MapPolyline;
+import fr.utbm.set.attr.AttributeContainer;
+import fr.utbm.set.attr.AttributeException;
 
 
 /**
@@ -25,15 +26,21 @@ public abstract class RoadComponent extends AbstractGraphicElement {
 	protected int[] Xpts;
 	protected int[] Ypts;
 	protected SensRoad sens;
+	MapPolyline mapPl;
 	public RoadComponent(int[] x, int[] y) {
 		this.Xpts = x;
 		this.Ypts = y;
 		sens = SensRoad.SANS;
 	}
-	public RoadComponent(int[] x, int[] y, SensRoad sens) {
+	public String getName()
+	{
+		return mapPl.getName();
+	}
+	public RoadComponent(int[] x, int[] y, SensRoad sens, MapPolyline m) {
 		this.Xpts = x;
 		this.Ypts = y;
 		this.sens = sens;
+		this.mapPl = m;
 	}
 	
 	public void move(int x, int y)
