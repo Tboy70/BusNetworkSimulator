@@ -3,9 +3,9 @@ package fr.utbm.info.gl52.Graphics;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
 
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
@@ -22,9 +22,13 @@ import fr.utbm.info.gl52.Graphics.Buttons.ZoomButton;
 import fr.utbm.info.gl52.Graphics.Frame.Window;
 import fr.utbm.info.gl52.Graphics.Road.HighwayComponent;
 import fr.utbm.info.gl52.Graphics.Road.SensRoad;
+import fr.utbm.info.gl52.Middle.BusLine;
+import fr.utbm.info.gl52.Middle.BusNetwork;
+import fr.utbm.info.gl52.Middle.Itineraire;
 import fr.utbm.info.gl52.Middle.MapGraph;
 import fr.utbm.info.gl52.Middle.MapPolyline;
 import fr.utbm.info.gl52.Middle.Segment;
+import fr.utbm.info.gl52.Middle.Stop;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
 import fr.utbm.set.attr.AttributeContainer;
 import fr.utbm.set.io.shape.ESRIBounds;
@@ -117,6 +121,63 @@ public class GraphicsLaunch {
 				w.addGraphicElement(new HighwayComponent(px, py, sens));
 			}
     	}	*/
+		
+		// Add itiniraire		
+		Segment<AttributeContainer> seg1 = (Segment<AttributeContainer>)g.iterator().next();
+		Stop s1 = new Stop(100, seg1);
+		Segment<AttributeContainer> seg2 = (Segment<AttributeContainer>)g.iterator().next();
+		Stop s2 = new Stop(0, seg2);
+		Segment<AttributeContainer> seg3 = (Segment<AttributeContainer>)g.iterator().next();
+		Stop s3 = new Stop(0, seg3);
+		Segment<AttributeContainer> seg4 = (Segment<AttributeContainer>)g.iterator().next();
+		Stop s4 = new Stop(0, seg4);
+		Segment<AttributeContainer> seg5 = (Segment<AttributeContainer>)g.iterator().next();
+		Stop s5 = new Stop(0, seg5);
+		Segment<AttributeContainer> seg6 = (Segment<AttributeContainer>)g.iterator().next();
+		Stop s6 = new Stop(100, seg6);
+		
+		
+		Itineraire i1 = new Itineraire("Test1");
+		i1.addStop(s1);
+		i1.addStop(s2);
+		i1.addStop(s3);
+		i1.addStop(s4);
+		i1.addStop(s5);
+		i1.addStop(s6);
+		i1.addSeg(seg1);
+		i1.addSeg(seg2);
+		i1.addSeg(seg3);
+		i1.addSeg(seg4);
+		i1.addSeg(seg5);
+		i1.addSeg(seg6);
+		
+		Itineraire i2 = new Itineraire("Test1-2");
+		i1.addStop(s6);
+		i1.addStop(s5);
+		i1.addStop(s4);
+		i1.addStop(s3);
+		i1.addStop(s2);
+		i1.addStop(s1);
+		i1.addSeg(seg6);
+		i1.addSeg(seg5);
+		i1.addSeg(seg4);
+		i1.addSeg(seg3);
+		i1.addSeg(seg2);
+		i1.addSeg(seg1);
+		
+		List<Itineraire> li = new LinkedList<>();
+		li.add(i1);
+		li.add(i2);
+		
+		BusLine busline = new BusLine();
+		busline.setlIti(li);
+		
+		List<BusLine> lb = new LinkedList<>();
+		lb.add(busline);
+		
+		BusNetwork net = new BusNetwork();
+		net.setlBusLine(lb);
+		
 		w.repaint();
 	}
 	public static int[] toPrimitive(Integer[] IntegerArray) {

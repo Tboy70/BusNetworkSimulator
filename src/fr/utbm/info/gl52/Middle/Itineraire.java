@@ -1,6 +1,7 @@
 package fr.utbm.info.gl52.Middle;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,8 +16,8 @@ public class Itineraire implements Serializable{
 	private String name;
     
     private List<Segment<?>> lRoute;
-    
-    private List<Stop> lStop;
+
+	private List<Stop> lStop;
 
 	/**
      * 
@@ -30,9 +31,43 @@ public class Itineraire implements Serializable{
 	public String getName() {
 		return this.name;
 	}
+	
+	
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+    public boolean addSeg(Segment<?> arg0) {
+		return lRoute.add(arg0);
+	}
+
+	public boolean addAllSeg(Collection<? extends Segment<?>> arg0) {
+		return lRoute.addAll(arg0);
+	}
+
+	public boolean removeSeg(Object arg0) {
+		return lRoute.remove(arg0);
+	}
+
+	public boolean removeAllSeg(Collection<?> arg0) {
+		return lRoute.removeAll(arg0);
+	}
+	
+	public boolean addStop(Stop e) {
+		return lStop.add(e);
+	}
+
+	public boolean addAllStop(Collection<? extends Stop> c) {
+		return lStop.addAll(c);
+	}
+
+	public boolean removeStop(Object o) {
+		return lStop.remove(o);
+	}
+
+	public boolean removeAllStop(Collection<?> c) {
+		return lStop.removeAll(c);
 	}
 
 	/* (non-Javadoc)
