@@ -2,8 +2,9 @@ package fr.utbm.info.gl52.Graphics;
 
 
 
+import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -19,10 +20,9 @@ import fr.utbm.info.gl52.Graphics.Buttons.CenterButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ParseButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ZoomButton;
 import fr.utbm.info.gl52.Graphics.Frame.Window;
+import fr.utbm.info.gl52.Graphics.Itinerary.GraphicItinerary;
 import fr.utbm.info.gl52.Graphics.Road.HighwayComponent;
 import fr.utbm.info.gl52.Graphics.Road.SensRoad;
-import fr.utbm.info.gl52.Middle.BusLine;
-import fr.utbm.info.gl52.Middle.BusNetwork;
 import fr.utbm.info.gl52.Middle.Itineraire;
 import fr.utbm.info.gl52.Middle.MapGraph;
 import fr.utbm.info.gl52.Middle.MapPolyline;
@@ -37,6 +37,7 @@ import fr.utbm.set.io.shape.ESRIPoint;
 public class GraphicsLaunch {
 
 	public static Window w;
+	public static IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> graph;
 
 	public static void main(String[] args) {
 		w = new Window("BusNetwork",700,700);
@@ -79,6 +80,7 @@ public class GraphicsLaunch {
 	
 	public static void addGraph(IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> g){
 		ESRIBounds b = ((MapGraph)g).getMapBounds();
+		graph = g;
 		w.getMap().flush();
 		List<MapPolyline> lMap = ((MapGraph)g).getlMapPolyline();  
 		for (MapPolyline p :  lMap)
@@ -151,20 +153,25 @@ public class GraphicsLaunch {
 		i1.addSeg(seg6);
 		
 		Itineraire i2 = new Itineraire("Test1-2");
-		i1.addStop(s6);
-		i1.addStop(s5);
-		i1.addStop(s4);
-		i1.addStop(s3);
-		i1.addStop(s2);
-		i1.addStop(s1);
-		i1.addSeg(seg6);
-		i1.addSeg(seg5);
-		i1.addSeg(seg4);
-		i1.addSeg(seg3);
-		i1.addSeg(seg2);
-		i1.addSeg(seg1);
+		i2.addStop(s6);
+		i2.addStop(s5);
+		i2.addStop(s4);
+		i2.addStop(s3);
+		i2.addStop(s2);
+		i2.addStop(s1);
+		i2.addSeg(seg6);
+		i2.addSeg(seg5);
+		i2.addSeg(seg4);
+		i2.addSeg(seg3);
+		i2.addSeg(seg2);
+		i2.addSeg(seg1);
+		Point offset = new Point();
+		offset.setLocation(5,5);
+		w.addGraphicElement(new GraphicItinerary(i1, offset , Color.red, b));
+		offset.setLocation(-5,5);
+		//w.addGraphicElement(new GraphicItinerary(i2, offset , Color.blue, b));
 		
-		List<Itineraire> li = new LinkedList<>();
+		/*List<Itineraire> li = new LinkedList<>();
 		li.add(i1);
 		li.add(i2);
 		
@@ -175,7 +182,7 @@ public class GraphicsLaunch {
 		lb.add(busline);
 		
 		BusNetwork net = new BusNetwork();
-		net.setlBusLine(lb);
+		net.setlBusLine(lb);*/
 		
 		w.repaint();
 	}

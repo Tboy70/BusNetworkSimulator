@@ -24,7 +24,7 @@ public abstract class RoadComponent extends AbstractGraphicElement {
 	protected int[] Xpts;
 	protected int[] Ypts;
 	protected SensRoad sens;
-	MapPolyline mapPl;
+	protected MapPolyline mapPl;
 	public RoadComponent(int[] x, int[] y) {
 		this.Xpts = x;
 		this.Ypts = y;
@@ -34,11 +34,16 @@ public abstract class RoadComponent extends AbstractGraphicElement {
 	{
 		return this.mapPl.getName();
 	}
+	public MapPolyline getPolyline()
+	{
+		return mapPl;
+	}
 	public RoadComponent(int[] x, int[] y, SensRoad sens, MapPolyline m) {
 		this.Xpts = x;
 		this.Ypts = y;
 		this.sens = sens;
 		this.mapPl = m;
+
 	}
 	
 	public void move(int x, int y)
