@@ -15,8 +15,9 @@ import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Event.PopupEvent;
 import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
-import fr.utbm.info.gl52.Graphics.Buttons.AddBusButton;
+import fr.utbm.info.gl52.Graphics.Buttons.SaveButton;
 import fr.utbm.info.gl52.Graphics.Buttons.CenterButton;
+import fr.utbm.info.gl52.Graphics.Buttons.ModButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ParseButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ZoomButton;
 import fr.utbm.info.gl52.Graphics.Frame.Window;
@@ -42,11 +43,14 @@ public class GraphicsLaunch {
 	public static void main(String[] args) {
 		w = new Window("BusNetwork",700,700);
 		w.setVisible(true);
-		ZoomButton zplus = new ZoomButton("+", 0, 200, 40, 40, 10);
-    	ZoomButton zminus = new ZoomButton("-", 0, 240, 40, 40, -10);
-    	AddBusButton busButt = new AddBusButton("A", 0, 280, 40, 40, CardinalSystem.NORTHEAST);
-    	CenterButton center = new CenterButton("C",0, 320, 40, 40);
-    	ParseButton parse = new ParseButton("P",0, 360, 40, 40);
+		ZoomButton zplus = new ZoomButton("+", 0, 0, 40, 40, 10);
+    	ZoomButton zminus = new ZoomButton("-", 0, 40, 40, 40, -10);
+    	CenterButton center = new CenterButton("C",0, 80, 40, 40);
+    	
+    	ParseButton parse = new ParseButton("Load",0, 280, 50, 40);
+    	ModButton mod = new ModButton("Modifier",0, 320, 50, 40);
+    	SaveButton save = new SaveButton("Save", 0, 360, 50, 40);
+    	
 
     	for (int i = 0; i < 10; i++)
     	{
@@ -58,13 +62,15 @@ public class GraphicsLaunch {
     	
     	zplus.setLayout(w.getMap());
     	zminus.setLayout(w.getMap());
+    	center.setLayout(w.getMap());
     	
     	zplus.setLayout(w.getNetwork());
     	zminus.setLayout(w.getNetwork());
+    	center.setLayout(w.getNetwork());
     	
-    	busButt.setLayout(w.getMap());
-    	center.setLayout(w.getMap());
+    	save.setLayout(w.getMap());
     	parse.setLayout(w.getMap());
+    	mod.setLayout(w.getMap());
 
     	Controller c = new Controller();
     	EventService.getInstance().subscribe(LeftClicEvent.class, null, c);
@@ -72,9 +78,11 @@ public class GraphicsLaunch {
     	
     	w.addGUI(zplus);
     	w.addGUI(zminus);
-    	w.addGUI(busButt);
     	w.addGUI(center);
     	w.addGUI(parse);
+    	w.addGUI(mod);
+    	w.addGUI(save);
+    	
     	w.repaint();
 	}
 	
