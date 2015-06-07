@@ -29,7 +29,7 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	 */	
 	public void flush()
 	{
-		listComponents.removeAll(listComponents);
+		this.listComponents.removeAll(this.listComponents);
 	}
 	public AbstractGraphicElement actionClick(int x, int y)
 	{

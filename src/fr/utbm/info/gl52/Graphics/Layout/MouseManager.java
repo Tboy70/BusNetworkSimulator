@@ -20,11 +20,11 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 	{
 		this.x = x;
 		this.y = y;
-		l = new ArrayList<AbstractLayout<?>>();
+		this.l = new ArrayList<>();
 	}
 	public void add(AbstractLayout<?> al)
 	{
-		l.add(al);
+		this.l.add(al);
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -34,7 +34,7 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 	public void mousePressed(MouseEvent e) {
 		this.x = e.getX();
 		this.y = e.getY();
-		for (AbstractLayout<?> al : l)
+		for (AbstractLayout<?> al : this.l)
 			System.out.println("Source:"+al.actionClick(this.x, this.y));
 	}
 	@Override
@@ -53,7 +53,7 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 	public void mouseDragged(MouseEvent e) {
 		int newX = (this.x-e.getX());
 		int newY = (this.y-e.getY());
-		for (AbstractLayout<?> al : l)
+		for (AbstractLayout<?> al : this.l)
 		{
 			al.setLocation((int)al.getLocation().getX()-newX, (int) al.getLocation().getY()-newY);
 			al.repaint();
@@ -69,7 +69,7 @@ public class MouseManager implements MouseListener, MouseMotionListener, MouseWh
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
 	    if (e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
-	    	for (AbstractLayout<?> al : l)
+	    	for (AbstractLayout<?> al : this.l)
 				al.zoom(e.getUnitsToScroll());
 			
 	    }

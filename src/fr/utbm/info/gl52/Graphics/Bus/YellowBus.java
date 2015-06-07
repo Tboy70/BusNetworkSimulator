@@ -44,9 +44,9 @@ public class YellowBus extends BusComponent {
 
 		int x = rand.nextInt((1 - (-1)) + 1) + (-1);
 		int y = rand.nextInt((1 - (-1)) + 1) + (-1);
-		int newX = x + bounds.x;
-		int newY = y + bounds.y;
+		int newX = x + this.bounds.x;
+		int newY = y + this.bounds.y;
 		if (newX > 0 && newX < 800 && newY > 0 && newY < 800)
-			bounds.setLocation(newX, newY);
+			this.bounds.setLocation(newX, newY);
 	}
 }

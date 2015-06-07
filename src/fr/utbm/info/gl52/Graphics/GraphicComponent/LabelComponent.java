@@ -6,6 +6,10 @@ import fr.utbm.info.gl52.Graphics.AbstractComponent;
 
 public class LabelComponent  extends AbstractComponent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1680605107593088813L;
 	private LabelGraphic label;
 	public LabelComponent(String message, int x, int y, int w, int h)
 	{

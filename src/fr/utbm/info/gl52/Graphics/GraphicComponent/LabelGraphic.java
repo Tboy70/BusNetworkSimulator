@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 
 public class LabelGraphic extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2615685565789111986L;
 	private String message;
 	private int x, y, m_start, m_end;
 	private AttributedCharacterIterator m_iterator;

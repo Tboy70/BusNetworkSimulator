@@ -67,7 +67,7 @@ public class MapGraph<Dn,De> extends Graph<Dn,De> implements Serializable{
 	}
 
 	public List<MapPolyline> getlMapPolyline() {
-		return lMapPolyline;
+		return this.lMapPolyline;
 	}
 
 	/* (non-Javadoc)

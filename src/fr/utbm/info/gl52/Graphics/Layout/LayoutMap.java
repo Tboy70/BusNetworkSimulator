@@ -28,7 +28,7 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 	private int x, y;
 	public LayoutMap(int h, int w) {
 		super(h, w);
-		listComponents = Collections.synchronizedList(new ArrayList());
+		this.listComponents = Collections.synchronizedList(new ArrayList());
 	}
 	public void addComponent(C c) {
 		this.listComponents.add(c);
@@ -50,8 +50,8 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 
 		/*for(C c: this.listComponents)
 			c.draw(g);*/
-		synchronized(listComponents) {
-			Iterator i = listComponents.iterator(); 
+		synchronized(this.listComponents) {
+			Iterator i = this.listComponents.iterator(); 
 			while (i.hasNext())
 			{
 				AbstractGraphicElement b = (AbstractGraphicElement) i.next();
@@ -66,8 +66,8 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 	}
 	public AbstractGraphicElement actionClick(int x, int y)
 	{
-		this.clicx = (int) ((100/zoom) * (x - this.getLocation().getX()));
-		this.clicy = (int) ((100/zoom) * (y - this.getLocation().getY()));
+		this.clicx = (int) ((100/this.zoom) * (x - this.getLocation().getX()));
+		this.clicy = (int) ((100/this.zoom) * (y - this.getLocation().getY()));
 		Shape ellipse = new Ellipse2D.Double(this.clicx , this.clicy, 8, 8);
 		for(AbstractGraphicElement e: this.listComponents)
 		{

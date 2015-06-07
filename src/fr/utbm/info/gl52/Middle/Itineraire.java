@@ -39,35 +39,35 @@ public class Itineraire implements Serializable{
 	}
 	
     public boolean addSeg(Segment<?> arg0) {
-		return lRoute.add(arg0);
+		return this.lRoute.add(arg0);
 	}
 
 	public boolean addAllSeg(Collection<? extends Segment<?>> arg0) {
-		return lRoute.addAll(arg0);
+		return this.lRoute.addAll(arg0);
 	}
 
 	public boolean removeSeg(Object arg0) {
-		return lRoute.remove(arg0);
+		return this.lRoute.remove(arg0);
 	}
 
 	public boolean removeAllSeg(Collection<?> arg0) {
-		return lRoute.removeAll(arg0);
+		return this.lRoute.removeAll(arg0);
 	}
 	
 	public boolean addStop(Stop e) {
-		return lStop.add(e);
+		return this.lStop.add(e);
 	}
 
 	public boolean addAllStop(Collection<? extends Stop> c) {
-		return lStop.addAll(c);
+		return this.lStop.addAll(c);
 	}
 
 	public boolean removeStop(Object o) {
-		return lStop.remove(o);
+		return this.lStop.remove(o);
 	}
 
 	public boolean removeAllStop(Collection<?> c) {
-		return lStop.removeAll(c);
+		return this.lStop.removeAll(c);
 	}
 
 	/* (non-Javadoc)

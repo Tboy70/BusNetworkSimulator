@@ -41,7 +41,7 @@ public abstract class ButtonComponent extends AbstractComponent {
     	this.button.setSize(w,h);
     	this.button.setBounds(this.bounds);
     	this.placement = CardinalSystem.NORTHEAST;
-    	this.m = new ArrayList<AbstractLayout<?>>();
+    	this.m = new ArrayList<>();
     	init();
     }
 	    
@@ -52,7 +52,7 @@ public abstract class ButtonComponent extends AbstractComponent {
     	this.button.setSize(w,h);
     	this.button.setBounds(this.bounds);
     	this.placement = p;
-    	this.m = new ArrayList<AbstractLayout<?>>();
+    	this.m = new ArrayList<>();
     	init();
     }
 

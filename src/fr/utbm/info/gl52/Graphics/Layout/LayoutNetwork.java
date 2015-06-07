@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
-import fr.utbm.info.gl52.Graphics.Bus.BusComponent;
 
 /**
  * 
@@ -25,9 +24,9 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 	
 	public LayoutNetwork(int h, int w) {
 		super(h, w);
-		listComponents = Collections.synchronizedList(new ArrayList());
-		t = new Thread(this);
-		t.start();
+		this.listComponents = Collections.synchronizedList(new ArrayList());
+		this.t = new Thread(this);
+		this.t.start();
 	}
 
 	@Override
@@ -36,8 +35,8 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 		{
 			try {
 				Thread.sleep(30);
-				synchronized(listComponents) {
-					Iterator i = listComponents.iterator(); 
+				synchronized(this.listComponents) {
+					Iterator i = this.listComponents.iterator(); 
 					while (i.hasNext())
 					{
 						
@@ -63,8 +62,8 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 	}
 	public AbstractGraphicElement actionClick(int x, int y)
 	{
-		this.clicx = (int) ((100/zoom) * (x - this.getLocation().getX()));
-		this.clicy = (int) ((100/zoom) * (y - this.getLocation().getY()));
+		this.clicx = (int) ((100/this.zoom) * (x - this.getLocation().getX()));
+		this.clicy = (int) ((100/this.zoom) * (y - this.getLocation().getY()));
 		Shape ellipse = new Ellipse2D.Double(this.clicx , this.clicy, 8, 8);
 		for(AbstractGraphicElement e: this.listComponents)
 		{

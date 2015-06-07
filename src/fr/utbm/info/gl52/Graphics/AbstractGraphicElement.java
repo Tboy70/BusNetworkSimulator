@@ -16,7 +16,6 @@ public abstract class AbstractGraphicElement extends AbstractComponent implement
      * 
      */
 	protected boolean selected = false;
-	protected int posX, posY;
     public AbstractGraphicElement() {
     }
 

@@ -6,6 +6,11 @@ import fr.utbm.info.gl52.Graphics.Layout.LayoutGUI;
 
 public class PopupWindow extends AbstractFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7459389851855477807L;
+
 	public PopupWindow(String message)
 	{
 		super("Popup", 400, 150);

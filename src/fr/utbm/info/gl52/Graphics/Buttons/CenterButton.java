@@ -17,8 +17,8 @@ public class CenterButton extends ButtonComponent {
 
 	@Override
 	public void action(ActionEvent evt) {
-		for (AbstractLayout<?> m : this.m)
-			m.setLocation(0, 0);
+		for (AbstractLayout<?> me : this.m)
+			me.setLocation(0, 0);
 	}
 
 }

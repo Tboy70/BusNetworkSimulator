@@ -10,7 +10,6 @@ import java.util.Random;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
-import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Event.PopupEvent;
@@ -85,15 +84,15 @@ public class GraphicsLaunch {
 		for (MapPolyline p :  lMap)
 		{
 			boolean bFirstPoint = false;
-			ArrayList<Integer> px = new ArrayList<Integer>();
-			ArrayList<Integer> py = new ArrayList<Integer>();
+			ArrayList<Integer> px = new ArrayList<>();
+			ArrayList<Integer> py = new ArrayList<>();
 			SensRoad sens = SensRoad.SANS;
 			for (Segment s : p.getListSegment())
 			{
 				
 				AttributeContainer attrs = (AttributeContainer) s.getData();
-				INode<ESRISpatialObject> A = (Node<ESRISpatialObject>)s.getNodeA();
-				INode<ESRISpatialObject> B = (Node<ESRISpatialObject>)s.getNodeB();
+				INode<ESRISpatialObject> A = s.getNodeA();
+				INode<ESRISpatialObject> B = s.getNodeB();
 				if (!bFirstPoint)
 				{
 					bFirstPoint = true;

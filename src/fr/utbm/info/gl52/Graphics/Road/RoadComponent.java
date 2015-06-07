@@ -9,8 +9,6 @@ import java.awt.geom.Line2D;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 import fr.utbm.info.gl52.Middle.MapPolyline;
-import fr.utbm.set.attr.AttributeContainer;
-import fr.utbm.set.attr.AttributeException;
 
 
 /**
@@ -30,11 +28,11 @@ public abstract class RoadComponent extends AbstractGraphicElement {
 	public RoadComponent(int[] x, int[] y) {
 		this.Xpts = x;
 		this.Ypts = y;
-		sens = SensRoad.SANS;
+		this.sens = SensRoad.SANS;
 	}
 	public String getName()
 	{
-		return mapPl.getName();
+		return this.mapPl.getName();
 	}
 	public RoadComponent(int[] x, int[] y, SensRoad sens, MapPolyline m) {
 		this.Xpts = x;
@@ -76,15 +74,15 @@ public abstract class RoadComponent extends AbstractGraphicElement {
 	}
 	protected void drawArrowRoad(Graphics2D g2d)
 	{
-    	if (sens == SensRoad.DROIT)
+    	if (this.sens == SensRoad.DROIT)
     	{
-    		double theta = Math.atan2(Ypts[1] - Ypts[0], Xpts[1] - Xpts[0]);
-            drawArrow(g2d, theta, Xpts[1], Ypts[1]);	
+    		double theta = Math.atan2(this.Ypts[1] - this.Ypts[0], this.Xpts[1] - this.Xpts[0]);
+            drawArrow(g2d, theta, this.Xpts[1], this.Ypts[1]);	
     	}
-    	else if (sens == SensRoad.INVERSE)
+    	else if (this.sens == SensRoad.INVERSE)
     	{
-    		double theta = Math.atan2(Ypts[0] - Ypts[1], Xpts[0] - Xpts[1]);
-            drawArrow(g2d, theta, Xpts[0], Ypts[0]);
+    		double theta = Math.atan2(this.Ypts[0] - this.Ypts[1], this.Xpts[0] - this.Xpts[1]);
+            drawArrow(g2d, theta, this.Xpts[0], this.Ypts[0]);
     	}
 	}
     protected void drawArrow(Graphics2D g2, double theta, double x0, double y0)
@@ -101,6 +99,6 @@ public abstract class RoadComponent extends AbstractGraphicElement {
     }
     public void update()
     {
-    	
+    	// nothing ?
     }
 }
