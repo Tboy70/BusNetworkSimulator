@@ -1,8 +1,11 @@
 package fr.utbm.info.gl52.Middle;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 
 /**
@@ -16,7 +19,14 @@ public class Itineraire implements Serializable{
     
     private List<Segment<?>> lRoute;
     
-    private List<Stop> lStop;
+    /**
+	 * @return the lRoute
+	 */
+	public List<Segment<?>> getlRoute() {
+		return lRoute;
+	}
+
+	private List<Stop> lStop;
 
 	/**
      * 
@@ -85,5 +95,209 @@ public class Itineraire implements Serializable{
 	public String toString() {
 		return "Itineraire [name=" + this.name + ", lRoute=" + this.lRoute + ", lStop="
 				+ this.lStop + "]";
-	}	
+	}
+
+	/**
+	 * @param arg0
+	 * @param arg1
+	 * @see java.util.List#add(int, java.lang.Object)
+	 */
+	public void add(int arg0, Segment<?> arg1) {
+		lRoute.add(arg0, arg1);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#add(java.lang.Object)
+	 */
+	public boolean add(Segment<?> arg0) {
+		return lRoute.add(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#addAll(java.util.Collection)
+	 */
+	public boolean addAll(Collection<? extends Segment<?>> arg0) {
+		return lRoute.addAll(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @param arg1
+	 * @return
+	 * @see java.util.List#addAll(int, java.util.Collection)
+	 */
+	public boolean addAll(int arg0, Collection<? extends Segment<?>> arg1) {
+		return lRoute.addAll(arg0, arg1);
+	}
+
+	/**
+	 * 
+	 * @see java.util.List#clear()
+	 */
+	public void clear() {
+		lRoute.clear();
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#contains(java.lang.Object)
+	 */
+	public boolean contains(Object arg0) {
+		return lRoute.contains(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#containsAll(java.util.Collection)
+	 */
+	public boolean containsAll(Collection<?> arg0) {
+		return lRoute.containsAll(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#get(int)
+	 */
+	public Segment<?> get(int arg0) {
+		return lRoute.get(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#indexOf(java.lang.Object)
+	 */
+	public int indexOf(Object arg0) {
+		return lRoute.indexOf(arg0);
+	}
+
+	/**
+	 * @return
+	 * @see java.util.List#isEmpty()
+	 */
+	public boolean isEmpty() {
+		return lRoute.isEmpty();
+	}
+
+	/**
+	 * @return
+	 * @see java.util.List#iterator()
+	 */
+	public Iterator<Segment<?>> iterator() {
+		return lRoute.iterator();
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#lastIndexOf(java.lang.Object)
+	 */
+	public int lastIndexOf(Object arg0) {
+		return lRoute.lastIndexOf(arg0);
+	}
+
+	/**
+	 * @return
+	 * @see java.util.List#listIterator()
+	 */
+	public ListIterator<Segment<?>> listIterator() {
+		return lRoute.listIterator();
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#listIterator(int)
+	 */
+	public ListIterator<Segment<?>> listIterator(int arg0) {
+		return lRoute.listIterator(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#remove(int)
+	 */
+	public Segment<?> remove(int arg0) {
+		return lRoute.remove(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#remove(java.lang.Object)
+	 */
+	public boolean remove(Object arg0) {
+		return lRoute.remove(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#removeAll(java.util.Collection)
+	 */
+	public boolean removeAll(Collection<?> arg0) {
+		return lRoute.removeAll(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#retainAll(java.util.Collection)
+	 */
+	public boolean retainAll(Collection<?> arg0) {
+		return lRoute.retainAll(arg0);
+	}
+
+	/**
+	 * @param arg0
+	 * @param arg1
+	 * @return
+	 * @see java.util.List#set(int, java.lang.Object)
+	 */
+	public Segment<?> set(int arg0, Segment<?> arg1) {
+		return lRoute.set(arg0, arg1);
+	}
+
+	/**
+	 * @return
+	 * @see java.util.List#size()
+	 */
+	public int size() {
+		return lRoute.size();
+	}
+
+	/**
+	 * @param arg0
+	 * @param arg1
+	 * @return
+	 * @see java.util.List#subList(int, int)
+	 */
+	public List<Segment<?>> subList(int arg0, int arg1) {
+		return lRoute.subList(arg0, arg1);
+	}
+
+	/**
+	 * @return
+	 * @see java.util.List#toArray()
+	 */
+	public Object[] toArray() {
+		return lRoute.toArray();
+	}
+
+	/**
+	 * @param arg0
+	 * @return
+	 * @see java.util.List#toArray(java.lang.Object[])
+	 */
+	public <T> T[] toArray(T[] arg0) {
+		return lRoute.toArray(arg0);
+	}
 }
