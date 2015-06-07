@@ -20,15 +20,6 @@ public class Itineraire implements Serializable{
     
     private List<Segment<?>> lRoute;
     
-    /**
-	 * @return the lRoute
-	 */
-	public List<Segment<?>> getlRoute() {
-		return lRoute;
-	}
-
-	private List<Stop> lStop;
-
 	private List<Stop> lStop;
 
 	/**
@@ -337,4 +328,11 @@ public class Itineraire implements Serializable{
 	public <T> T[] toArray(T[] arg0) {
 		return lRoute.toArray(arg0);
 	}
+    /**
+	 * @return the lRoute
+	 */
+	public List<Segment<?>> getlRoute() {
+		return lRoute;
+	}
+
 }
