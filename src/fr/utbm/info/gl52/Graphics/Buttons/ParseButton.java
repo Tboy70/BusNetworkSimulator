@@ -22,64 +22,77 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	private static final long serialVersionUID = 6054097105602086695L;
 	private IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> shapeParser;
 	private IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> dbaseParser;
+	
+	private String loadedRessource[]; // 0 : filename ; 1 : extension
 
 	public ParseButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
 	}
 
 	@Override
-	public void action(ActionEvent evt) {
-		this.parseDefaultFile();
+	public void action(ActionEvent evt) { 
+		
+		File file = this.openDialog();
+		
+		loadedRessource = file.getName().split("[.]");
+		
+		switch(loadedRessource[1]){
+			case "shp":
+			case "dbf":
+				loadedRessource[0] = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf("."));
+				
+				File shp = new File(loadedRessource[0] + ".shp");
+				File dbf = new File(loadedRessource[0] + ".dbf");
+				
+				if(shp.exists() && dbf.exists()){
+					this.dbaseParser = new ParserDBase<>(dbf.getAbsolutePath());
+					this.shapeParser = new ParserShapeFile<>(shp.getAbsolutePath(), this.dbaseParser);
+					
+					this.shapeParser.addFinishedCallback(this);
+
+					Thread t = new Thread(this.shapeParser);
+					t.start();
+
+					System.out.println("Go parsing");
+				}
+				break;
+			default:
+		}
+		
 	}
 
-	private void parseDefaultFile(){
-		int p = 0;
+	private File openDialog(){		
+		// Open choose window
 		JFileChooser fc = new JFileChooser(new File("."));
-		File file;
-		String fs = "";
-		if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
-			file = fc.getSelectedFile();
-			this.dbaseParser = new ParserDBase<>(file.getAbsolutePath());
-			fs = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf('.'));
-			++p;
-		}
-		File f1 = new File(fs+".shp");
-		if (p == 1)
-		{
-			if (!f1.exists())
-			{
-				if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION) {
-					file = fc.getSelectedFile();
-					this.shapeParser = new ParserShapeFile<>(file.getAbsolutePath(), this.dbaseParser);
-					++p;
-				}
-			}
-			else
-			{
-				this.shapeParser = new ParserShapeFile<>(f1.getAbsolutePath(), this.dbaseParser);
-				++p;
-			}
-		}
-		if (p == 2)
-		{
-			this.shapeParser.addFinishedCallback(this);
-
-			Thread t = new Thread(this.shapeParser);
-			t.start();
-
-			System.out.println("Go parsing");
-		}
+		
+		// get filename without extension
+		if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION)
+			return fc.getSelectedFile();
+		else
+			return null;
 	}
 
 	@Override
 	public void finishedSuccess() {
-		System.out.println("Finished");
-		IGraph<INode<ESRIPoint>, IEdge<AttributeContainer>> g = this.shapeParser.getData();
-		GraphicsLaunch.addGraph(g);
+		switch(loadedRessource[1]){
+			case "shp":
+			case "dbf":
+				System.out.println("Finished");
+				IGraph<INode<ESRIPoint>, IEdge<AttributeContainer>> g = this.shapeParser.getData();
+				GraphicsLaunch.addGraph(g);
+				break;
+			default:
+		}
 	}
 
 	@Override
 	public void finishedFailed() {
-		System.out.println("Problï¿½me parser !!!!");
+		switch(loadedRessource[1]){
+		case "shp":
+		case "dbf":
+			System.out.println("Problème Parser");
+			break;
+		default:
+	}
 	}
 }
