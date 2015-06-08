@@ -1,7 +1,5 @@
 package fr.utbm.info.gl52.Graphics;
 
-
-
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -11,7 +9,10 @@ import java.util.Random;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
+import fr.utbm.info.gl52.Event.AddGraphEvent;
 import fr.utbm.info.gl52.Event.EventService;
+import fr.utbm.info.gl52.Event.IEvent;
+import fr.utbm.info.gl52.Event.ISubscriber;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Event.PopupEvent;
 import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
@@ -37,18 +38,38 @@ import fr.utbm.set.io.shape.ESRIPoint;
 @SuppressWarnings("deprecation")
 public class GraphicsLaunch {
 
-	public static Window w;
-	public static IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> graph;
-
-	public static void main(String[] args) {
-		w = new Window("BusNetwork",700,700);
-		w.setVisible(true);
+	private Window mapWindow;
+	private IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> graph;
+	private Controller controller;
+	
+	public GraphicsLaunch(Controller c){
+		this.controller = c;
+	}
+	
+	public void init(){
+		this.initController();
+		this.initWindow();
+		this.initGUI();
+	}
+	
+	public void initWindow(){
+		this.mapWindow = new Window("BusNetwork",700,700);
+		this.mapWindow.setVisible(true);
+	}
+	
+	public void initController(){
+    	EventService.getInstance().subscribe(LeftClicEvent.class, null, this.controller);
+    	EventService.getInstance().subscribe(PopupEvent.class, null, this.controller);
+    	EventService.getInstance().subscribe(AddGraphEvent.class, null, this.controller);
+	}
+	
+	public void initGUI(){
 		ZoomButton zplus = new ZoomButton("+", 0, 0, 40, 40, 10);
     	ZoomButton zminus = new ZoomButton("-", 0, 40, 40, 40, -10);
     	CenterButton center = new CenterButton("C",0, 80, 40, 40);
     	
     	ParseButton parse = new ParseButton("Load",0, 280, 50, 40);
-    	ModButton mod = new ModButton("Modifier",0, 320, 50, 40, parse);
+    	ModButton mod = new ModButton("Modifier",0, 320, 50, 40);
     	SaveButton save = new SaveButton("Save", 0, 360, 50, 40);
     	
     	for (int i = 0; i < 10; i++)
@@ -56,39 +77,35 @@ public class GraphicsLaunch {
     		Random rand = new Random();
     		int x = rand.nextInt((800 - 0) + 1) + 0;
     		int y = rand.nextInt((800 - 0) + 1) + 0;
-    		w.addNetworkElement(new YellowBus(x,y) );
+    		this.mapWindow.addNetworkElement(new YellowBus(x,y) );
     	}
     	
-    	zplus.setLayout(w.getMap());
-    	zminus.setLayout(w.getMap());
-    	center.setLayout(w.getMap());
+    	zplus.setLayout(this.mapWindow.getMap());
+    	zminus.setLayout(this.mapWindow.getMap());
+    	center.setLayout(this.mapWindow.getMap());
     	
-    	zplus.setLayout(w.getNetwork());
-    	zminus.setLayout(w.getNetwork());
-    	center.setLayout(w.getNetwork());
+    	zplus.setLayout(this.mapWindow.getNetwork());
+    	zminus.setLayout(this.mapWindow.getNetwork());
+    	center.setLayout(this.mapWindow.getNetwork());
     	
-    	save.setLayout(w.getMap());
-    	parse.setLayout(w.getMap());
-    	mod.setLayout(w.getMap());
+    	save.setLayout(this.mapWindow.getMap());
+    	parse.setLayout(this.mapWindow.getMap());
+    	mod.setLayout(this.mapWindow.getMap());
 
-    	Controller c = new Controller();
-    	EventService.getInstance().subscribe(LeftClicEvent.class, null, c);
-    	EventService.getInstance().subscribe(PopupEvent.class, null, c);
+    	this.mapWindow.addGUI(zplus);
+    	this.mapWindow.addGUI(zminus);
+    	this.mapWindow.addGUI(center);
+    	this.mapWindow.addGUI(parse);
+    	this.mapWindow.addGUI(mod);
+    	this.mapWindow.addGUI(save);
     	
-    	w.addGUI(zplus);
-    	w.addGUI(zminus);
-    	w.addGUI(center);
-    	w.addGUI(parse);
-    	w.addGUI(mod);
-    	w.addGUI(save);
-    	
-    	w.repaint();
+    	this.mapWindow.repaint();
 	}
 	
-	public static void addGraph(IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> g){
+	public void addGraph(IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> g){
 		ESRIBounds b = ((MapGraph)g).getMapBounds();
-		graph = g;
-		w.getMap().flush();
+		this.graph = g;
+		this.mapWindow.getMap().flush();
 		List<MapPolyline> lMap = ((MapGraph)g).getlMapPolyline();  
 		for (MapPolyline p :  lMap)
 		{
@@ -114,7 +131,7 @@ public class GraphicsLaunch {
 				
 			}
 			
-			w.addGraphicElement(new HighwayComponent(toPrimitive(px.toArray(new Integer[px.size()])), toPrimitive(py.toArray(new Integer[py.size()])), sens, p));
+			this.mapWindow.addGraphicElement(new HighwayComponent(toPrimitive(px.toArray(new Integer[px.size()])), toPrimitive(py.toArray(new Integer[py.size()])), sens, p));
 		}
 		
 		/*for(IEdge<?> e: g)
@@ -174,7 +191,7 @@ public class GraphicsLaunch {
 		i2.addSeg(seg1);
 		Point offset = new Point();
 		offset.setLocation(5,5);
-		w.addGraphicElement(new GraphicItinerary(i1, offset , Color.red, b));
+		this.mapWindow.addGraphicElement(new GraphicItinerary(i1, offset , Color.red, b));
 		offset.setLocation(-5,5);
 		//w.addGraphicElement(new GraphicItinerary(i2, offset , Color.blue, b));
 		
@@ -191,8 +208,9 @@ public class GraphicsLaunch {
 		BusNetwork net = new BusNetwork();
 		net.setlBusLine(lb);*/
 		
-		w.repaint();
+		this.mapWindow.repaint();
 	}
+	
 	public static int[] toPrimitive(Integer[] IntegerArray) {
 		 
 		int[] result = new int[IntegerArray.length];

@@ -2,13 +2,13 @@ package fr.utbm.info.gl52.Graphics.Buttons;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-
 import javax.swing.JFileChooser;
 
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
-import fr.utbm.info.gl52.Graphics.GraphicsLaunch;
+import fr.utbm.info.gl52.Event.AddGraphEvent;
+import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Parser.FinishedParsingCallcack;
 import fr.utbm.info.gl52.Parser.IParser;
 import fr.utbm.info.gl52.Parser.ParserDBase;
@@ -24,8 +24,6 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	private IParser<IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>>> dbaseParser;
 	
 	private String loadedRessource[]; // 0 : filename ; 1 : extension
-
-	private boolean mapLoaded = false; 
 	
 	public ParseButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
@@ -81,8 +79,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 			case "dbf":
 				System.out.println("Finished");
 				IGraph<INode<ESRIPoint>, IEdge<AttributeContainer>> g = this.shapeParser.getData();
-				GraphicsLaunch.addGraph(g);
-				this.mapLoaded = true;
+				EventService.getInstance().publish(new AddGraphEvent(g));
 				break;
 			default:
 		}
@@ -97,9 +94,5 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 				break;
 			default:
 		}
-	}
-
-	public boolean MapIsLoaded() {
-		return this.mapLoaded;
 	}
 }

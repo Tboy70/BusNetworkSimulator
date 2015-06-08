@@ -4,12 +4,9 @@ import java.awt.event.ActionEvent;
 
 public class ModButton extends ButtonComponent {
 	private static final long serialVersionUID = -8107668952988309579L;
-
-	private ParseButton parse;
-
-	public ModButton(String string, int i, int j, int k, int l, ParseButton parse) {
+	
+	public ModButton(String string, int i, int j, int k, int l) {
 		super(string, i, j, k, l);
-		this.parse = parse;
 	}
 
 	@Override
