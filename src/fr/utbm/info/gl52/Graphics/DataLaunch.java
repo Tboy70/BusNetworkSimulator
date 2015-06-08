@@ -22,23 +22,17 @@ public class DataLaunch {
 		EventService.getInstance().subscribe(AddBusLineEvent.class, null, this.controller);
 	}
 	
-	public void init(){
+	public synchronized void init(){
 		this.dataW = new DataWindow("Data", 700, 700);
 		this.dataW.setVisible(true);
 	}
 
-	public void setNetwork(BusNetwork net){
+	public synchronized void setNetwork(BusNetwork net){
 		this.setNetwork(net);
 	}
 	
-	public void add(BusLine message) {
-		try {
-			Thread.sleep(300);
-			this.dataW.addData(message);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
+	public synchronized void add(BusLine message) {
+		this.dataW.addData(message);
 	}
 	
 }

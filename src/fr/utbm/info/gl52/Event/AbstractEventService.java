@@ -38,19 +38,19 @@ public abstract class AbstractEventService implements IEventService, Runnable {
     		{
     			if (eTuple.filter == null)
     			{
-    				this.lunchThread(eTuple, e);
+    				lunchThread(eTuple, e);
     				break;
     			}
     			else if (eTuple.filter.apply(e))
     			{
-    				this.lunchThread(eTuple, e);
+    				lunchThread(eTuple, e);
     				break;
     			}
     		}
     	}
 	}
     
-    private void lunchThread(final EventTuple eTuple, final IEvent e){
+    private static void lunchThread(final EventTuple eTuple, final IEvent e){
     	Runnable run = new Runnable() {
 			@Override
 			public void run() {
