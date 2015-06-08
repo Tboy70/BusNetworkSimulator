@@ -14,6 +14,8 @@ public class BusLine implements Serializable{
 
 	private String name; 
 	
+	private int num;
+
 	private List<Itineraire> lIti;
 	
     /**
@@ -38,7 +40,15 @@ public class BusLine implements Serializable{
 	public void setlIti(List<Itineraire> lIti) {
 		this.lIti = lIti;
 	}
+	
+	public int getNum() {
+		return this.num;
+	}
 
+	public void setNum(int num) {
+		this.num = num;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

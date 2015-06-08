@@ -7,6 +7,7 @@ import javax.swing.JFileChooser;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
+import fr.utbm.info.gl52.Event.AddBusLineEvent;
 import fr.utbm.info.gl52.Event.AddGraphEvent;
 import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Parser.FinishedParsingCallcack;
@@ -53,7 +54,7 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	
 						Thread t = new Thread(this.shapeParser);
 						t.start();
-	
+						
 						System.out.println("Go parsing");
 					}
 					break;

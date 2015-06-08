@@ -3,28 +3,30 @@ package fr.utbm.info.gl52.Graphics;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
+import fr.utbm.info.gl52.Event.AddBusLineEvent;
 import fr.utbm.info.gl52.Event.AddGraphEvent;
 import fr.utbm.info.gl52.Event.EventService;
-import fr.utbm.info.gl52.Event.IEvent;
-import fr.utbm.info.gl52.Event.ISubscriber;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Event.PopupEvent;
 import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
-import fr.utbm.info.gl52.Graphics.Buttons.SaveButton;
 import fr.utbm.info.gl52.Graphics.Buttons.CenterButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ModButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ParseButton;
+import fr.utbm.info.gl52.Graphics.Buttons.SaveButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ZoomButton;
 import fr.utbm.info.gl52.Graphics.Frame.Window;
 import fr.utbm.info.gl52.Graphics.Itinerary.GraphicItinerary;
 import fr.utbm.info.gl52.Graphics.Road.HighwayComponent;
 import fr.utbm.info.gl52.Graphics.Road.SensRoad;
+import fr.utbm.info.gl52.Middle.BusLine;
+import fr.utbm.info.gl52.Middle.BusNetwork;
 import fr.utbm.info.gl52.Middle.Itineraire;
 import fr.utbm.info.gl52.Middle.MapGraph;
 import fr.utbm.info.gl52.Middle.MapPolyline;
@@ -44,10 +46,10 @@ public class GraphicsLaunch {
 	
 	public GraphicsLaunch(Controller c){
 		this.controller = c;
+		this.initController();
 	}
 	
 	public void init(){
-		this.initController();
 		this.initWindow();
 		this.initGUI();
 	}
@@ -195,19 +197,23 @@ public class GraphicsLaunch {
 		offset.setLocation(-5,5);
 		//w.addGraphicElement(new GraphicItinerary(i2, offset , Color.blue, b));
 		
-		/*List<Itineraire> li = new LinkedList<>();
+		List<Itineraire> li = new LinkedList<>();
 		li.add(i1);
 		li.add(i2);
 		
 		BusLine busline = new BusLine();
 		busline.setlIti(li);
+		busline.setName("testCoco");
+		busline.setNum(1);
 		
-		List<BusLine> lb = new LinkedList<>();
+		/*List<BusLine> lb = new LinkedList<>();
 		lb.add(busline);
 		
 		BusNetwork net = new BusNetwork();
 		net.setlBusLine(lb);*/
 		
+		EventService.getInstance().publish(new AddBusLineEvent(busline));
+
 		this.mapWindow.repaint();
 	}
 	
