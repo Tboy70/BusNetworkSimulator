@@ -34,31 +34,32 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 		
 		File file = this.openDialog();
 		
-		loadedRessource = file.getName().split("[.]");
-		
-		switch(loadedRessource[1]){
-			case "shp":
-			case "dbf":
-				loadedRessource[0] = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf("."));
-				
-				File shp = new File(loadedRessource[0] + ".shp");
-				File dbf = new File(loadedRessource[0] + ".dbf");
-				
-				if(shp.exists() && dbf.exists()){
-					this.dbaseParser = new ParserDBase<>(dbf.getAbsolutePath());
-					this.shapeParser = new ParserShapeFile<>(shp.getAbsolutePath(), this.dbaseParser);
+		if(file != null){
+			loadedRessource = file.getName().split("[.]");
+			
+			switch(loadedRessource[1]){
+				case "shp":
+				case "dbf":
+					loadedRessource[0] = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf("."));
 					
-					this.shapeParser.addFinishedCallback(this);
-
-					Thread t = new Thread(this.shapeParser);
-					t.start();
-
-					System.out.println("Go parsing");
-				}
-				break;
-			default:
+					File shp = new File(loadedRessource[0] + ".shp");
+					File dbf = new File(loadedRessource[0] + ".dbf");
+					
+					if(shp.exists() && dbf.exists()){
+						this.dbaseParser = new ParserDBase<>(dbf.getAbsolutePath());
+						this.shapeParser = new ParserShapeFile<>(shp.getAbsolutePath(), this.dbaseParser);
+						
+						this.shapeParser.addFinishedCallback(this);
+	
+						Thread t = new Thread(this.shapeParser);
+						t.start();
+	
+						System.out.println("Go parsing");
+					}
+					break;
+				default:
+			}
 		}
-		
 	}
 
 	private File openDialog(){		
