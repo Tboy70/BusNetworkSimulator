@@ -213,6 +213,7 @@ public class GraphicsLaunch {
 		net.setlBusLine(lb);*/
 		
 		EventService.getInstance().publish(new AddBusLineEvent(busline));
+		EventService.getInstance().publish(new AddBusLineEvent(busline));
 
 		this.mapWindow.repaint();
 	}

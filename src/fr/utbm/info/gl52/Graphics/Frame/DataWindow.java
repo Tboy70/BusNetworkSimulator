@@ -37,6 +37,8 @@ public class DataWindow extends AbstractFrame {
 	
 	public void addData(BusLine message) {
 		this.busLine.addBusLine(message);
+		this.repaint();
+		this.revalidate();
 	}
 	
 	

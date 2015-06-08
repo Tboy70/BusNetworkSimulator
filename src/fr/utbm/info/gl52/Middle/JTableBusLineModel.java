@@ -48,6 +48,7 @@ public class JTableBusLineModel extends AbstractTableModel {
 
 	public void addBusLine(BusLine message) {
 		this.net.getlBusLine().add(message);
+		this.fireTableDataChanged();
 	}
 
 }

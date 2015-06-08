@@ -32,7 +32,13 @@ public class DataLaunch {
 	}
 	
 	public void add(BusLine message) {
-		this.dataW.addData(message);
+		try {
+			Thread.sleep(300);
+			this.dataW.addData(message);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

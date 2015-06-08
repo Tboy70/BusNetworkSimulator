@@ -38,17 +38,28 @@ public abstract class AbstractEventService implements IEventService, Runnable {
     		{
     			if (eTuple.filter == null)
     			{
-    				eTuple.subscriber.inform(e);
+    				this.lunchThread(eTuple, e);
     				break;
     			}
     			else if (eTuple.filter.apply(e))
     			{
-    				eTuple.subscriber.inform(e);
+    				this.lunchThread(eTuple, e);
     				break;
     			}
     		}
     	}
 	}
+    
+    private void lunchThread(final EventTuple eTuple, final IEvent e){
+    	Runnable run = new Runnable() {
+			@Override
+			public void run() {
+				eTuple.subscriber.inform(e);
+			}
+		};
+		Thread t = new Thread(run);
+		t.start();
+    }
 
 	public synchronized void publish(IEvent e)
     {
