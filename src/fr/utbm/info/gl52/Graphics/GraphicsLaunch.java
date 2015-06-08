@@ -52,18 +52,18 @@ public class GraphicsLaunch {
 		this.initGUI();
 	}
 	
-	public void initWindow(){
+	private void initWindow(){
 		this.mapWindow = new Window("BusNetwork",700,700);
 		this.mapWindow.setVisible(true);
 	}
 	
-	public void initController(){
+	private void initController(){
     	EventService.getInstance().subscribe(LeftClicEvent.class, null, this.controller);
     	EventService.getInstance().subscribe(PopupEvent.class, null, this.controller);
     	EventService.getInstance().subscribe(AddGraphEvent.class, null, this.controller);
 	}
 	
-	public void initGUI(){
+	private void initGUI(){
 		ZoomButton zplus = new ZoomButton("+", 0, 0, 40, 40, 10);
     	ZoomButton zminus = new ZoomButton("-", 0, 40, 40, 40, -10);
     	CenterButton center = new CenterButton("C",0, 80, 40, 40);
