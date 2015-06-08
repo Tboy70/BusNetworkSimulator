@@ -25,25 +25,27 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 	
 	private String loadedRessource[]; // 0 : filename ; 1 : extension
 
+	private boolean mapLoaded = false; 
+	
 	public ParseButton(String text, int x, int y, int h, int w) {
 		super(text, x, y, h, w);
 	}
 
 	@Override
-	public void action(ActionEvent evt) { 
+	public void action(ActionEvent evt) {
 		
 		File file = this.openDialog();
 		
 		if(file != null){
-			loadedRessource = file.getName().split("[.]");
+			this.loadedRessource = file.getName().split("[.]");
 			
-			switch(loadedRessource[1]){
+			switch(this.loadedRessource[1]){
 				case "shp":
 				case "dbf":
-					loadedRessource[0] = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf("."));
+					this.loadedRessource[0] = file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf("."));
 					
-					File shp = new File(loadedRessource[0] + ".shp");
-					File dbf = new File(loadedRessource[0] + ".dbf");
+					File shp = new File(this.loadedRessource[0] + ".shp");
+					File dbf = new File(this.loadedRessource[0] + ".dbf");
 					
 					if(shp.exists() && dbf.exists()){
 						this.dbaseParser = new ParserDBase<>(dbf.getAbsolutePath());
@@ -69,18 +71,18 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 		// get filename without extension
 		if (fc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION)
 			return fc.getSelectedFile();
-		else
-			return null;
+		return null;
 	}
 
 	@Override
 	public void finishedSuccess() {
-		switch(loadedRessource[1]){
+		switch(this.loadedRessource[1]){
 			case "shp":
 			case "dbf":
 				System.out.println("Finished");
 				IGraph<INode<ESRIPoint>, IEdge<AttributeContainer>> g = this.shapeParser.getData();
 				GraphicsLaunch.addGraph(g);
+				this.mapLoaded = true;
 				break;
 			default:
 		}
@@ -88,12 +90,16 @@ public class ParseButton extends ButtonComponent implements FinishedParsingCallc
 
 	@Override
 	public void finishedFailed() {
-		switch(loadedRessource[1]){
-		case "shp":
-		case "dbf":
-			System.out.println("Problème Parser");
-			break;
-		default:
+		switch(this.loadedRessource[1]){
+			case "shp":
+			case "dbf":
+				System.out.println("Problème Parser");
+				break;
+			default:
+		}
 	}
+
+	public boolean MapIsLoaded() {
+		return this.mapLoaded;
 	}
 }

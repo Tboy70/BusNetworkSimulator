@@ -48,10 +48,9 @@ public class GraphicsLaunch {
     	CenterButton center = new CenterButton("C",0, 80, 40, 40);
     	
     	ParseButton parse = new ParseButton("Load",0, 280, 50, 40);
-    	ModButton mod = new ModButton("Modifier",0, 320, 50, 40);
+    	ModButton mod = new ModButton("Modifier",0, 320, 50, 40, parse);
     	SaveButton save = new SaveButton("Save", 0, 360, 50, 40);
     	
-
     	for (int i = 0; i < 10; i++)
     	{
     		Random rand = new Random();
