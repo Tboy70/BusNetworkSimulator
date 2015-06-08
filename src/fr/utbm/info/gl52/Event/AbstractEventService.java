@@ -2,23 +2,36 @@ package fr.utbm.info.gl52.Event;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * 
  */
-public abstract class AbstractEventService implements IEventService {
+public abstract class AbstractEventService implements IEventService, Runnable {
 
     /**
      * 
      */
 	private List<EventTuple> listTuples;
+	
+	private List<IEvent> listEvent;
+	
     protected AbstractEventService() {
-    	this.listTuples = new ArrayList<>();
+    	this.listTuples = Collections.synchronizedList(new ArrayList<EventTuple>());
+    	this.listEvent = Collections.synchronizedList(new LinkedList<IEvent>());
     }
     
-    public void publish(IEvent e)
-    {
+	@Override
+	public void run() {
+		while(true){
+			if(this.listEvent.size() > 0)
+				this.launch(this.listEvent.remove(0));
+		}
+	}
+    
+    private synchronized void launch(IEvent e) {			
     	for (EventTuple eTuple : this.listTuples)
     	{
     		if (eTuple.eventType == e.getClass())
@@ -26,20 +39,27 @@ public abstract class AbstractEventService implements IEventService {
     			if (eTuple.filter == null)
     			{
     				eTuple.subscriber.inform(e);
+    				break;
     			}
     			else if (eTuple.filter.apply(e))
     			{
     				eTuple.subscriber.inform(e);
+    				break;
     			}
     		}
     	}
+	}
+
+	public synchronized void publish(IEvent e)
+    {
+    	this.listEvent.add(e);	
     }
 
     /**
      * @param Event e 
      * @param Subscriber s
      */
-    public void subscribe(Class<? extends IEvent> eT, IFilter f, ISubscriber s)
+    public synchronized void subscribe(Class<? extends IEvent> eT, IFilter f, ISubscriber s)
     {
     	this.listTuples.add(new EventTuple(eT, f, s));
     }
@@ -48,16 +68,9 @@ public abstract class AbstractEventService implements IEventService {
      * @param Event e 
      * @param Subscriber s
      */
-    public void unsubscribe(Class<? extends IEvent> eT, IFilter f, ISubscriber s)
+    public synchronized void unsubscribe(Class<? extends IEvent> eT, IFilter f, ISubscriber s)
     {
     	this.listTuples.remove(new EventTuple(eT, f, s));
     }
-
-
-
-
-
-
-
 
 }
