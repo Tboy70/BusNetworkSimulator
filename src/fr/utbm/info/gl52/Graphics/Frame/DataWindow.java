@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import fr.utbm.info.gl52.Middle.BusLine;
 import fr.utbm.info.gl52.Middle.BusNetwork;
 import fr.utbm.info.gl52.Middle.JTableBusLineModel;
+import fr.utbm.info.gl52.Middle.JTableItModel;
 
 public class DataWindow extends AbstractFrame {
 	private static final long serialVersionUID = -8026439744221193590L;
@@ -18,13 +19,15 @@ public class DataWindow extends AbstractFrame {
 	
 	private JTableBusLineModel busLine;
 	
+	private JTableItModel it;
+	
 	private MouseAdapter mouse = new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e){
-			int row = table.rowAtPoint(e.getPoint());
-			int col = table.columnAtPoint(e.getPoint());
+			int row = DataWindow.this.table.rowAtPoint(e.getPoint());
+			int col = DataWindow.this.table.columnAtPoint(e.getPoint());
 			if(e.getClickCount() >= 2){ // handle double click
-				// Go to itineraire
+				goToIt(row);
 			}else{ // Single click
 				// TODO display traffic
 			}
@@ -43,12 +46,20 @@ public class DataWindow extends AbstractFrame {
 		// Add it to layout
 		getContentPane().add(new JScrollPane(this.table), BorderLayout.CENTER);
 		
-		this.table.addMouseListener(mouse);
+		this.table.addMouseListener(this.mouse);
 		
 		// Define the minimum size of the window
 		this.pack();
 	}
 
+	private void goToIt(int row){		
+		this.it = new JTableItModel(this.busLine.getBusLineAt(row));
+		this.table.setModel(this.it);
+
+		this.repaint();		
+		this.pack();
+	}
+	
 	public void setData(BusNetwork net){
 		this.busLine.setNet(net);
 	}
@@ -58,7 +69,4 @@ public class DataWindow extends AbstractFrame {
 		this.repaint();
 		this.revalidate();
 	}
-	
-	
-
 }

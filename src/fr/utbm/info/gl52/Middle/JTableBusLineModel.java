@@ -33,6 +33,10 @@ public class JTableBusLineModel extends AbstractTableModel {
 		return 0;
 	}
 	
+	public BusLine getBusLineAt(int row){
+		return this.net.getlBusLine().get(row);
+	}
+	
 	@Override
 	public String getColumnName(int columnIndex) {
         return this.entetes[columnIndex];

@@ -130,7 +130,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#add(int, java.lang.Object)
 	 */
 	public void add(int arg0, Segment<?> arg1) {
-		lRoute.add(arg0, arg1);
+		this.lRoute.add(arg0, arg1);
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#add(java.lang.Object)
 	 */
 	public boolean add(Segment<?> arg0) {
-		return lRoute.add(arg0);
+		return this.lRoute.add(arg0);
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#addAll(java.util.Collection)
 	 */
 	public boolean addAll(Collection<? extends Segment<?>> arg0) {
-		return lRoute.addAll(arg0);
+		return this.lRoute.addAll(arg0);
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#addAll(int, java.util.Collection)
 	 */
 	public boolean addAll(int arg0, Collection<? extends Segment<?>> arg1) {
-		return lRoute.addAll(arg0, arg1);
+		return this.lRoute.addAll(arg0, arg1);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#clear()
 	 */
 	public void clear() {
-		lRoute.clear();
+		this.lRoute.clear();
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#contains(java.lang.Object)
 	 */
 	public boolean contains(Object arg0) {
-		return lRoute.contains(arg0);
+		return this.lRoute.contains(arg0);
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#containsAll(java.util.Collection)
 	 */
 	public boolean containsAll(Collection<?> arg0) {
-		return lRoute.containsAll(arg0);
+		return this.lRoute.containsAll(arg0);
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#get(int)
 	 */
 	public Segment<?> get(int arg0) {
-		return lRoute.get(arg0);
+		return this.lRoute.get(arg0);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#indexOf(java.lang.Object)
 	 */
 	public int indexOf(Object arg0) {
-		return lRoute.indexOf(arg0);
+		return this.lRoute.indexOf(arg0);
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#isEmpty()
 	 */
 	public boolean isEmpty() {
-		return lRoute.isEmpty();
+		return this.lRoute.isEmpty();
 	}
 
 	/**
@@ -218,7 +218,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#iterator()
 	 */
 	public Iterator<Segment<?>> iterator() {
-		return lRoute.iterator();
+		return this.lRoute.iterator();
 	}
 
 	/**
@@ -227,7 +227,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#lastIndexOf(java.lang.Object)
 	 */
 	public int lastIndexOf(Object arg0) {
-		return lRoute.lastIndexOf(arg0);
+		return this.lRoute.lastIndexOf(arg0);
 	}
 
 	/**
@@ -235,7 +235,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#listIterator()
 	 */
 	public ListIterator<Segment<?>> listIterator() {
-		return lRoute.listIterator();
+		return this.lRoute.listIterator();
 	}
 
 	/**
@@ -244,7 +244,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#listIterator(int)
 	 */
 	public ListIterator<Segment<?>> listIterator(int arg0) {
-		return lRoute.listIterator(arg0);
+		return this.lRoute.listIterator(arg0);
 	}
 
 	/**
@@ -253,7 +253,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#remove(int)
 	 */
 	public Segment<?> remove(int arg0) {
-		return lRoute.remove(arg0);
+		return this.lRoute.remove(arg0);
 	}
 
 	/**
@@ -262,7 +262,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#remove(java.lang.Object)
 	 */
 	public boolean remove(Object arg0) {
-		return lRoute.remove(arg0);
+		return this.lRoute.remove(arg0);
 	}
 
 	/**
@@ -271,7 +271,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#removeAll(java.util.Collection)
 	 */
 	public boolean removeAll(Collection<?> arg0) {
-		return lRoute.removeAll(arg0);
+		return this.lRoute.removeAll(arg0);
 	}
 
 	/**
@@ -280,7 +280,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#retainAll(java.util.Collection)
 	 */
 	public boolean retainAll(Collection<?> arg0) {
-		return lRoute.retainAll(arg0);
+		return this.lRoute.retainAll(arg0);
 	}
 
 	/**
@@ -290,7 +290,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#set(int, java.lang.Object)
 	 */
 	public Segment<?> set(int arg0, Segment<?> arg1) {
-		return lRoute.set(arg0, arg1);
+		return this.lRoute.set(arg0, arg1);
 	}
 
 	/**
@@ -298,7 +298,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#size()
 	 */
 	public int size() {
-		return lRoute.size();
+		return this.lRoute.size();
 	}
 
 	/**
@@ -308,7 +308,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#subList(int, int)
 	 */
 	public List<Segment<?>> subList(int arg0, int arg1) {
-		return lRoute.subList(arg0, arg1);
+		return this.lRoute.subList(arg0, arg1);
 	}
 
 	/**
@@ -316,7 +316,7 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#toArray()
 	 */
 	public Object[] toArray() {
-		return lRoute.toArray();
+		return this.lRoute.toArray();
 	}
 
 	/**
@@ -325,13 +325,33 @@ public class Itineraire implements Serializable{
 	 * @see java.util.List#toArray(java.lang.Object[])
 	 */
 	public <T> T[] toArray(T[] arg0) {
-		return lRoute.toArray(arg0);
+		return this.lRoute.toArray(arg0);
 	}
     /**
 	 * @return the lRoute
 	 */
 	public List<Segment<?>> getlRoute() {
-		return lRoute;
+		return this.lRoute;
+	}
+	
+	public void add(int index, Stop element) {
+		this.lStop.add(index, element);
+	}
+
+	public boolean add(Stop e) {
+		return this.lStop.add(e);
+	}
+
+	public Stop getStop(int index) {
+		return this.lStop.get(index);
+	}
+	
+	public int getNbStop(){
+		return this.lStop.size();
+	}
+
+	public Stop removeStop(int index) {
+		return this.lStop.remove(index);
 	}
 
 }
