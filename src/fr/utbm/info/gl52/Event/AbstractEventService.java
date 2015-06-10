@@ -50,6 +50,10 @@ public abstract class AbstractEventService implements IEventService, Runnable {
     	}
 	}
     
+    private static void lunchUnThread(final EventTuple eTuple, final IEvent e){
+    	eTuple.subscriber.inform(e);
+    }
+    
     private static void lunchThread(final EventTuple eTuple, final IEvent e){
     	Runnable run = new Runnable() {
 			@Override
