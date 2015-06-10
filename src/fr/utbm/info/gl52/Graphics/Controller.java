@@ -43,7 +43,9 @@ public class Controller implements ISubscriber {
 		}else if(e.getClass() == AddBusLineEvent.class){
 			this.viewData.add(((AddBusLineEvent)e).message);
 		}else if(e.getClass() == DisplayBusLineEvent.class){
+			this.viewMap.addGraphicBusLine(((DisplayBusLineEvent)e).message);
 		}else if(e.getClass() == DisplayItEvent.class){
+			this.viewMap.addGraphicIt(((DisplayItEvent)e).message);
 		}
 	}
 	

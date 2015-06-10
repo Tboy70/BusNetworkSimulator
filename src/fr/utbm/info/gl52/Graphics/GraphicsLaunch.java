@@ -136,19 +136,6 @@ public class GraphicsLaunch {
 			this.mapWindow.addGraphicElement(new HighwayComponent(toPrimitive(px.toArray(new Integer[px.size()])), toPrimitive(py.toArray(new Integer[py.size()])), sens, p));
 		}
 		
-		/*for(IEdge<?> e: g)
-    	{
-			if(e != null){
-				IEdge<AttributeContainer> eT = (Edge<AttributeContainer>)e;
-				INode<ESRISpatialObject> A = (Node<ESRISpatialObject>)eT.getNodeA();
-				INode<ESRISpatialObject> B = (Node<ESRISpatialObject>)eT.getNodeB();
-				int px[] = {(int)A.getData().x - (int)b.minx,(int)B.getData().x - (int)b.minx};
-				int py[] = {(int)A.getData().y - (int)b.miny,(int)B.getData().y - (int)b.miny};
-				SensRoad sens = eT.getData().getAttribute("SENS").equals("Double sens") ? SensRoad.SANS : SensRoad.DROIT;
-				w.addGraphicElement(new HighwayComponent(px, py, sens));
-			}
-    	}	*/
-		
 		// Add itiniraire		
 		Segment<AttributeContainer> seg1 = (Segment<AttributeContainer>)g.iterator().next();
 		Stop s1 = new Stop(100, seg1);
@@ -218,8 +205,21 @@ public class GraphicsLaunch {
 		this.mapWindow.repaint();
 	}
 	
+	public void addGraphicBusLine(BusLine l) {
+		for(Itineraire i : l.getlIti()){
+			this.addGraphicIt(i);
+		}
+	}
+	
+	public void addGraphicIt(Itineraire i){
+		Point offset = new Point();
+		offset.setLocation(5,5);
+		GraphicItinerary g = new GraphicItinerary(i, offset, Color.RED, ((MapGraph)this.graph).getMapBounds());
+		offset.setLocation(-5,5);
+		this.mapWindow.repaint();
+	}
+	
 	public static int[] toPrimitive(Integer[] IntegerArray) {
-		 
 		int[] result = new int[IntegerArray.length];
 		for (int i = 0; i < IntegerArray.length; i++) {
 			result[i] = IntegerArray[i].intValue();
