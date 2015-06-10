@@ -15,17 +15,17 @@ public class JTableItModel extends AbstractTableModel {
 	}
 	
 	@Override
-	public int getColumnCount() {
+	public synchronized int getColumnCount() {
 		return 2; // Name ; nb of stop
 	}
 
 	@Override
-	public int getRowCount() {
+	public synchronized int getRowCount() {
 		return this.line.getlIti().size();
 	}
 
 	@Override
-	public Object getValueAt(int arg0, int arg1) {
+	public synchronized Object getValueAt(int arg0, int arg1) {
 		if(arg1 == 0)
 			return this.line.getlIti().get(arg0).getName();
 		if(arg1 == 1)
@@ -34,23 +34,23 @@ public class JTableItModel extends AbstractTableModel {
 	}
 	
 	@Override
-	public String getColumnName(int columnIndex) {
+	public synchronized String getColumnName(int columnIndex) {
         return this.entetes[columnIndex];
     }
 	
-	public Itineraire getItAt(int row){
+	public synchronized Itineraire getItAt(int row){
 		return this.line.getlIti().get(row);
 	}
 	
-	public BusLine getBus() {
+	public synchronized BusLine getBus() {
 		return this.line;
 	}
 
-	public void setNet(BusLine l) {
+	public synchronized void setNet(BusLine l) {
 		this.line = l;
 	}
 
-	public void addBusLine(Itineraire message) {
+	public synchronized void addBusLine(Itineraire message) {
 		this.line.getlIti().add(message);
 		this.fireTableDataChanged();
 	}

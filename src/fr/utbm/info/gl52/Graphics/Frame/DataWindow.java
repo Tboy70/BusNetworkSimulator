@@ -24,9 +24,11 @@ public class DataWindow extends AbstractFrame {
 	
 	private JTableItModel it;
 	
+	private JScrollPane jscroll; // Panel
+	
 	private MouseAdapter mouseBusline = new MouseAdapter() {
 		@Override
-		public void mouseClicked(MouseEvent e){
+		public synchronized void mouseClicked(MouseEvent e){
 			int row = DataWindow.this.table.rowAtPoint(e.getPoint());
 			int col = DataWindow.this.table.columnAtPoint(e.getPoint());
 			if(e.getClickCount() >= 2){ // handle double click
@@ -40,7 +42,7 @@ public class DataWindow extends AbstractFrame {
 	
 	private MouseAdapter mouseIt = new MouseAdapter() {
 		@Override
-		public void mouseClicked(MouseEvent e){
+		public synchronized void mouseClicked(MouseEvent e){
 			int row = DataWindow.this.table.rowAtPoint(e.getPoint());
 			int col = DataWindow.this.table.columnAtPoint(e.getPoint());
 			if(e.getClickCount() >= 2){ // handle double click
@@ -51,6 +53,8 @@ public class DataWindow extends AbstractFrame {
 			}
 		}
 	};
+
+	
 	
 	public DataWindow(String title, int h, int w) {
 		super(title, h, w);
@@ -61,8 +65,10 @@ public class DataWindow extends AbstractFrame {
 		// Create new table
 		this.table = new JTable(this.busLine);
 		
+		this.jscroll = new JScrollPane(this.table);
+		
 		// Add it to layout
-		getContentPane().add(new JScrollPane(this.table), BorderLayout.CENTER);
+		getContentPane().add(this.jscroll, BorderLayout.CENTER);
 		
 		this.table.addMouseListener(this.mouseBusline);
 		
@@ -70,20 +76,26 @@ public class DataWindow extends AbstractFrame {
 		this.pack();
 	}
 
-	private void goToIt(int row){		
+	private synchronized void goToIt(int row){		
 		this.it = new JTableItModel(this.busLine.getBusLineAt(row));
-		this.table.setModel(this.it);
+		
+		this.jscroll.remove(this.table);
+		getContentPane().remove(this.jscroll);
+		
+		this.table = new JTable(this.it);
 		this.table.addMouseListener(this.mouseIt);
+		this.jscroll = new JScrollPane(this.table);
+		getContentPane().add(this.jscroll, BorderLayout.CENTER);
 		
 		this.repaint();		
 		this.pack();
 	}
 	
-	public void setData(BusNetwork net){
+	public synchronized void setData(BusNetwork net){
 		this.busLine.setNet(net);
 	}
 	
-	public void addData(BusLine message) {
+	public synchronized void addData(BusLine message) {
 		this.busLine.addBusLine(message);
 		this.repaint();
 		this.revalidate();

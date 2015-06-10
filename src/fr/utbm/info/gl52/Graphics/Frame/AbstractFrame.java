@@ -61,9 +61,18 @@ public abstract class AbstractFrame extends JFrame implements IFrame, ISubscribe
 	{
 		return this.gui;
 	}
-	public void addGraphicElement(AbstractGraphicElement c)
+	public synchronized void addGraphicElement(AbstractGraphicElement c)
 	{
 		this.map.addComponent(c);
+	}
+	public synchronized void remGraphicElement(AbstractGraphicElement c)
+	{
+		this.map.remove(c);
+		c.setVisible(false);
+		this.map.repaint();
+		this.map.revalidate();
+		this.repaint();
+		this.revalidate();
 	}
 	public void addNetworkElement(BusComponent c)
 	{

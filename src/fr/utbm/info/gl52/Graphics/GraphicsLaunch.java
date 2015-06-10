@@ -3,6 +3,7 @@ package fr.utbm.info.gl52.Graphics;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,7 +28,6 @@ import fr.utbm.info.gl52.Graphics.Itinerary.GraphicItinerary;
 import fr.utbm.info.gl52.Graphics.Road.HighwayComponent;
 import fr.utbm.info.gl52.Graphics.Road.SensRoad;
 import fr.utbm.info.gl52.Middle.BusLine;
-import fr.utbm.info.gl52.Middle.BusNetwork;
 import fr.utbm.info.gl52.Middle.Itineraire;
 import fr.utbm.info.gl52.Middle.MapGraph;
 import fr.utbm.info.gl52.Middle.MapPolyline;
@@ -212,23 +212,37 @@ public class GraphicsLaunch {
 		net.setlBusLine(lb);*/
 		
 		EventService.getInstance().publish(new AddBusLineEvent(busline));
-		EventService.getInstance().publish(new AddBusLineEvent(busline));
 
 		this.mapWindow.repaint();
 	}
 	
-	public void addGraphicBusLine(BusLine l) {
+	public List<GraphicItinerary> added = Collections.synchronizedList(new LinkedList<GraphicItinerary>());
+	
+	public synchronized void removeAllIt(){
+		for(GraphicItinerary i : this.added){
+			this.mapWindow.remGraphicElement(i);
+			i.setVisible(false);
+		}
+		
+		this.mapWindow.revalidate();
+		this.mapWindow.repaint();
+		this.added.clear();
+	}
+	
+	public synchronized void addGraphicIt(Itineraire i){
+		Point offset = new Point();
+		offset.setLocation(5,5);
+		GraphicItinerary g = new GraphicItinerary(i, offset, Color.RED, ((MapGraph)this.graph).getMapBounds());
+		this.mapWindow.addGraphicElement(g);
+		this.added.add(g);
+		offset.setLocation(-5,5);
+		this.mapWindow.repaint();
+	}
+	
+	public synchronized void addGraphicBusLine(BusLine l) {
 		for(Itineraire i : l.getlIti()){
 			this.addGraphicIt(i);
 		}
-	}
-	
-	public void addGraphicIt(Itineraire i){
-		Point offset = new Point();
-		offset.setLocation(5,5);
-		this.mapWindow.addGraphicElement(new GraphicItinerary(i, offset, Color.RED, ((MapGraph)this.graph).getMapBounds()));
-		offset.setLocation(-5,5);
-		this.mapWindow.repaint();
 	}
 	
 	public static int[] toPrimitive(Integer[] IntegerArray) {
