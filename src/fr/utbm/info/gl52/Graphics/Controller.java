@@ -7,6 +7,7 @@ import fr.utbm.info.gl52.Event.AddBusLineEvent;
 import fr.utbm.info.gl52.Event.AddGraphEvent;
 import fr.utbm.info.gl52.Event.DisplayBusLineEvent;
 import fr.utbm.info.gl52.Event.DisplayItEvent;
+import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.IEvent;
 import fr.utbm.info.gl52.Event.ISubscriber;
 import fr.utbm.info.gl52.Event.PopupEvent;
@@ -29,6 +30,9 @@ public class Controller implements ISubscriber {
 		
 		this.viewMap = new GraphicsLaunch(this);
 		this.viewData = new DataLaunch(this);
+		
+		EventService.getInstance().subscribe(DisplayBusLineEvent.class, null, this);
+		EventService.getInstance().subscribe(DisplayItEvent.class, null, this);
 	}
 	
 	@Override

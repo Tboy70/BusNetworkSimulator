@@ -3,6 +3,7 @@ package fr.utbm.info.gl52.Graphics;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -136,19 +137,32 @@ public class GraphicsLaunch {
 			this.mapWindow.addGraphicElement(new HighwayComponent(toPrimitive(px.toArray(new Integer[px.size()])), toPrimitive(py.toArray(new Integer[py.size()])), sens, p));
 		}
 		
-		// Add itiniraire		
-		Segment<AttributeContainer> seg1 = (Segment<AttributeContainer>)g.iterator().next();
+		// Add itiniraire
+		Iterator<IEdge<?>> i = g.iterator();
+		Segment<AttributeContainer> seg1 = (Segment<AttributeContainer>)i.next();
 		Stop s1 = new Stop(100, seg1);
-		Segment<AttributeContainer> seg2 = (Segment<AttributeContainer>)g.iterator().next();
+		Segment<AttributeContainer> seg2 = (Segment<AttributeContainer>)i.next();
 		Stop s2 = new Stop(0, seg2);
-		Segment<AttributeContainer> seg3 = (Segment<AttributeContainer>)g.iterator().next();
+		Segment<AttributeContainer> seg3 = (Segment<AttributeContainer>)i.next();
 		Stop s3 = new Stop(0, seg3);
-		Segment<AttributeContainer> seg4 = (Segment<AttributeContainer>)g.iterator().next();
+		Segment<AttributeContainer> seg4 = (Segment<AttributeContainer>)i.next();
 		Stop s4 = new Stop(0, seg4);
-		Segment<AttributeContainer> seg5 = (Segment<AttributeContainer>)g.iterator().next();
+		Segment<AttributeContainer> seg5 = (Segment<AttributeContainer>)i.next();
 		Stop s5 = new Stop(0, seg5);
-		Segment<AttributeContainer> seg6 = (Segment<AttributeContainer>)g.iterator().next();
+		Segment<AttributeContainer> seg6 = (Segment<AttributeContainer>)i.next();
 		Stop s6 = new Stop(100, seg6);
+		Segment<AttributeContainer> seg7 = (Segment<AttributeContainer>)i.next();
+		Stop s7 = new Stop(100, seg1);
+		Segment<AttributeContainer> seg8 = (Segment<AttributeContainer>)i.next();
+		Stop s8 = new Stop(0, seg2);
+		Segment<AttributeContainer> seg9 = (Segment<AttributeContainer>)i.next();
+		Stop s9 = new Stop(0, seg3);
+		Segment<AttributeContainer> seg10 = (Segment<AttributeContainer>)i.next();
+		Stop s10 = new Stop(0, seg4);
+		Segment<AttributeContainer> seg11 = (Segment<AttributeContainer>)i.next();
+		Stop s11 = new Stop(0, seg5);
+		Segment<AttributeContainer> seg12 = (Segment<AttributeContainer>)i.next();
+		Stop s12 = new Stop(100, seg6);
 		
 		
 		Itineraire i1 = new Itineraire("Test1");
@@ -166,23 +180,21 @@ public class GraphicsLaunch {
 		i1.addSeg(seg6);
 		
 		Itineraire i2 = new Itineraire("Test1-2");
-		i2.addStop(s6);
-		i2.addStop(s5);
-		i2.addStop(s4);
-		i2.addStop(s3);
-		i2.addStop(s2);
-		i2.addStop(s1);
-		i2.addSeg(seg6);
-		i2.addSeg(seg5);
-		i2.addSeg(seg4);
-		i2.addSeg(seg3);
-		i2.addSeg(seg2);
-		i2.addSeg(seg1);
-		Point offset = new Point();
-		offset.setLocation(5,5);
-		this.mapWindow.addGraphicElement(new GraphicItinerary(i1, offset , Color.red, b));
-		offset.setLocation(-5,5);
-		//w.addGraphicElement(new GraphicItinerary(i2, offset , Color.blue, b));
+		i2.addStop(s7);
+		i2.addStop(s8);
+		i2.addStop(s9);
+		i2.addStop(s10);
+		i2.addStop(s11);
+		i2.addStop(s12);
+		i2.addSeg(seg7);
+		i2.addSeg(seg8);
+		i2.addSeg(seg9);
+		i2.addSeg(seg10);
+		i2.addSeg(seg11);
+		i2.addSeg(seg12);
+		
+		//this.addGraphicIt(i1);
+		//this.addGraphicIt(i2);
 		
 		List<Itineraire> li = new LinkedList<>();
 		li.add(i1);
@@ -214,7 +226,7 @@ public class GraphicsLaunch {
 	public void addGraphicIt(Itineraire i){
 		Point offset = new Point();
 		offset.setLocation(5,5);
-		GraphicItinerary g = new GraphicItinerary(i, offset, Color.RED, ((MapGraph)this.graph).getMapBounds());
+		this.mapWindow.addGraphicElement(new GraphicItinerary(i, offset, Color.RED, ((MapGraph)this.graph).getMapBounds()));
 		offset.setLocation(-5,5);
 		this.mapWindow.repaint();
 	}
