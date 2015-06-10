@@ -7,6 +7,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import fr.utbm.info.gl52.Event.DisplayBusLineEvent;
+import fr.utbm.info.gl52.Event.DisplayItEvent;
+import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Middle.BusLine;
 import fr.utbm.info.gl52.Middle.BusNetwork;
 import fr.utbm.info.gl52.Middle.JTableBusLineModel;
@@ -21,7 +24,7 @@ public class DataWindow extends AbstractFrame {
 	
 	private JTableItModel it;
 	
-	private MouseAdapter mouse = new MouseAdapter() {
+	private MouseAdapter mouseBusline = new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e){
 			int row = DataWindow.this.table.rowAtPoint(e.getPoint());
@@ -29,7 +32,22 @@ public class DataWindow extends AbstractFrame {
 			if(e.getClickCount() >= 2){ // handle double click
 				goToIt(row);
 			}else{ // Single click
-				// TODO display traffic
+				DisplayBusLineEvent l = new DisplayBusLineEvent(busLine.getBusLineAt(row));
+				EventService.getInstance().publish(l);
+			}
+		}
+	};
+	
+	private MouseAdapter mouseIt = new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e){
+			int row = DataWindow.this.table.rowAtPoint(e.getPoint());
+			int col = DataWindow.this.table.columnAtPoint(e.getPoint());
+			if(e.getClickCount() >= 2){ // handle double click
+				// ???
+			}else{ // Single click
+				DisplayItEvent l = new DisplayItEvent(it.getItAt(row));
+				EventService.getInstance().publish(l);
 			}
 		}
 	};
@@ -46,7 +64,7 @@ public class DataWindow extends AbstractFrame {
 		// Add it to layout
 		getContentPane().add(new JScrollPane(this.table), BorderLayout.CENTER);
 		
-		this.table.addMouseListener(this.mouse);
+		this.table.addMouseListener(this.mouseBusline);
 		
 		// Define the minimum size of the window
 		this.pack();
@@ -55,7 +73,8 @@ public class DataWindow extends AbstractFrame {
 	private void goToIt(int row){		
 		this.it = new JTableItModel(this.busLine.getBusLineAt(row));
 		this.table.setModel(this.it);
-
+		this.table.addMouseListener(this.mouseIt);
+		
 		this.repaint();		
 		this.pack();
 	}

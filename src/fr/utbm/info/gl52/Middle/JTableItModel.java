@@ -38,6 +38,10 @@ public class JTableItModel extends AbstractTableModel {
         return this.entetes[columnIndex];
     }
 	
+	public Itineraire getItAt(int row){
+		return this.line.getlIti().get(row);
+	}
+	
 	public BusLine getBus() {
 		return this.line;
 	}
