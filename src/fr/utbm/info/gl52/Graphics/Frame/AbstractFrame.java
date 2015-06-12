@@ -67,12 +67,10 @@ public abstract class AbstractFrame extends JFrame implements IFrame, ISubscribe
 	}
 	public synchronized void remGraphicElement(AbstractGraphicElement c)
 	{
-		this.map.remove(c);
+		//this.map.remove(c);
+		this.map.flush(c.getClass());
 		c.setVisible(false);
 		this.map.repaint();
-		this.map.revalidate();
-		this.repaint();
-		this.revalidate();
 	}
 	public void addNetworkElement(BusComponent c)
 	{

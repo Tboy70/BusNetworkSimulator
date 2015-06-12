@@ -31,6 +31,18 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	{
 		this.listComponents.removeAll(this.listComponents);
 	}
+	public void flush(Class<?> c)
+	{
+		Collection<C> temp = new ArrayList();
+		for (C obj : this.listComponents)
+		{
+			if (obj.getClass().equals(c))
+			{
+				temp.add(obj);
+			}
+		}
+		this.listComponents.removeAll(temp);
+	}
 	public AbstractGraphicElement actionClick(int x, int y)
 	{
 		return null;
