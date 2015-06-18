@@ -23,14 +23,14 @@ import fr.utbm.info.gl52.Middle.Connection;
 public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<C>  {
 
 	private static final long serialVersionUID = 1L;
-	private Connection start = null;
-	private Connection end = null;
+	private Connection<?> start = null;
+	private Connection<?> end = null;
 	private int clicx=0, clicy=0;
 	public LayoutMap(int h, int w) {
 		super(h, w);
-		this.listComponents = Collections.synchronizedList(new ArrayList());
+		this.listComponents = Collections.synchronizedList(new ArrayList<C>());
 	}
-	public void addComponent(C c) {
+	public synchronized void addComponent(C c) {
 		this.listComponents.add(c);
 	}
 
@@ -51,10 +51,10 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		/*for(C c: this.listComponents)
 			c.draw(g);*/
 		synchronized(this.listComponents) {
-			Iterator i = this.listComponents.iterator(); 
+			Iterator<C> i = this.listComponents.iterator(); 
 			while (i.hasNext())
 			{
-				AbstractGraphicElement b = (AbstractGraphicElement) i.next();
+				AbstractGraphicElement b = i.next();
 				b.draw(g2d);
 			}
 		}
@@ -70,7 +70,7 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		this.clicy = (int) ((100/this.zoom) * (y - this.getLocation().getY()));
 		Shape ellipse = new Ellipse2D.Double(this.clicx , this.clicy, 8, 8);
 		//AbstractGraphicElement eTemp = null;
-		Collection c = new ArrayList<AbstractGraphicElement>();
+		Collection<AbstractGraphicElement> c = new ArrayList<>();
 		for(AbstractGraphicElement e: this.listComponents)
 		{
 			if (e.intersect(ellipse)) {
@@ -81,16 +81,16 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 				if (e.getClass().getSuperclass() == RoadComponent.class)
 				{
 					RoadComponent r = (RoadComponent) e;
-					if (start == null)
+					if (this.start == null)
 					{
-						start = (Connection)r.getPolyline().getListSegment().get(0).getNodeA();
+						this.start = (Connection<?>)r.getPolyline().getListSegment().get(0).getNodeA();
 					}
-					else if (end == null)
+					else if (this.end == null)
 					{
-						end = (Connection)r.getPolyline().getListSegment().get(r.getPolyline().getListSegment().size()-1).getNodeB();
+						this.end = (Connection<?>)r.getPolyline().getListSegment().get(r.getPolyline().getListSegment().size()-1).getNodeB();
 					}
 					
-					if (start != null && end != null)
+					if (this.start != null && this.end != null)
 					{
 					//	System.out.println("Start:"+start.toString());
 					//	System.out.println("End:"+end.toString());

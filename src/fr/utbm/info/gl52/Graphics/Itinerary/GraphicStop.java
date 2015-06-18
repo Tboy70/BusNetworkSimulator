@@ -15,7 +15,7 @@ import fr.utbm.info.gl52.Middle.Stop;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
 
 public class GraphicStop extends AbstractGraphicElement {
-
+	private static final long serialVersionUID = -5870536476809951076L;
 	private Stop s;
 	private Point naturalOffset;
 	private Shape shape;
@@ -25,21 +25,21 @@ public class GraphicStop extends AbstractGraphicElement {
 		this.naturalOffset = offset;
 		
 		new Point();
-		int x = (int) ((((100 - s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getData().getX()))
-				+ ((s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getData().getX())) - naturalOffset.x;
-		int y = (int) ((((100 - s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getData().getY()))
-				+ ((s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getData().getY())) - naturalOffset.y;
+		int x = (int) ((((100 - this.s.getPourcentage())/100 * ((Node<ESRISpatialObject>)this.s.getEdge().getNodeA()).getData().getX()))
+				+ ((this.s.getPourcentage())/100 * ((Node<ESRISpatialObject>)this.s.getEdge().getNodeB()).getData().getX())) - this.naturalOffset.x;
+		int y = (int) ((((100 - this.s.getPourcentage())/100 * ((Node<ESRISpatialObject>)this.s.getEdge().getNodeA()).getData().getY()))
+				+ ((this.s.getPourcentage())/100 * ((Node<ESRISpatialObject>)this.s.getEdge().getNodeB()).getData().getY())) - this.naturalOffset.y;
 		//System.out.println("x:"+x+" y:"+y);
 		this.shape = new Ellipse2D.Double(x-4, y-4, 8, 8);
 	}
 	
 	public void setStop(Stop ss)
 	{
-		this.s = s;
+		this.s = ss;
 	}
 	public Stop getStop()
 	{
-		return s;
+		return this.s;
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ public class GraphicStop extends AbstractGraphicElement {
 		g2d.setColor(Color.blue);
 		g2d.fill(this.shape);
 	}
-	public Point projection(Point A, Point B, Point P)
+	public static Point projection(Point A, Point B, Point P)
 	{
 		float xA = A.x;
 		float yA = A.y;
@@ -75,18 +75,18 @@ public class GraphicStop extends AbstractGraphicElement {
 	}
 	public void dragAndDrop(Point p)
 	{
-		float xA = (float) (((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getData().getX());
-		float yA = (float) (((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getData().getY());
+		float xA = (float) (((Node<ESRISpatialObject>)this.s.getEdge().getNodeA()).getData().getX());
+		float yA = (float) (((Node<ESRISpatialObject>)this.s.getEdge().getNodeA()).getData().getY());
 		
-		float xB = (float) (((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getData().getX());
-		float yB = (float) (((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getData().getY());
+		float xB = (float) (((Node<ESRISpatialObject>)this.s.getEdge().getNodeB()).getData().getX());
+		float yB = (float) (((Node<ESRISpatialObject>)this.s.getEdge().getNodeB()).getData().getY());
 		
 		Point A = new Point();
 		A.setLocation(xA, yA);
-		A.translate(- naturalOffset.x, - naturalOffset.y);
+		A.translate(- this.naturalOffset.x, - this.naturalOffset.y);
 		Point B = new Point();
 		B.setLocation(xB, yB);
-		B.translate(- naturalOffset.x, - naturalOffset.y);
+		B.translate(- this.naturalOffset.x, - this.naturalOffset.y);
 		Point pFinal = projection(A, B, p);
 		
 		xA = A.x;
@@ -111,6 +111,7 @@ public class GraphicStop extends AbstractGraphicElement {
 	}
 	@Override
 	public void update() {
+		// Not used
 	}
 
 	@Override

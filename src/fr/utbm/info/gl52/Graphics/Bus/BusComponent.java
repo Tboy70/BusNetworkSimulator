@@ -38,7 +38,7 @@ public abstract class BusComponent extends AbstractGraphicElement{
     public void setItinerary(AbstractGraphicItinerary iki)
     {
     	this.iti = iki;
-    	position = 100;
+    	this.position = 100;
     }
 	public void move(int x, int y) {
 		this.bounds.setLocation(x, y);
@@ -54,17 +54,17 @@ public abstract class BusComponent extends AbstractGraphicElement{
 	}
 	public void update()
 	{
-		if (iti != null)
+		if (this.iti != null)
 		{
-			if (!b)
-				position += step;
+			if (!this.b)
+				this.position += step;
 			else
-				position -= step;
-			Point newPos = iti.getPoint(position);
+				this.position -= step;
+			Point newPos = this.iti.getPoint(this.position);
 			this.bounds.setLocation(newPos.x, newPos.y);
-			System.out.println("--->"+position/100 + " / "+ position);
-			if (position <= 0 || (position/100) >= iti.getRoutesNumber())
-				position = 0;
+			System.out.println("--->"+this.position/100 + " / "+ this.position);
+			if (this.position <= 0 || (this.position/100) >= this.iti.getRoutesNumber())
+				this.position = 0;
 		}
 	}
 }

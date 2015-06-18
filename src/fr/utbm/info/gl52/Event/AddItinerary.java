@@ -6,9 +6,9 @@ import fr.utbm.info.gl52.Middle.Segment;
 public class AddItinerary implements IEvent {
 
 	public Itineraire it = null;
-	public Segment seg = null;
+	public Segment<?> seg = null;
 	
-	public AddItinerary(Itineraire i, Segment s)
+	public AddItinerary(Itineraire i, Segment<?> s)
 	{
 		this.it = i;
 		this.seg = s;

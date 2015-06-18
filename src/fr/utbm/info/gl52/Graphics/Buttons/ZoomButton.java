@@ -23,10 +23,10 @@ public class ZoomButton extends ButtonComponent {
 
 	@Override
 	public void action(ActionEvent evt) {
-		for (AbstractLayout<?> m : this.m)
+		for (AbstractLayout<?> n : this.m)
 		{
-			m.zoom(this.zoomFactor);
-			m.repaint();
+			n.zoom(this.zoomFactor);
+			n.repaint();
 		}
 	}
 }

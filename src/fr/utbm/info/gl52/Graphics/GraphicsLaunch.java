@@ -104,21 +104,21 @@ public class GraphicsLaunch {
 			ArrayList<Integer> px = new ArrayList<>();
 			ArrayList<Integer> py = new ArrayList<>();
 			SensRoad sens = SensRoad.SANS;
-			for (Segment s : p.getListSegment())
+			for (Segment<?> s : p.getListSegment())
 			{
 				
 				AttributeContainer attrs = (AttributeContainer) s.getData();
-				INode<ESRISpatialObject> A = s.getNodeA();
-				INode<ESRISpatialObject> B = s.getNodeB();
+				INode<ESRISpatialObject> A = (INode<ESRISpatialObject>) s.getNodeA();
+				INode<ESRISpatialObject> B = (INode<ESRISpatialObject>) s.getNodeB();
 				if (!bFirstPoint)
 				{
 					bFirstPoint = true;
-					px.add((int)A.getData().x - (int)this.offset.x);
-					py.add((int)A.getData().y - (int)this.offset.y);
+					px.add((int)A.getData().x - this.offset.x);
+					py.add((int)A.getData().y - this.offset.y);
 					sens = attrs.getAttribute("SENS").equals("Double sens") ? SensRoad.SANS : SensRoad.DROIT;
 				}
-				px.add((int)B.getData().x - (int)this.offset.x);
-				py.add((int)B.getData().y - (int)this.offset.y);
+				px.add((int)B.getData().x - this.offset.x);
+				py.add((int)B.getData().y - this.offset.y);
 				
 			}
 			
@@ -218,9 +218,9 @@ public class GraphicsLaunch {
 	}
 	
 	public synchronized void addGraphicIt(Itineraire i){
-		Point offset = new Point();
-		offset.setLocation(5,5);
-		GraphicItinerary g = new GraphicItinerary(i, offset, Color.RED, ((MapGraph)this.graph).getMapBounds());
+		Point pOffset = new Point();
+		pOffset.setLocation(5,5);
+		GraphicItinerary g = new GraphicItinerary(i, pOffset, Color.RED, ((MapGraph)this.graph).getMapBounds());
 		/*BusComponent bus = new YellowBus(0,0);
 		bus.setItinerary(g);
 		this.mapWindow.addNetworkElement(bus);*/
@@ -235,7 +235,7 @@ public class GraphicsLaunch {
 		}
 		
 		this.added.add(g);
-		offset.setLocation(-5,5);
+		pOffset.setLocation(-5,5);
 		this.mapWindow.repaint();
 	}
 	

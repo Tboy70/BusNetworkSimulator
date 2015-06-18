@@ -36,7 +36,7 @@ public abstract class RoadComponent extends AbstractGraphicElement {
 	}
 	public MapPolyline getPolyline()
 	{
-		return mapPl;
+		return this.mapPl;
 	}
 	public RoadComponent(int[] x, int[] y, SensRoad sens, MapPolyline m) {
 		this.Xpts = x;
@@ -90,7 +90,7 @@ public abstract class RoadComponent extends AbstractGraphicElement {
             drawArrow(g2d, theta, this.Xpts[0], this.Ypts[0]);
     	}
 	}
-    protected void drawArrow(Graphics2D g2, double theta, double x0, double y0)
+    protected static void drawArrow(Graphics2D g2, double theta, double x0, double y0)
     {
         int barb = 5; // Taille de la flèche
         double phi = Math.PI/6; // Angle avec les deux branches de la flèche

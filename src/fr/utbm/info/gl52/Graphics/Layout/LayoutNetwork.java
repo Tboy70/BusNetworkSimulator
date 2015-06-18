@@ -23,7 +23,7 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 	
 	public LayoutNetwork(int h, int w) {
 		super(h, w);
-		this.listComponents = Collections.synchronizedList(new ArrayList());
+		this.listComponents = Collections.synchronizedList(new ArrayList<C>());
 		this.t = new Thread(this);
 		this.t.start();
 	}
@@ -35,7 +35,7 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 			try {
 				Thread.sleep(30);
 				synchronized(this.listComponents) {
-					Iterator i = this.listComponents.iterator(); 
+					Iterator<?> i = this.listComponents.iterator(); 
 					while (i.hasNext())
 					{
 						
@@ -64,7 +64,7 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 		this.clicy = (int) ((100/this.zoom) * (y - this.getLocation().getY()));
 		Shape ellipse = new Ellipse2D.Double(this.clicx , this.clicy, 8, 8);
 		//AbstractGraphicElement eTemp = null;
-		Collection c = new ArrayList<AbstractGraphicElement>();
+		Collection<AbstractGraphicElement> c = new ArrayList<>();
 		for(AbstractGraphicElement e: this.listComponents)
 		{
 			if (e.intersect(ellipse)) {

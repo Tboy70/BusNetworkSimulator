@@ -19,6 +19,7 @@ import fr.utbm.set.io.shape.ESRIBounds;
 
 public abstract class AbstractGraphicItinerary extends AbstractGraphicElement {
 
+	private static final long serialVersionUID = -6178200941587487343L;
 	protected Itineraire it = null;
 	protected Point offset = null;
 	protected Color col = null;
@@ -110,12 +111,12 @@ public abstract class AbstractGraphicItinerary extends AbstractGraphicElement {
 		// System.out.println("Nombre de routes:"+i);
 	}
 
-	public Point getPoint(int offset) {
+	public Point getPoint(int iOffset) {
 		Point pFinal = new Point();
-		int p = (offset / 100);
+		int p = (iOffset / 100);
 
-		int pOffset = offset - p*100;
-		System.out.println("" + offset);
+		int pOffset = iOffset - p*100;
+		System.out.println("" + iOffset);
 		if (p > 0 && p < this.it.getlRoute().size()) {
 			Segment<?> s = this.it.getlRoute().get(p);
 			float xA = (float) (((Node<ESRISpatialObject>) s.getNodeA()).getData().getX()) - this.naturalOffset.x;

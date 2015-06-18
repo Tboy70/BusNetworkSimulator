@@ -23,7 +23,7 @@ public class GraphicButton extends JButton  {
 		super(t);
 	}
 	public void click() {
-		selected = !selected;
+		this.selected = !this.selected;
 	}
 
 	protected void paintComponent(Graphics g) {
@@ -38,7 +38,7 @@ public class GraphicButton extends JButton  {
 			g2.setColor(new Color(19, 43, 168));
 		if(this.getModel().isPressed())
 			g2.setColor(new Color(246, 175,0));
-		if(this.getModel().isSelected() || selected)
+		if(this.getModel().isSelected() || this.selected)
 			g2.setColor(new Color(246, 128, 0));
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		g2.setColor(Color.white);

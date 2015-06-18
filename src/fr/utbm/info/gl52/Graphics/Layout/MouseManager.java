@@ -49,12 +49,12 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 			Collection<AbstractGraphicElement> c = new ArrayList<>();
 			for (AbstractLayout<?> al : this.l)
 				c.addAll(al.actionClick(this.x, this.y));
-			selected = null;
+			this.selected = null;
 			for (AbstractGraphicElement age : c)
 			{
 				if (age instanceof GraphicStop)
 				{
-					selected = (GraphicStop) age;
+					this.selected = (GraphicStop) age;
 					age.select();
 					break;
 				}
@@ -91,7 +91,7 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 		}
 		else
 		{
-			if (selected != null)
+			if (this.selected != null)
 			{
 				Point p = new Point();
 				for (AbstractLayout<?> al : this.l) {
@@ -103,7 +103,7 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 				//Point p = new Point();
 				//p.setLocation(e.getX(), e.getY());
 				System.out.println("----x"+p);
-				selected.dragAndDrop(p);
+				this.selected.dragAndDrop(p);
 			}
 		}
 		this.x = e.getX();

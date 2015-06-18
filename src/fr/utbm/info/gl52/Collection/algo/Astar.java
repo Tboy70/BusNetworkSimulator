@@ -50,16 +50,16 @@ public class Astar {
 		}
 		return this.shortestPath;
 	}
-	public double run(INode<?> start, INode<?> end)
+	public double run(INode<?> start, INode<?> iEnd)
 	{
-		this.end = end;
+		this.end = iEnd;
 		this.openList.add(start);
 		this.cost.put(start, (double) 0);
 		while (!this.openList.isEmpty())
 		{
 			Collections.sort(this.openList, new ArrayComparator());
 			this.current = this.openList.remove(0);
-			if (this.current == end)
+			if (this.current == iEnd)
 				return this.score;
 			this.openList.remove(this.current);
 			this.closedList.add(this.current);
@@ -101,6 +101,11 @@ public class Astar {
 		this.score = 0;
 	}
 	private class ArrayComparator implements Comparator<INode<?>> {
+		
+		public ArrayComparator(){
+			
+		}
+		
 		@Override
 		public int compare(INode<?> A, INode<?> B)
 		{
