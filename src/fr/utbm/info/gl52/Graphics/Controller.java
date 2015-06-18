@@ -10,6 +10,7 @@ import fr.utbm.info.gl52.Event.DisplayItEvent;
 import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.IEvent;
 import fr.utbm.info.gl52.Event.ISubscriber;
+import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Event.PopupEvent;
 import fr.utbm.info.gl52.Graphics.Frame.PopupWindow;
 import fr.utbm.set.attr.AttributeContainer;
@@ -28,9 +29,17 @@ public class Controller implements ISubscriber {
 		this.model = null;
 		this.viewData = null;	
 		
-		this.viewMap = new GraphicsLaunch(this);
-		this.viewData = new DataLaunch(this);
+		this.viewMap = new GraphicsLaunch();
+		this.viewData = new DataLaunch();
 		
+		// Mapview
+		EventService.getInstance().subscribe(LeftClicEvent.class, null, this);
+    	EventService.getInstance().subscribe(PopupEvent.class, null, this);
+    	EventService.getInstance().subscribe(AddGraphEvent.class, null, this);
+		
+    	// Data launch
+    	EventService.getInstance().subscribe(AddBusLineEvent.class, null, this);
+    	
 		EventService.getInstance().subscribe(DisplayBusLineEvent.class, null, this);
 		EventService.getInstance().subscribe(DisplayItEvent.class, null, this);
 	}

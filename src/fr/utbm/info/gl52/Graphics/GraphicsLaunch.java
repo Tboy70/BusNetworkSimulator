@@ -12,12 +12,7 @@ import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
 import fr.utbm.info.gl52.Event.AddBusLineEvent;
-import fr.utbm.info.gl52.Event.AddGraphEvent;
 import fr.utbm.info.gl52.Event.EventService;
-import fr.utbm.info.gl52.Event.LeftClicEvent;
-import fr.utbm.info.gl52.Event.PopupEvent;
-import fr.utbm.info.gl52.Graphics.Bus.BusComponent;
-import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
 import fr.utbm.info.gl52.Graphics.Buttons.CenterButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ModButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ParseButton;
@@ -43,11 +38,9 @@ public class GraphicsLaunch {
 
 	private Window mapWindow;
 	private IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> graph;
-	private Controller controller;
 	public Point offset = null;
-	public GraphicsLaunch(Controller c){
-		this.controller = c;
-		this.initController();
+	
+	public GraphicsLaunch(){
 	}
 	
 	public void init(){
@@ -58,12 +51,6 @@ public class GraphicsLaunch {
 	private void initWindow(){
 		this.mapWindow = new Window("BusNetwork",700,700);
 		this.mapWindow.setVisible(true);
-	}
-	
-	private void initController(){
-    	EventService.getInstance().subscribe(LeftClicEvent.class, null, this.controller);
-    	EventService.getInstance().subscribe(PopupEvent.class, null, this.controller);
-    	EventService.getInstance().subscribe(AddGraphEvent.class, null, this.controller);
 	}
 	
 	private void initGUI(){
