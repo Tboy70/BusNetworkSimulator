@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Map polyline which is composed of segment for representing roads
  * @author Alexandre
  *
  */
@@ -16,10 +17,19 @@ public class MapPolyline implements Serializable{
 
 	private static final long serialVersionUID = -1734745846851382158L;
 
+	/**
+	 * Name of the roads
+	 */
 	private String name;
 	
+	/**
+	 * List of segment which composed this road
+	 */
 	private List<Segment<?>> lseg;
 
+	/**
+	 * Default constructor
+	 */
 	public MapPolyline(){
 		this.lseg = new LinkedList<>();
 	}
@@ -62,18 +72,34 @@ public class MapPolyline implements Serializable{
 		return this.lseg.removeAll(arg0);
 	}
 	
+	/**
+	 * Get name of this road
+	 * @return The name of this road
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * Set the name of this road
+	 * @param name The name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Get the list of segments
+	 * @return
+	 */
 	public List<Segment<?>> getListSegment() {
 		return this.lseg;
 	}
 
+	/**
+	 * set the list of segment
+	 * @param lseg
+	 */
 	public void setListSegment(List<Segment<?>> lseg) {
 		this.lseg = lseg;
 	}

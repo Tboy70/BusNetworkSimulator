@@ -7,19 +7,29 @@ import java.util.List;
 import fr.utbm.info.gl52.Collection.graph.Graph;
 import fr.utbm.set.io.shape.ESRIBounds;
 
-
 /**
- * 
+ * Map graph is the main part of the model.
+ * @author Alexandre
+ *
+ * @param <Dn> Data nodes
+ * @param <De> Data edges
  */
 public class MapGraph<Dn,De> extends Graph<Dn,De> implements Serializable{
 
 	private static final long serialVersionUID = 7723868339903190574L;
+	
+	/**
+	 * List of map polylines for representing map data 
+	 */
 	private List<MapPolyline> lMapPolyline;
 
+	/**
+	 * Bounds of this map
+	 */
 	private ESRIBounds mapBounds;
 	
 	/**
-     * 
+     * Default constructor
      */
     public MapGraph() {
     	this.lMapPolyline = new LinkedList<>();
@@ -66,6 +76,10 @@ public class MapGraph<Dn,De> extends Graph<Dn,De> implements Serializable{
 		return true;
 	}
 
+	/**
+	 * Get polylines from the map
+	 * @return Polylines of the map
+	 */
 	public List<MapPolyline> getlMapPolyline() {
 		return this.lMapPolyline;
 	}
@@ -78,10 +92,18 @@ public class MapGraph<Dn,De> extends Graph<Dn,De> implements Serializable{
 		return "MapGraph [lMapPolyline=" + this.lMapPolyline + ";" + super.toString() + "]";
 	}
 
+	/**
+	 * Get bounds of the map
+	 * @return Map's bounds
+	 */
 	public ESRIBounds getMapBounds() {
 		return this.mapBounds;
 	}
 
+	/**
+	 * Set the map Bounds
+	 * @param mapBounds Map bounds to set
+	 */
 	public void setMapBounds(ESRIBounds mapBounds) {
 		this.mapBounds = mapBounds;
 	}
