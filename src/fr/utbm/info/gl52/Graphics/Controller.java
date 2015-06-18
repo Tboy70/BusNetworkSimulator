@@ -16,19 +16,33 @@ import fr.utbm.info.gl52.Graphics.Frame.PopupWindow;
 import fr.utbm.set.attr.AttributeContainer;
 import fr.utbm.set.io.shape.ESRIPoint;
 
+/**
+ * Main controller of the application. This one launch views at starts and responds to main events. 
+ * @author Alexandre
+ *
+ */
 @SuppressWarnings("deprecation")
 public class Controller implements ISubscriber {
 
+	/**
+	 * [MODEL] Model of the application. Used to store map
+	 */
 	private IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> model;
 	
+	/**
+	 * [VIEW] Main window with map and bus network
+	 */
 	private GraphicsLaunch viewMap;
 	
+	/**
+	 * [VIEW] Timetable, bus line, itinerary used (uses part of the model) 
+	 */
 	private DataLaunch viewData;
 	
+	/**
+	 * Initialize the main controller.
+	 */
 	public Controller() { 
-		this.model = null;
-		this.viewData = null;	
-		
 		this.viewMap = new GraphicsLaunch();
 		this.viewData = new DataLaunch();
 		
@@ -44,6 +58,10 @@ public class Controller implements ISubscriber {
 		EventService.getInstance().subscribe(DisplayItEvent.class, null, this);
 	}
 	
+	/**
+	 * This methods is called by the event service. It responds all main events of the application and redistributes its
+	 */
+	@SuppressWarnings("unused")
 	@Override
 	public void inform(IEvent e) {
 		if (e.getClass() == PopupEvent.class)
@@ -63,8 +81,10 @@ public class Controller implements ISubscriber {
 		}
 	}
 	
+	/**
+	 * Start the main view
+	 */
 	public void start() {
 		this.viewMap.init();
 	}
-	
 }

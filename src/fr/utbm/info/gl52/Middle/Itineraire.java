@@ -9,20 +9,31 @@ import java.util.ListIterator;
 
 
 /**
- * 
+ * [MODEL] Itinerary used as model.
+ * @author Alexandre
+ *
  */
 public class Itineraire implements Serializable{
 
 	private static final long serialVersionUID = -3207601505766469834L;
 
+	/**
+	 * Name of the itinerary
+	 */
 	private String name;
     
+	/**
+	 * List of segment composed by the itinerary
+	 */
     private List<Segment<?>> lRoute;
     
+    /**
+     * Number of stop this itinerary has
+     */
 	private List<Stop> lStop;
 
 	/**
-     * 
+     * Default constructor. Initialize the class with a name
      */
     public Itineraire(String name) {
     	this.setName(name);
@@ -30,44 +41,90 @@ public class Itineraire implements Serializable{
     	this.lStop = new LinkedList<>();
     }
 
+    /**
+     * Get the name of this itinerary
+     * @return The string name of the itinerary
+     */
 	public String getName() {
 		return this.name;
 	}
 	
-	
-
+	/**
+	 * Set the name of this itinerary
+	 * @param name Name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * Add segment to this itinerary
+	 * @param arg0 The segment to add
+	 * @return true if succeeded insertion, false otherwise
+	 */
     public boolean addSeg(Segment<?> arg0) {
 		return this.lRoute.add(arg0);
 	}
 
+    /**
+	 * Add segments to this itinerary
+	 * @param arg0 Segments to add
+	 * @return true if succeeded insertion, false otherwise
+	 */
 	public boolean addAllSeg(Collection<? extends Segment<?>> arg0) {
 		return this.lRoute.addAll(arg0);
 	}
 
+	/**
+	 * Remove segment to this itinerary
+	 * @param arg0 The segment to remove
+	 * @return true if succeeded deletion, false otherwise
+	 */
 	public boolean removeSeg(Object arg0) {
 		return this.lRoute.remove(arg0);
 	}
 
+	/**
+	 * Remove segments to this itinerary
+	 * @param arg0 Segments to remove
+	 * @return true if succeeded deletion, false otherwise
+	 */
 	public boolean removeAllSeg(Collection<?> arg0) {
 		return this.lRoute.removeAll(arg0);
 	}
 	
+	/**
+	 * Add stop in this itinerary
+	 * @param e The stop to add
+	 * @return true if succeeded insertion, false otherwise
+	 */
 	public boolean addStop(Stop e) {
 		return this.lStop.add(e);
 	}
 
+	/**
+	 * Add stops in this itinerary
+	 * @param e Stops to add
+	 * @return true if succeeded insertion, false otherwise
+	 */
 	public boolean addAllStop(Collection<? extends Stop> c) {
 		return this.lStop.addAll(c);
 	}
 
+	/**
+	 * Remove stop in this itinerary
+	 * @param e The stop to remove
+	 * @return true if succeeded deletion, false otherwise
+	 */
 	public boolean removeStop(Object o) {
 		return this.lStop.remove(o);
 	}
 
+	/**
+	 * Remove stops in this itinerary
+	 * @param e Stop to remove
+	 * @return true if succeeded deletion, false otherwise
+	 */
 	public boolean removeAllStop(Collection<?> c) {
 		return this.lStop.removeAll(c);
 	}
@@ -328,11 +385,13 @@ public class Itineraire implements Serializable{
 		return this.lRoute.toArray(arg0);
 	}
     /**
-	 * @return the lRoute
+     * Return the list of segment 
+	 * @return the route
 	 */
 	public List<Segment<?>> getlRoute() {
 		return this.lRoute;
 	}
+	
 	
 	public void add(int index, Stop element) {
 		this.lStop.add(index, element);

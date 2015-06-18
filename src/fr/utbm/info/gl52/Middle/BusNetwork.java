@@ -6,24 +6,38 @@ import java.util.List;
 
 
 /**
- * 
+ * [MODEL] This class define bus network of a city
+ * @author Alexandre
+ *
  */
 public class BusNetwork implements Serializable{
 
 	private static final long serialVersionUID = -6094149499508306454L;
+	
+	/**
+	 * List of bus line currently in the city
+	 */
 	private List<BusLine> lBusLine;
 	
     /**
-     * 
+     * Default constructor. Initialize this class 
      */
     public BusNetwork() {
     	this.lBusLine = new LinkedList<>();
     }
 
+    /**
+     * Get the bus lines
+     * @return List of bus line
+     */
 	public List<BusLine> getlBusLine() {
 		return this.lBusLine;
 	}
 
+	/**
+	 * The bus lines to set
+	 * @param lBusLine List of bus line
+	 */
 	public void setlBusLine(List<BusLine> lBusLine) {
 		this.lBusLine = lBusLine;
 	}
