@@ -17,18 +17,13 @@ public class LabelGraphic extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 2615685565789111986L;
-	private String message;
-	private int x, y, m_start, m_end;
+	private int m_start, m_end;
 	private AttributedCharacterIterator m_iterator;
 	public LabelGraphic(String message,int x, int y, int h, int w)
 	{
 		super();
 		this.setBounds(x,y,h,w);
-		this.message = message;
-		this.x = x;
-		this.y = y;
-
-        AttributedString styledText = new AttributedString(message);
+		AttributedString styledText = new AttributedString(message);
         this.m_iterator = styledText.getIterator();
         this.m_start = this.m_iterator.getBeginIndex();
         this.m_end = this.m_iterator.getEndIndex();

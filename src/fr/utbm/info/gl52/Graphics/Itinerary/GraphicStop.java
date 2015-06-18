@@ -24,7 +24,7 @@ public class GraphicStop extends AbstractGraphicElement {
 		this.s = ss;
 		this.naturalOffset = offset;
 		
-		Point pt = new Point();
+		new Point();
 		int x = (int) ((((100 - s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getData().getX()))
 				+ ((s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getData().getX())) - naturalOffset.x;
 		int y = (int) ((((100 - s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getData().getY()))

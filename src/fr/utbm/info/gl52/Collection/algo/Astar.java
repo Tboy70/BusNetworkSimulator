@@ -24,7 +24,6 @@ public class Astar {
 	private Map<INode<?>, Double> cost;
 	private Map<INode<?>, INode<?> > path;
 
-	private INode<?> start;
 	private INode<?> current;
 	private INode<?> end;
 	
@@ -53,7 +52,6 @@ public class Astar {
 	}
 	public double run(INode<?> start, INode<?> end)
 	{
-		this.start = start;
 		this.end = end;
 		this.openList.add(start);
 		this.cost.put(start, (double) 0);

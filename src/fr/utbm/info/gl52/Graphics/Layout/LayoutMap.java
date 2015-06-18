@@ -23,12 +23,9 @@ import fr.utbm.info.gl52.Middle.Connection;
 public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<C>  {
 
 	private static final long serialVersionUID = 1L;
-	private static final int HIT_BOX_SIZE = 2;
-	private AbstractGraphicElement selected = null;
 	private Connection start = null;
 	private Connection end = null;
 	private int clicx=0, clicy=0;
-	private int x, y;
 	public LayoutMap(int h, int w) {
 		super(h, w);
 		this.listComponents = Collections.synchronizedList(new ArrayList());

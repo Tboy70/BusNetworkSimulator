@@ -19,8 +19,6 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 
 	private static final long serialVersionUID = -8388992835805072885L;
 	private Thread t;
-	private int x, y;
-	private AbstractGraphicElement selected = null;
 	private int clicx=0, clicy=0;
 	
 	public LayoutNetwork(int h, int w) {

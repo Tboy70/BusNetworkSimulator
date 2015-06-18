@@ -46,7 +46,7 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 		}
 		else
 		{
-			Collection<AbstractGraphicElement> c = new ArrayList<AbstractGraphicElement>();
+			Collection<AbstractGraphicElement> c = new ArrayList<>();
 			for (AbstractLayout<?> al : this.l)
 				c.addAll(al.actionClick(this.x, this.y));
 			selected = null;

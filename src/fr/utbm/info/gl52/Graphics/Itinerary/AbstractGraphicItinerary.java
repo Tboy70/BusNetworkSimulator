@@ -14,7 +14,6 @@ import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 import fr.utbm.info.gl52.Middle.Itineraire;
 import fr.utbm.info.gl52.Middle.Segment;
-import fr.utbm.info.gl52.Middle.Stop;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
 import fr.utbm.set.io.shape.ESRIBounds;
 
@@ -74,9 +73,7 @@ public abstract class AbstractGraphicItinerary extends AbstractGraphicElement {
 	@Override
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		int i = 0;
 		for (Segment<?> seg : this.it.getlRoute()) {
-			++i;
 			INode<ESRISpatialObject> A = (Node<ESRISpatialObject>) seg
 					.getNodeA();
 			INode<ESRISpatialObject> B = (Node<ESRISpatialObject>) seg

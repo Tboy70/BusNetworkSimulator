@@ -30,7 +30,7 @@ public class DataWindow extends AbstractFrame {
 		@Override
 		public synchronized void mouseClicked(MouseEvent e){
 			int row = DataWindow.this.table.rowAtPoint(e.getPoint());
-			int col = DataWindow.this.table.columnAtPoint(e.getPoint());
+			DataWindow.this.table.columnAtPoint(e.getPoint());
 			if(e.getClickCount() >= 2){ // handle double click
 				goToIt(row);
 			}else{ // Single click
@@ -44,7 +44,7 @@ public class DataWindow extends AbstractFrame {
 		@Override
 		public synchronized void mouseClicked(MouseEvent e){
 			int row = DataWindow.this.table.rowAtPoint(e.getPoint());
-			int col = DataWindow.this.table.columnAtPoint(e.getPoint());
+			DataWindow.this.table.columnAtPoint(e.getPoint());
 			if(e.getClickCount() >= 2){ // handle double click
 				// ???
 			}else{ // Single click

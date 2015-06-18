@@ -3,8 +3,6 @@ package fr.utbm.info.gl52.Graphics.Buttons;
 
 import java.awt.event.ActionEvent;
 
-import fr.utbm.info.gl52.Graphics.CardinalSystem;
-
 /**
  * 
  */

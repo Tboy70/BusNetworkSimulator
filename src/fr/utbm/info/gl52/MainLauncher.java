@@ -1,7 +1,5 @@
 package fr.utbm.info.gl52;
 
-import java.awt.Point;
-
 import fr.utbm.info.gl52.Graphics.Controller;
 
 public class MainLauncher {
