@@ -41,7 +41,6 @@ public class Controller implements ISubscriber {
 			new PopupWindow(((PopupEvent)e).message);
 		else if(e.getClass() == AddGraphEvent.class){
 			this.viewData.init(); // To do fisrt
-			
 			this.model = ((AddGraphEvent)e).message;
 			this.viewMap.addGraph(this.model);
 		}else if(e.getClass() == AddBusLineEvent.class){

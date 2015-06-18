@@ -88,10 +88,12 @@ public class GraphicStop extends AbstractGraphicElement {
 		B.setLocation(xB, yB);
 		B.translate(- naturalOffset.x, - naturalOffset.y);
 		Point pFinal = projection(A, B, p);
+		
 		xA = A.x;
 		xB = B.x;
 		yA = A.y;
 		yB = B.y;
+
 		float xP = pFinal.x;
 		float yP = pFinal.y;
 		float distance = (xP - xA) * (xP - xA) + (yP - yA) * (yP - yA);
@@ -103,7 +105,6 @@ public class GraphicStop extends AbstractGraphicElement {
 		{
 			System.out.println(""+pourcentage+"%");
 			this.s.setPourcentage(pourcentage);
-			//p.translate(- naturalOffset.x, - naturalOffset.y);
 			this.shape = new Ellipse2D.Double(pFinal.x-4, pFinal.y-4, 8, 8);
 			this.revalidate();
 		}

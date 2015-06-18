@@ -37,7 +37,7 @@ public class YellowBus extends BusComponent {
     public boolean intersect(Shape r)
     {
     	return this.bounds.intersects(r.getBounds2D()) || r.intersects(this.bounds);
-    }
+    }/*
 	public synchronized void update()
 	{
 		Random rand = new Random();
@@ -48,5 +48,5 @@ public class YellowBus extends BusComponent {
 		int newY = y + this.bounds.y;
 		if (newX > 0 && newX < 800 && newY > 0 && newY < 800)
 			this.bounds.setLocation(newX, newY);
-	}
+	}*/
 }

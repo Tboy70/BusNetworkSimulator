@@ -6,7 +6,7 @@ public class JTableBusLineModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 4506575801197239466L;
 
-	private final String[] entetes = {"N°", "Nom"};
+	private final String[] entetes = {"NÂ°", "Nom"};
 	
 	private BusNetwork net;
 
@@ -16,7 +16,7 @@ public class JTableBusLineModel extends AbstractTableModel {
 	
 	@Override
 	public synchronized int getColumnCount() {
-		return 2; // N° of line ; name
+		return 2; // Nï¿½ of line ; name
 	}
 
 	@Override

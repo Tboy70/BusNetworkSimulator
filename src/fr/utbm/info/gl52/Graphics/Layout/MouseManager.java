@@ -94,7 +94,14 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 			if (selected != null)
 			{
 				Point p = new Point();
-				p.setLocation(e.getX(), e.getY());
+				for (AbstractLayout<?> al : this.l) {
+					if (al instanceof LayoutNetwork)
+						p.setLocation((int) al.getLocation().getX() + e.getX(), (int) al.getLocation().getY() + e.getY());
+					//al.repaint();
+				}
+
+				//Point p = new Point();
+				//p.setLocation(e.getX(), e.getY());
 				System.out.println("----x"+p);
 				selected.dragAndDrop(p);
 			}

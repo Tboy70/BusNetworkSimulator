@@ -49,7 +49,6 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 	public synchronized void paintComponent(Graphics g) {

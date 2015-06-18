@@ -6,7 +6,7 @@ public class JTableItModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 4995801468434965215L;
 
-	private final String[] entetes = {"Nom", "Nombre d'arrêt"};
+	private final String[] entetes = {"Nom", "Nombre d'arrÃªt"};
 	
 	private BusLine line;
 

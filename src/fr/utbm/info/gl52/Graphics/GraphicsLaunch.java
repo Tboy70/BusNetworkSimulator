@@ -7,17 +7,16 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
-import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Event.AddBusLineEvent;
 import fr.utbm.info.gl52.Event.AddGraphEvent;
 import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Event.PopupEvent;
+import fr.utbm.info.gl52.Graphics.Bus.BusComponent;
 import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
 import fr.utbm.info.gl52.Graphics.Buttons.CenterButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ModButton;
@@ -37,7 +36,6 @@ import fr.utbm.info.gl52.Middle.Segment;
 import fr.utbm.info.gl52.Middle.Stop;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
 import fr.utbm.set.attr.AttributeContainer;
-import fr.utbm.set.io.shape.ESRIBounds;
 import fr.utbm.set.io.shape.ESRIPoint;
 
 @SuppressWarnings("deprecation")
@@ -76,14 +74,14 @@ public class GraphicsLaunch {
     	ParseButton parse = new ParseButton("Load",0, 280, 50, 40);
     	ModButton mod = new ModButton("Modifier",0, 320, 50, 40);
     	SaveButton save = new SaveButton("Save", 0, 360, 50, 40);
-    	
+    	/*
     	for (int i = 0; i < 10; i++)
     	{
     		Random rand = new Random();
     		int x = rand.nextInt((800 - 0) + 1) + 0;
     		int y = rand.nextInt((800 - 0) + 1) + 0;
     		this.mapWindow.addNetworkElement(new YellowBus(x,y) );
-    	}
+    	}*/
     	
     	zplus.setLayout(this.mapWindow.getMap());
     	zminus.setLayout(this.mapWindow.getMap());
@@ -236,6 +234,9 @@ public class GraphicsLaunch {
 		Point offset = new Point();
 		offset.setLocation(5,5);
 		GraphicItinerary g = new GraphicItinerary(i, offset, Color.RED, ((MapGraph)this.graph).getMapBounds());
+		/*BusComponent bus = new YellowBus(0,0);
+		bus.setItinerary(g);
+		this.mapWindow.addNetworkElement(bus);*/
 		this.mapWindow.addGraphicElement(g);
 		this.offset = new Point();
 		this.offset.setLocation(((MapGraph)this.graph).getMapBounds().minx, ((MapGraph)this.graph).getMapBounds().miny);
