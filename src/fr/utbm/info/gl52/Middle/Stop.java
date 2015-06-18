@@ -6,31 +6,61 @@ import fr.utbm.info.gl52.Collection.graph.IEdge;
 
 
 /**
- * 
+ * Define a stop in itinerary
+ * @author Alexandre
+ *
  */
 public class Stop implements Serializable{
 
 	private static final long serialVersionUID = -2833791493638864569L;
+	/**
+	 * Percentage of the segment the stop is
+	 */
 	private Integer pourcentage;
+	
+	/**
+	 * Segment where is located the stop
+	 */
 	private IEdge<?> edge;
 
+	/**
+	 * Default constructor which defines completely the stop
+	 * @param pourcentage Percentage of the segment the stop is 
+	 * @param e Segment where is located the stop
+	 */
 	public Stop(Integer pourcentage, IEdge<?> e) {
     	this.setPourcentage(pourcentage);
     	this.setEdge(e);
     }
 
+	/**
+	 * GEt the edge of the stop
+	 * @return The edge to get
+	 */
     public IEdge<?> getEdge() {
 		return this.edge;
 	}
 
+    /**
+     * Set the edge of the stop
+     * @param edge The edge to set
+     */
 	public void setEdge(IEdge<?> edge) {
 		this.edge = edge;
 	}
 
+	/**
+	 * Get the percentage of the stop
+	 * @return Return the percentage
+	 */
 	public Integer getPourcentage() {
 		return this.pourcentage;
 	}
 
+	/**
+	 * Set the percentage
+	 * @param pourcentage Percentage to set
+	 */
 	public void setPourcentage(Integer pourcentage) {
 		this.pourcentage = pourcentage;
 	}
