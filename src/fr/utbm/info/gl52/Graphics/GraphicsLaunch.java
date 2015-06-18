@@ -12,6 +12,7 @@ import java.util.Random;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
 import fr.utbm.info.gl52.Collection.graph.INode;
+import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Event.AddBusLineEvent;
 import fr.utbm.info.gl52.Event.AddGraphEvent;
 import fr.utbm.info.gl52.Event.EventService;
@@ -25,6 +26,7 @@ import fr.utbm.info.gl52.Graphics.Buttons.SaveButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ZoomButton;
 import fr.utbm.info.gl52.Graphics.Frame.Window;
 import fr.utbm.info.gl52.Graphics.Itinerary.GraphicItinerary;
+import fr.utbm.info.gl52.Graphics.Itinerary.GraphicStop;
 import fr.utbm.info.gl52.Graphics.Road.HighwayComponent;
 import fr.utbm.info.gl52.Graphics.Road.SensRoad;
 import fr.utbm.info.gl52.Middle.BusLine;
@@ -44,7 +46,7 @@ public class GraphicsLaunch {
 	private Window mapWindow;
 	private IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> graph;
 	private Controller controller;
-	
+	public Point offset = null;
 	public GraphicsLaunch(Controller c){
 		this.controller = c;
 		this.initController();
@@ -106,7 +108,8 @@ public class GraphicsLaunch {
 	}
 	
 	public void addGraph(IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> g){
-		ESRIBounds b = ((MapGraph)g).getMapBounds();
+		this.offset = new Point();
+		this.offset.setLocation(((MapGraph)g).getMapBounds().minx, ((MapGraph)g).getMapBounds().miny);
 		this.graph = g;
 		this.mapWindow.getMap().flush();
 		List<MapPolyline> lMap = ((MapGraph)g).getlMapPolyline();  
@@ -125,12 +128,12 @@ public class GraphicsLaunch {
 				if (!bFirstPoint)
 				{
 					bFirstPoint = true;
-					px.add((int)A.getData().x - (int)b.minx);
-					py.add((int)A.getData().y - (int)b.miny);
+					px.add((int)A.getData().x - (int)this.offset.x);
+					py.add((int)A.getData().y - (int)this.offset.y);
 					sens = attrs.getAttribute("SENS").equals("Double sens") ? SensRoad.SANS : SensRoad.DROIT;
 				}
-				px.add((int)B.getData().x - (int)b.minx);
-				py.add((int)B.getData().y - (int)b.miny);
+				px.add((int)B.getData().x - (int)this.offset.x);
+				py.add((int)B.getData().y - (int)this.offset.y);
 				
 			}
 			
@@ -234,6 +237,15 @@ public class GraphicsLaunch {
 		offset.setLocation(5,5);
 		GraphicItinerary g = new GraphicItinerary(i, offset, Color.RED, ((MapGraph)this.graph).getMapBounds());
 		this.mapWindow.addGraphicElement(g);
+		this.offset = new Point();
+		this.offset.setLocation(((MapGraph)this.graph).getMapBounds().minx, ((MapGraph)this.graph).getMapBounds().miny);
+		Stop s;
+		for (int j = 0; j < i.getNbStop(); ++j)
+		{
+			s = i.getStop(j);
+			this.mapWindow.addGraphicElement(new GraphicStop(s, this.offset));
+		}
+		
 		this.added.add(g);
 		offset.setLocation(-5,5);
 		this.mapWindow.repaint();

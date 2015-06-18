@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -60,24 +61,27 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 		g2d.dispose();
 		super.paintComponent(g);
 	}
-	public AbstractGraphicElement actionClick(int x, int y)
+	public Collection<AbstractGraphicElement> actionClick(int x, int y)
 	{
 		this.clicx = (int) ((100/this.zoom) * (x - this.getLocation().getX()));
 		this.clicy = (int) ((100/this.zoom) * (y - this.getLocation().getY()));
 		Shape ellipse = new Ellipse2D.Double(this.clicx , this.clicy, 8, 8);
+		//AbstractGraphicElement eTemp = null;
+		Collection c = new ArrayList<AbstractGraphicElement>();
 		for(AbstractGraphicElement e: this.listComponents)
 		{
 			if (e.intersect(ellipse)) {
-				if (this.selected != null)
-					this.selected.unselect();
-				e.select();
-				this.selected = e;
-				return e;
+				//if (this.selected != null)
+				//	this.selected.unselect();
+				//e.select();
+				//this.selected = e;
+				//eTemp =  e;
+				c.add(e);
 			}		
 		}
-		if (this.selected != null)
-			this.selected.unselect();
-		this.selected = null;
-		return null;
+		//if (this.selected != null)
+		//	this.selected.unselect();
+		//this.selected = null;
+		return c;
 	}
 }

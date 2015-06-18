@@ -25,7 +25,7 @@ public abstract class ButtonComponent extends AbstractComponent {
 	private static final long serialVersionUID = -3341644248986327368L;
 	protected List<AbstractLayout<?>> m;
 	protected Rectangle bounds;
-	private JButton button;
+	protected GraphicButton button;
 	protected CardinalSystem placement;
 	private void init() {
 		this.button.addActionListener(new ActionListener() {

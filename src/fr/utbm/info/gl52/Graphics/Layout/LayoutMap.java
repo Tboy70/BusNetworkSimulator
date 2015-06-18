@@ -8,11 +8,11 @@ import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
-
 import fr.utbm.info.gl52.Graphics.Road.RoadComponent;
 import fr.utbm.info.gl52.Middle.Connection;
 
@@ -67,18 +67,20 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 		g2d.draw(new Ellipse2D.Double(this.clicx, this.clicy, 8, 8));
 		g2d.dispose();
 	}
-	public AbstractGraphicElement actionClick(int x, int y)
+	public Collection<AbstractGraphicElement> actionClick(int x, int y)
 	{
 		this.clicx = (int) ((100/this.zoom) * (x - this.getLocation().getX()));
 		this.clicy = (int) ((100/this.zoom) * (y - this.getLocation().getY()));
 		Shape ellipse = new Ellipse2D.Double(this.clicx , this.clicy, 8, 8);
+		//AbstractGraphicElement eTemp = null;
+		Collection c = new ArrayList<AbstractGraphicElement>();
 		for(AbstractGraphicElement e: this.listComponents)
 		{
 			if (e.intersect(ellipse)) {
-				if (this.selected != null)
-					this.selected.unselect();
-				e.select();
-				this.selected = e;
+				//if (this.selected != null)
+				//	this.selected.unselect();
+				//e.select();
+				//this.selected = e;
 				if (e.getClass().getSuperclass() == RoadComponent.class)
 				{
 					RoadComponent r = (RoadComponent) e;
@@ -93,17 +95,18 @@ public class LayoutMap<C extends AbstractGraphicElement> extends AbstractLayout<
 					
 					if (start != null && end != null)
 					{
-						System.out.println("Start:"+start.toString());
-						System.out.println("End:"+end.toString());
+					//	System.out.println("Start:"+start.toString());
+					//	System.out.println("End:"+end.toString());
 					}
-					System.out.println("Rue: "+r.getName());
+					//System.out.println("Rue: "+r.getName());
 				}
-				return e;
+				c.add(e);
+				//eTemp = e;
 			}		
 		}
-		if (this.selected != null)
-			this.selected.unselect();
-		this.selected = null;
-		return null;
+	//	if (this.selected != null)
+	//		this.selected.unselect();
+	//	this.selected = null;
+		return c;
 	}
 }

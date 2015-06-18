@@ -14,6 +14,7 @@ import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 import fr.utbm.info.gl52.Middle.Itineraire;
 import fr.utbm.info.gl52.Middle.Segment;
+import fr.utbm.info.gl52.Middle.Stop;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
 import fr.utbm.set.io.shape.ESRIBounds;
 
@@ -49,18 +50,30 @@ public abstract class AbstractGraphicItinerary extends AbstractGraphicElement{
 			Point pt1 = new Point();
 			pt1.setLocation(A.getData().x, A.getData().y);
 			pt1.translate(-naturalOffset.x, -naturalOffset.y);
-			pt1.translate(offset.x, offset.y);
+//			pt1.translate(offset.x, offset.y);
 			
 			Point pt2 = new Point();
 			pt2.setLocation(B.getData().x, B.getData().y);
 			pt2.translate(-naturalOffset.x, -naturalOffset.y);
-			pt2.translate(offset.x, offset.y);
+//			pt2.translate(offset.x, offset.y);
 
 			g2d.setStroke(new BasicStroke(1.5f));
 			g2d.setColor(this.col);
 //			System.out.println("Route "+ i + "Pt1:"+pt1.x+"/"+pt1.y+" | Pt2:"+pt2.x+"/"+pt2.y);
 			g2d.drawLine(pt1.x, pt1.y, pt2.x, pt2.y);
-		}
+		}/*
+		Stop s;
+		for (i = 0; i < this.it.getNbStop(); ++i)
+		{
+			s = this.it.getStop(i);
+			Point pt = new Point();
+			int x = (int) ((((100 - s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getData().getX()))
+					+ ((s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getData().getX())) - naturalOffset.x;
+			int y = (int) ((((100 - s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getData().getY()))
+					+ ((s.getPourcentage())/100 * ((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getData().getY())) - naturalOffset.y;
+			g2d.setColor(Color.blue);
+			g2d.fillOval(x-4, y-4, 8, 8);
+		}*/
 		//System.out.println("Nombre de routes:"+i);
 	}
 

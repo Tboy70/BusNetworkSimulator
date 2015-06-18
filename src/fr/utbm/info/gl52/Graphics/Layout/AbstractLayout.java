@@ -43,7 +43,7 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 		}
 		this.listComponents.removeAll(temp);
 	}
-	public AbstractGraphicElement actionClick(int x, int y)
+	public Collection<AbstractGraphicElement> actionClick(int x, int y)
 	{
 		return null;
 	}
