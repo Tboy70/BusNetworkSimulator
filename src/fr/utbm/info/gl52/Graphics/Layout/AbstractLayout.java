@@ -33,7 +33,7 @@ public abstract class AbstractLayout<C extends AbstractComponent> extends JPanel
 	}
 	public void flush(Class<?> c)
 	{
-		Collection<C> temp = new ArrayList();
+		Collection<C> temp = new ArrayList<>();
 		for (C obj : this.listComponents)
 		{
 			if (obj.getClass().equals(c))

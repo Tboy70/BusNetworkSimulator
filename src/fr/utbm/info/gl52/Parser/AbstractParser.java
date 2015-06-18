@@ -7,7 +7,7 @@ import fr.utbm.info.gl52.Collection.graph.IGraph;
  * Abstract Parsing class.
  * Launch Thread at construction.
  */
-public class AbstractParser<G extends IGraph<?,?>> implements IParser<G> {
+public abstract class AbstractParser<G extends IGraph<?,?>> implements IParser<G> {
 
 	/**
 	 * The file to parse

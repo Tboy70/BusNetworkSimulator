@@ -43,7 +43,7 @@ public abstract class AbstractGraph<N extends INode<?>, E extends IEdge<?>>  imp
 	@Override
 	public void addNode(N n) {
 		this.listNode.add(n);
-		this.listEdge.addAll((Collection<? extends E>) n.getEdges());
+		this.listEdge.addAll((Collection<E>) n.getEdges());
 	}
 
 	@Override
