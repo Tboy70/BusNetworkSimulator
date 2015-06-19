@@ -1,6 +1,8 @@
 package fr.utbm.info.gl52.Middle;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 
@@ -19,9 +21,19 @@ public class Stop implements Serializable{
 	private Integer pourcentage;
 	
 	/**
+	 * List of date representing stop date of the bus
+	 */
+	private List<Date> lTime;
+	
+	/**
 	 * Segment where is located the stop
 	 */
 	private IEdge<?> edge;
+	
+	/**
+	 * Name of the stop
+	 */
+	private String name;
 
 	/**
 	 * Default constructor which defines completely the stop
@@ -32,6 +44,28 @@ public class Stop implements Serializable{
     	this.setPourcentage(pourcentage);
     	this.setEdge(e);
     }
+
+	/**
+	 * @return the lTime
+	 */
+	public List<Date> getlTime() {
+		return this.lTime;
+	}
+
+	/**
+	 * @param lTime the lTime to set
+	 */
+	public void setlTime(List<Date> lTime) {
+		this.lTime = lTime;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * GEt the edge of the stop

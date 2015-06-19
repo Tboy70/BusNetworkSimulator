@@ -14,7 +14,6 @@ import fr.utbm.info.gl52.Event.IEvent;
 import fr.utbm.info.gl52.Event.ISubscriber;
 import fr.utbm.info.gl52.Graphics.AbstractComponent;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
-import fr.utbm.info.gl52.Graphics.Bus.BusComponent;
 import fr.utbm.info.gl52.Graphics.Layout.AbstractLayout;
 import fr.utbm.info.gl52.Graphics.Layout.LayoutNetwork;
 import fr.utbm.info.gl52.Graphics.Layout.MouseManager;
