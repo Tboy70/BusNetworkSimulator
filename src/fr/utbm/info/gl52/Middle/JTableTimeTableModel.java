@@ -21,6 +21,7 @@ public class JTableTimeTableModel extends AbstractTableModel {
 	 */
 	public JTableTimeTableModel(TimeTable s) {
 		this.tt = s;
+		this.fireTableDataChanged();
 	}
 	
 	@Override
@@ -34,7 +35,7 @@ public class JTableTimeTableModel extends AbstractTableModel {
 		if(!this.tt.getlStop().isEmpty())
 		{
 			int max = s.get(0).getlTime().size();
-			for(int i = 1 ; i < s.size(); ++i)
+			for(int i = 1 ; i < s.size() - 1; ++i)
 				if(max < s.get(i).getlTime().size())
 					max = s.get(i).getlTime().size();
 			return max;
@@ -56,6 +57,6 @@ public class JTableTimeTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return null;
+		return this.tt.getlStop().get(columnIndex).getlTime().get(rowIndex);
 	}
 }
