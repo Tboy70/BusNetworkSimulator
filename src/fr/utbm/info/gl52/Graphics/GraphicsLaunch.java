@@ -276,4 +276,13 @@ public class GraphicsLaunch {
 		}
 		return p;
 	}
+
+	public static Point getPositionOffsetTT() {
+		Point p = new Point();
+		if (mapWindow != null) {
+			p = mapWindow.getLocation();
+			p.translate(mapWindow.getWidth(), 400);
+		}
+		return p;
+	}
 }

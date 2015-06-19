@@ -47,6 +47,8 @@ public class Controller implements ISubscriber {
 
 	private DataLaunch viewData;
 	
+	private TTLaunch viewTT;
+	
 	public static Controller getInstance()
 	{
 		if (instance == null)
@@ -60,6 +62,7 @@ public class Controller implements ISubscriber {
 	private Controller() {
 		this.viewMap = new GraphicsLaunch();
 		this.viewData = new DataLaunch();
+		this.viewTT = new TTLaunch();
 		
 		// Mapview
 		EventService.getInstance().subscribe(LeftClicEvent.class, null, this);
@@ -93,6 +96,7 @@ public class Controller implements ISubscriber {
 			new PopupWindow(((PopupEvent)e).message);
 		else if(e.getClass() == AddGraphEvent.class){
 			this.viewData.init(); // To do fisrt
+			this.viewTT.init(); // To do fisrt
 			this.model = ((AddGraphEvent)e).message;
 			this.viewMap.addGraph(this.model);
 		}
