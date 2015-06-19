@@ -16,8 +16,6 @@ import fr.utbm.info.gl52.Event.AddGraphEvent;
 import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Event.LeftClicEvent;
 import fr.utbm.info.gl52.Event.PopupEvent;
-import fr.utbm.info.gl52.Graphics.Bus.BusComponent;
-import fr.utbm.info.gl52.Graphics.Bus.YellowBus;
 import fr.utbm.info.gl52.Graphics.Buttons.CenterButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ModButton;
 import fr.utbm.info.gl52.Graphics.Buttons.ParseButton;
@@ -44,7 +42,7 @@ public class GraphicsLaunch {
 	private Window mapWindow;
 	private IGraph<INode<ESRIPoint>,IEdge<AttributeContainer>> graph;
 	private Controller controller;
-	public Point offset = null;
+	public static Point offset = null;
 	public GraphicsLaunch(Controller c){
 		this.controller = c;
 		this.initController();
@@ -167,12 +165,7 @@ public class GraphicsLaunch {
 		
 		
 		Itineraire i1 = new Itineraire("Test1");
-		i1.addStop(s1);
-		i1.addStop(s2);
 		i1.addStop(s3);
-		i1.addStop(s4);
-		i1.addStop(s5);
-		i1.addStop(s6);
 		i1.addSeg(seg1);
 		i1.addSeg(seg2);
 		i1.addSeg(seg3);
@@ -180,26 +173,21 @@ public class GraphicsLaunch {
 		i1.addSeg(seg5);
 		i1.addSeg(seg6);
 		
-		Itineraire i2 = new Itineraire("Test1-2");
+		/*Itineraire i2 = new Itineraire("Test1-2");
 		i2.addStop(s7);
-		i2.addStop(s8);
-		i2.addStop(s9);
-		i2.addStop(s10);
-		i2.addStop(s11);
-		i2.addStop(s12);
 		i2.addSeg(seg7);
 		i2.addSeg(seg8);
 		i2.addSeg(seg9);
 		i2.addSeg(seg10);
 		i2.addSeg(seg11);
-		i2.addSeg(seg12);
+		i2.addSeg(seg12);*/
 		
 		//this.addGraphicIt(i1);
 		//this.addGraphicIt(i2);
 		
 		List<Itineraire> li = new LinkedList<>();
 		li.add(i1);
-		li.add(i2);
+		//li.add(i2);
 		
 		BusLine busline = new BusLine();
 		busline.setlIti(li);
@@ -224,12 +212,16 @@ public class GraphicsLaunch {
 			this.mapWindow.remGraphicElement(i);
 			i.setVisible(false);
 		}
+		this.mapWindow.getNetwork().flush(GraphicStop.class);
 		
 		this.mapWindow.revalidate();
 		this.mapWindow.repaint();
 		this.added.clear();
 	}
-	
+	public synchronized void addGraphicStop(GraphicStop s)
+	{
+		this.mapWindow.addNetworkElement(s);
+	}
 	public synchronized void addGraphicIt(Itineraire i){
 		Point offset = new Point();
 		offset.setLocation(5,5);
@@ -241,10 +233,11 @@ public class GraphicsLaunch {
 		this.offset = new Point();
 		this.offset.setLocation(((MapGraph)this.graph).getMapBounds().minx, ((MapGraph)this.graph).getMapBounds().miny);
 		Stop s;
+		System.out.println("NbStop:"+i.getNbStop());
 		for (int j = 0; j < i.getNbStop(); ++j)
 		{
 			s = i.getStop(j);
-			this.mapWindow.addGraphicElement(new GraphicStop(s, this.offset));
+			this.mapWindow.addNetworkElement(new GraphicStop(s, this.offset));
 		}
 		
 		this.added.add(g);

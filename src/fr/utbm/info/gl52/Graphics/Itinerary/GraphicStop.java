@@ -9,6 +9,7 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.JComponent;
 
+import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
 import fr.utbm.info.gl52.Middle.Stop;
@@ -63,7 +64,6 @@ public class GraphicStop extends AbstractGraphicElement {
 		
 		float a = (yB - yA) / (xB - xA);
 		float b = yA - a * xA;
-		System.out.println(a+"x + "+b);
 		Point p = new Point();
 		
 		float xP = (P.x - a*b + a * P.y) / ( 1.0f + a * a );
@@ -84,6 +84,7 @@ public class GraphicStop extends AbstractGraphicElement {
 		Point A = new Point();
 		A.setLocation(xA, yA);
 		A.translate(- naturalOffset.x, - naturalOffset.y);
+		
 		Point B = new Point();
 		B.setLocation(xB, yB);
 		B.translate(- naturalOffset.x, - naturalOffset.y);
@@ -96,18 +97,29 @@ public class GraphicStop extends AbstractGraphicElement {
 
 		float xP = pFinal.x;
 		float yP = pFinal.y;
-		float distance = (xP - xA) * (xP - xA) + (yP - yA) * (yP - yA);
-		distance = (float) Math.sqrt(distance);
-		float fullDistance = (xB - xA) * (xB - xA) + (yB - yA) * (yB - yA);
-		fullDistance = (float) Math.sqrt(fullDistance);
-		int pourcentage = (int) ((100 * distance) / fullDistance);
-		if (pourcentage <= 100 && pourcentage >= 0)
+		
+		float     distance = (float) Point.distance(xA,  yA, xP,  yP);
+		float    distanceB = (float) Point.distance(xB,  yB, xP,  yP);
+		float fullDistance = (float) Point.distance(xA,  yA, xB,  yB);
+		int    pourcentage = (int) ((100 * distance) / fullDistance);
+
+		System.out.println("p:"+pourcentage);
+		System.out.println("D:"+distance+" / Db:"+distanceB + " / fD:"+fullDistance);
+		System.out.println("D+Db:"+(distance+distanceB));
+		
+		if (pourcentage >= 0 && (distance+distanceB) <= fullDistance + 0.01f)
 		{
-			System.out.println(""+pourcentage+"%");
 			this.s.setPourcentage(pourcentage);
 			this.shape = new Ellipse2D.Double(pFinal.x-4, pFinal.y-4, 8, 8);
-			this.revalidate();
 		}
+		else if (pourcentage == 0)
+		{
+			for (IEdge e : ((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getEdges())
+			{
+				
+			}
+		}
+		
 	}
 	@Override
 	public void update() {
