@@ -4,19 +4,20 @@
 package fr.utbm.info.gl52.Parser;
 
 import java.awt.geom.Rectangle2D;
-
 import fr.utbm.info.gl52.Collection.graph.Edge;
-import fr.utbm.info.gl52.Collection.graph.Graph;
 import fr.utbm.info.gl52.Collection.graph.IEdge;
 import fr.utbm.info.gl52.Collection.graph.IGraph;
+import fr.utbm.info.gl52.Collection.graph.INode;
 import fr.utbm.info.gl52.Collection.graph.Node;
 import fr.utbm.info.gl52.Collection.tree.QuadTree;
+import fr.utbm.info.gl52.Middle.Connection;
+import fr.utbm.info.gl52.Middle.MapGraph;
+import fr.utbm.info.gl52.Middle.MapPolyline;
+import fr.utbm.info.gl52.Middle.Segment;
 import fr.utbm.info.gl52.Parser.util.ESRISpatialObject;
 import fr.utbm.set.attr.Attribute;
 import fr.utbm.set.attr.AttributeContainer;
-import fr.utbm.set.attr.AttributeNotInitializedException;
 import fr.utbm.set.attr.AttributeProvider;
-import fr.utbm.set.attr.InvalidAttributeTypeException;
 import fr.utbm.set.io.shape.AbstractElementFactory;
 import fr.utbm.set.io.shape.ESRIBounds;
 import fr.utbm.set.io.shape.ESRIPoint;
@@ -41,7 +42,7 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 	private ParserDBase<Dn, De> dbase;
 	
 	public ShapeFileGraphFactory(FinishedParsingCallcack c, IParser parser, ParserDBase<Dn,De> dbase) {
-		this.graph = new Graph<>();
+		this.graph = new MapGraph<>();
 		
 		this.c = c;
 		this.parser = parser;
@@ -51,6 +52,7 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 	public void setBounds(ESRIBounds b){
 		this.bounds = b;
 		this.qtree = new QuadTree<>(new Rectangle2D.Double(this.bounds.minx, this.bounds.miny, this.bounds.maxx, this.bounds.maxy));
+		((MapGraph)this.graph).setMapBounds(b);
 	}
 
 	public Dn createPolyline(AttributeProvider provider, int shapeIndex, int[] parts, ESRIPoint[] points, boolean hasZ) {
@@ -85,25 +87,35 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 		
 		///
 		
-		Node<ESRISpatialObject> n = new Node<>(new ESRISpatialObject(points[0]));
+		INode<ESRISpatialObject> n = new Connection<>(new ESRISpatialObject(points[0]));
 		IEdge<AttributeContainer> e;
 		AttributeContainer attrs;
 		
+		MapPolyline mpoly = new MapPolyline(); 
+		
 		this.qtree.insert(n.getData());
 		
+		attrs = this.dbase.next();
+		
 		for(int i = 1 ; i < points.length ; ++i){
-			Node<ESRISpatialObject> m = new Node<>(new ESRISpatialObject(points[i]));
+			INode<ESRISpatialObject> m = new Connection<>(new ESRISpatialObject(points[i]));
 			
-			attrs = this.dbase.next();
-			e = new Edge<>(attrs, n, m);
+			
+			e = new Segment<>(attrs, n, m);
+			
+			mpoly.add((Segment<?>) e);
 			
 			if(attrs != null){
 				for (Attribute attr : attrs.attributes()) {
 					try {
 						if(attr.getName().equals("SENS") && attr.getValue().toString().equals("Double sens")){
-							e = new Edge<>(attrs, m, n);
+							e = new Segment<>(attrs, m, n);
 							this.graph.addEdge((Edge<De>) e);
+							mpoly.add((Segment<?>) e);
 						}
+						
+						if(attr.getName().equals("NOM_RUE_D"))
+							mpoly.setName(attr.getValue().toString());
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -116,8 +128,7 @@ public class ShapeFileGraphFactory<Dn,De> extends AbstractElementFactory<Dn> {
 			n = m;
 		}
 		
-		if(shapeIndex % 1000 == 0)
-			System.out.println(shapeIndex);
+		((MapGraph)this.graph).addMapPolyline(mpoly);
 		
 		return null;
 	}

@@ -17,11 +17,14 @@ public class GraphicButton extends JButton  {
 	 */
 	private static final long serialVersionUID = 2889193335246290667L;
 
+	private boolean selected = false;
 	public GraphicButton(String t)
 	{
 		super(t);
 	}
-
+	public void click() {
+		this.selected = !this.selected;
+	}
 
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
@@ -35,7 +38,7 @@ public class GraphicButton extends JButton  {
 			g2.setColor(new Color(19, 43, 168));
 		if(this.getModel().isPressed())
 			g2.setColor(new Color(246, 175,0));
-		if(this.getModel().isSelected())
+		if(this.getModel().isSelected() || this.selected)
 			g2.setColor(new Color(246, 128, 0));
 		g2.fillRect(0, 0, getWidth(), getHeight());
 		g2.setColor(Color.white);

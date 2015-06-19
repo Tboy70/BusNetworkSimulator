@@ -11,4 +11,5 @@ public class Graph<Dn, De> extends AbstractGraph<Node<Dn>, Edge<De>> {
 	{
 		super();
 	}
+
 }

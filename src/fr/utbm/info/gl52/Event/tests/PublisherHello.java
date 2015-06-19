@@ -10,7 +10,7 @@ public class PublisherHello implements IPublisher {
 	{
 
 	}
-	public void test()
+	public static void test()
 	{
 		/*
 		EventService.getInstance().publish(new EventHello("test 1!"));
