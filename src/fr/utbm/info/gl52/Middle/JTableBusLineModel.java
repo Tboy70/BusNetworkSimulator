@@ -27,7 +27,7 @@ public class JTableBusLineModel extends AbstractTableModel {
 	@Override
 	public synchronized Object getValueAt(int arg0, int arg1) {
 		if(arg1 == 0)
-			return this.net.getlBusLine().get(arg0).getNum();
+			return arg0;
 		if(arg1 == 1)
 			return this.net.getlBusLine().get(arg0).getName();
 		return 0;

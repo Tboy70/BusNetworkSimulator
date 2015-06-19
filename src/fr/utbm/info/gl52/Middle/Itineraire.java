@@ -1,5 +1,6 @@
 package fr.utbm.info.gl52.Middle;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
@@ -16,7 +17,7 @@ public class Itineraire implements Serializable{
 	private static final long serialVersionUID = -3207601505766469834L;
 
 	private String name;
-    
+    private Color color;
     private List<Segment<?>> lRoute;
     
 	private List<Stop> lStop;
@@ -24,12 +25,20 @@ public class Itineraire implements Serializable{
 	/**
      * 
      */
-    public Itineraire(String name) {
+    public Itineraire(String name, Color c) {
     	this.setName(name);
+    	this.color = c;
     	this.lRoute = new LinkedList<>();
     	this.lStop = new LinkedList<>();
     }
-
+    public Color getColor()
+    {
+    	return color;
+    }
+    public void setColor(Color c)
+    {
+    	this.color = c;
+    }
 	public String getName() {
 		return this.name;
 	}

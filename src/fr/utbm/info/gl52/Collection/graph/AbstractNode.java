@@ -46,7 +46,7 @@ public abstract class AbstractNode<Dn> implements INode<Dn> {
 	 */
 	@Override
 	public List<IEdge<?>> getEdges() {
-		return this.getEdges();
+		return this.listEdge;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

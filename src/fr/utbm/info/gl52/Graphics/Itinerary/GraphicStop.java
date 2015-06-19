@@ -126,6 +126,8 @@ public class GraphicStop extends AbstractGraphicElement {
 		{
 			float minDistance = 1000000000000000.0f;
 			IEdge newEdge = null;
+			if (((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getEdges() != null)
+			{
 			for (IEdge e : ((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getEdges())
 			{
 				//TODO Parcourir la liste et récupérer le segment le plus proche dans le noeud de fin est getNodeA()
@@ -146,6 +148,7 @@ public class GraphicStop extends AbstractGraphicElement {
 					}
 				}
 			}
+			}
 			if (newEdge != null)
 			{
 				this.s.setEdge(newEdge);
@@ -154,10 +157,14 @@ public class GraphicStop extends AbstractGraphicElement {
 		}
 		else if ((distance+distanceB) > fullDistance + 0.01f)
 		{
+			if (((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getEdges() != null)
+			{
+			
 			for (IEdge e : ((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getEdges())
 			{
 				//TODO Parcourir la liste et récupérer le segment le plus proche dans le noeud de debut est getNodeB()
-			}			
+			}
+			}
 		}
 		
 	}

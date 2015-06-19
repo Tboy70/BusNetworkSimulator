@@ -29,7 +29,7 @@ public abstract class AbstractGraphicItinerary extends AbstractGraphicElement {
 			ESRIBounds b) {
 		this.it = iti;
 		this.offset = off;
-		this.col = c;
+		this.col = iti.getColor();
 		this.naturalOffset = new Point();
 		this.naturalOffset.setLocation(b.minx, b.miny);
 	}
