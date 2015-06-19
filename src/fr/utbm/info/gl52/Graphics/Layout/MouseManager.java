@@ -117,7 +117,7 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 								EventService.getInstance().publish(new AddStopEvent(this.selected));
 								Point pp = p;
 								p.translate(GraphicsLaunch.offset.x, GraphicsLaunch.offset.y);
-								for (Segment s : road
+								/*for (Segment s : road
 										.getPolyline().getListSegment())
 								{
 									if (true)
@@ -127,7 +127,11 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 										EventService.getInstance().publish(new AddStopEvent(selected));
 										break;
 									}
-								}
+								}*/
+								selected = new GraphicStop(new Stop(50,road
+										.getPolyline().getListSegment().get(0)), GraphicsLaunch.offset);
+								selected.dragAndDrop(p);
+								EventService.getInstance().publish(new AddStopEvent(selected));
 							}
 						}
 					}
