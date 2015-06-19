@@ -35,11 +35,16 @@ public class BusLine implements Serializable{
     public BusLine() {
     	this.lIti = new LinkedList<>();
     }
+    
+    public void addItineraire(Itineraire l)
+    {
+    	this.lIti.add(l);
+    }
 
-    /**
-     * Get the name of the bus line
-     * @return THe name of the bus line
-     */
+	/**
+	 * Get the name of the bus line
+	 * @return THe name of the bus line
+	 */
 	public String getName() {
 		return this.name;
 	}

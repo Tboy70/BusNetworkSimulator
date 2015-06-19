@@ -1,5 +1,6 @@
 package fr.utbm.info.gl52.Middle;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
@@ -21,6 +22,8 @@ public class Itineraire implements Serializable{
 	 * Name of the itinerary
 	 */
 	private String name;
+	
+	private Color color;
     
 	/**
 	 * List of segment composed by the itinerary
@@ -35,10 +38,20 @@ public class Itineraire implements Serializable{
 	/**
      * Default constructor. Initialize the class with a name
      */
-    public Itineraire(String name) {
+    public Itineraire(String name, Color c) {
     	this.setName(name);
+    	this.color = c;
     	this.lRoute = new LinkedList<>();
     	this.lStop = new LinkedList<>();
+    }
+    
+    public Color getColor()
+    {
+    	return this.color;
+    }
+    public void setColor(Color c)
+    {
+    	this.color = c;
     }
 
     /**

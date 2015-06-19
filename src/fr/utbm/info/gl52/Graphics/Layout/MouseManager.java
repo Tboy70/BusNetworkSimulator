@@ -12,8 +12,14 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
+import fr.utbm.info.gl52.Event.AddStopEvent;
+import fr.utbm.info.gl52.Event.EventService;
 import fr.utbm.info.gl52.Graphics.AbstractGraphicElement;
+import fr.utbm.info.gl52.Graphics.Controller;
+import fr.utbm.info.gl52.Graphics.GraphicsLaunch;
 import fr.utbm.info.gl52.Graphics.Itinerary.GraphicStop;
+import fr.utbm.info.gl52.Graphics.Road.RoadComponent;
+import fr.utbm.info.gl52.Middle.Stop;
 
 public class MouseManager implements MouseListener, MouseMotionListener,
 		MouseWheelListener {
@@ -21,6 +27,7 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 	private List<AbstractLayout<?>> l;
 	public static boolean bModify = false;
 	public GraphicStop selected;
+
 	public MouseManager(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -40,24 +47,80 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 	public void mousePressed(MouseEvent e) {
 		this.x = e.getX();
 		this.y = e.getY();
-		if (!bModify||SwingUtilities.isRightMouseButton(e)) {
+		if (!bModify || SwingUtilities.isRightMouseButton(e)) {
 			for (AbstractLayout<?> al : this.l)
 				System.out.println("Source:" + al.actionClick(this.x, this.y));
-		}
-		else
-		{
+		} else {
 			Collection<AbstractGraphicElement> c = new ArrayList<>();
+
 			for (AbstractLayout<?> al : this.l)
 				c.addAll(al.actionClick(this.x, this.y));
 			this.selected = null;
-			for (AbstractGraphicElement age : c)
-			{
-				if (age instanceof GraphicStop)
-				{
+			RoadComponent road = null;
+			for (AbstractGraphicElement age : c) {
+				if (age instanceof GraphicStop) {
 					this.selected = (GraphicStop) age;
+
 					age.select();
-					break;
+					//break;
+				} else if (age instanceof RoadComponent) {
+					road = (RoadComponent) age;
 				}
+			}
+			if (e.isControlDown()) {
+				if (road != null) {
+					if (Controller.getInstance().getItineraire() != null) {
+						if (Controller
+								.getInstance()
+								.getItineraire()
+								.getlRoute()
+								.containsAll(
+										road.getPolyline().getListSegment())) {
+							Controller
+									.getInstance()
+									.getItineraire()
+									.getlRoute()
+									.removeAll(
+											road.getPolyline().getListSegment());
+						} else {
+							Controller
+									.getInstance()
+									.getItineraire()
+									.getlRoute()
+									.addAll(road.getPolyline().getListSegment());
+						}
+					}
+				}
+								}
+			if (this.selected == null) {
+				if (e.isShiftDown() && e.getClickCount() >= 2) {
+					if (road != null) {
+						if (Controller.getInstance().getItineraire() != null) {
+							if (Controller
+									.getInstance()
+									.getItineraire()
+									.getlRoute()
+									.containsAll(
+											road.getPolyline()
+													.getListSegment())) {
+								System.out.println("test");
+								Point p = new Point();
+								for (AbstractLayout<?> al : this.l) {
+									if (al instanceof LayoutNetwork)
+										p.setLocation((int) al.getLocation().getX() + e.getX(),
+												(int) al.getLocation().getY() + e.getY());
+								}
+
+								this.selected = new GraphicStop(new Stop(0, road
+										.getPolyline().getListSegment()
+										.get(0)), GraphicsLaunch.offset);
+								this.selected.dragAndDrop(p);
+								EventService.getInstance().publish(new AddStopEvent(this.selected));
+							}
+						}
+					}
+				}
+
 			}
 		}
 	}
@@ -82,27 +145,25 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 		int newX = (this.x - e.getX());
 		int newY = (this.y - e.getY());
 
-		if (!bModify||SwingUtilities.isRightMouseButton(e)) {
+		if (!bModify || SwingUtilities.isRightMouseButton(e)) {
 			for (AbstractLayout<?> al : this.l) {
 				al.setLocation((int) al.getLocation().getX() - newX, (int) al
 						.getLocation().getY() - newY);
 				al.repaint();
 			}
-		}
-		else
-		{
-			if (this.selected != null)
-			{
+		} else {
+			if (this.selected != null) {
+
 				Point p = new Point();
 				for (AbstractLayout<?> al : this.l) {
 					if (al instanceof LayoutNetwork)
-						p.setLocation((int) al.getLocation().getX() + e.getX(), (int) al.getLocation().getY() + e.getY());
-					//al.repaint();
+						p.setLocation((int) al.getLocation().getX() + e.getX(),
+								(int) al.getLocation().getY() + e.getY());
 				}
 
-				//Point p = new Point();
-				//p.setLocation(e.getX(), e.getY());
-				System.out.println("----x"+p);
+				// Point p = new Point();
+				// p.setLocation(e.getX(), e.getY());
+				System.out.println("----x " + p);
 				this.selected.dragAndDrop(p);
 			}
 		}

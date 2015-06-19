@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import fr.utbm.info.gl52.Event.DisplayBusLineEvent;
 import fr.utbm.info.gl52.Event.DisplayItEvent;
 import fr.utbm.info.gl52.Event.EventService;
+import fr.utbm.info.gl52.Graphics.GraphicsLaunch;
 import fr.utbm.info.gl52.Middle.BusLine;
 import fr.utbm.info.gl52.Middle.BusNetwork;
 import fr.utbm.info.gl52.Middle.JTableBusLineModel;
@@ -74,6 +75,7 @@ public class DataWindow extends AbstractFrame {
 		
 		// Define the minimum size of the window
 		this.pack();
+		this.setLocation(GraphicsLaunch.getPositionOffset());
 	}
 
 	private synchronized void goToIt(int row){		

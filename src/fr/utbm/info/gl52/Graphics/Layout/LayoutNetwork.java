@@ -58,6 +58,7 @@ public class LayoutNetwork<C extends AbstractGraphicElement> extends AbstractLay
 		g2d.dispose();
 		super.paintComponent(g);
 	}
+	
 	public Collection<AbstractGraphicElement> actionClick(int x, int y)
 	{
 		this.clicx = (int) ((100/this.zoom) * (x - this.getLocation().getX()));

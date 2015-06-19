@@ -14,7 +14,6 @@ public class MainLauncher {
 	 * @param args None are checked
 	 */
 	public static void main(String[] args) {
-		Controller c = new Controller();
-		c.start();
+		Controller.getInstance().start();
 	}
 }

@@ -24,7 +24,7 @@ public abstract class AbstractFrame extends JFrame implements IFrame, ISubscribe
 	private static final long serialVersionUID = 1L;
 	protected AbstractLayout<AbstractComponent> gui;
 	protected AbstractLayout<AbstractGraphicElement> map;
-	protected LayoutNetwork<BusComponent> network;
+	protected LayoutNetwork<AbstractGraphicElement> network;
 	protected JLayeredPane jlp;
 	protected JPanel mainPanel;
 	protected MouseManager mouse;
@@ -49,7 +49,7 @@ public abstract class AbstractFrame extends JFrame implements IFrame, ISubscribe
     	this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 
 	}
-	public AbstractLayout<BusComponent> getNetwork()
+	public AbstractLayout<AbstractGraphicElement> getNetwork()
 	{
 		return this.network;
 	}
@@ -72,7 +72,7 @@ public abstract class AbstractFrame extends JFrame implements IFrame, ISubscribe
 		c.setVisible(false);
 		this.map.repaint();
 	}
-	public void addNetworkElement(BusComponent c)
+	public void addNetworkElement(AbstractGraphicElement c)
 	{
 		this.network.addComponent(c);
 	}
