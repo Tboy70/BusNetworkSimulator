@@ -45,8 +45,6 @@ public class Controller implements ISubscriber {
 		EventService.getInstance().subscribe(DisplayItEvent.class, null, this);
 		EventService.getInstance().subscribe(AddStopEvent.class, null, this);
 		EventService.getInstance().subscribe(AddItineraireEvent.class, null, this);
-		
-		
 	}
 	
 	public Itineraire getItineraire()
@@ -81,13 +79,13 @@ public class Controller implements ISubscriber {
 		}
 		else if(e.getClass() == AddStopEvent.class){
 			this.viewMap.addGraphicStop(((AddStopEvent)e).message);
+			this.viewData.redraw();
 		}
 		else if(e.getClass() == AddItineraireEvent.class){
-
-			System.out.println("Ajout de l'itinéraire");
 			if (this.currentLine  != null)
 			{
 				this.currentLine.addItineraire(((AddItineraireEvent)e).it);
+				this.viewData.redraw();
 			}
 		}
 	}

@@ -1,5 +1,7 @@
 package fr.utbm.info.gl52.Middle;
 
+import java.awt.Color;
+
 import javax.swing.table.AbstractTableModel;
 
 public class JTableItModel extends AbstractTableModel {
@@ -24,6 +26,13 @@ public class JTableItModel extends AbstractTableModel {
 		return this.line.getlIti().size();
 	}
 
+	public synchronized Color getColor(int arg0)
+	{
+		if (arg0 >=0 && this.line.getlIti().size() > arg0)
+			return this.line.getlIti().get(arg0).getColor();
+		
+		return Color.white;
+	}
 	@Override
 	public synchronized Object getValueAt(int arg0, int arg1) {
 		if(arg1 == 0)
@@ -49,9 +58,8 @@ public class JTableItModel extends AbstractTableModel {
 	public synchronized void setNet(BusLine l) {
 		this.line = l;
 	}
-
-	public synchronized void addBusLine(Itineraire message) {
-		this.line.getlIti().add(message);
+	public synchronized void refresh()
+	{
 		this.fireTableDataChanged();
 	}
 }

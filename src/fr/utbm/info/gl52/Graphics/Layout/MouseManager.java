@@ -19,6 +19,7 @@ import fr.utbm.info.gl52.Graphics.Controller;
 import fr.utbm.info.gl52.Graphics.GraphicsLaunch;
 import fr.utbm.info.gl52.Graphics.Itinerary.GraphicStop;
 import fr.utbm.info.gl52.Graphics.Road.RoadComponent;
+import fr.utbm.info.gl52.Middle.Segment;
 import fr.utbm.info.gl52.Middle.Stop;
 
 public class MouseManager implements MouseListener, MouseMotionListener,
@@ -101,24 +102,36 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 									.containsAll(
 											road.getPolyline()
 													.getListSegment())) {
-								System.out.println("test");
 								Point p = new Point();
 								for (AbstractLayout<?> al : this.l) {
 									if (al instanceof LayoutNetwork)
 										p.setLocation((int) al.getLocation().getX() + e.getX(),
 												(int) al.getLocation().getY() + e.getY());
 								}
-
-								selected = new GraphicStop(new Stop(0, road
-										.getPolyline().getListSegment()
-										.get(0)), GraphicsLaunch.offset);
-								selected.dragAndDrop(p);
-								EventService.getInstance().publish(new AddStopEvent(selected));
+								Point pp = p;
+								p.translate(GraphicsLaunch.offset.x, GraphicsLaunch.offset.y);
+								for (Segment s : road
+										.getPolyline().getListSegment())
+								{
+									if (true)
+									{
+										selected = new GraphicStop(new Stop(50,s), GraphicsLaunch.offset);
+										selected.dragAndDrop(p);
+										EventService.getInstance().publish(new AddStopEvent(selected));
+										break;
+									}
+								}
 							}
 						}
 					}
 				}
-
+			}
+			else
+			{
+				if (e.getClickCount() >= 2)
+				{
+					c.remove(selected);
+				}
 			}
 		}
 	}
@@ -158,9 +171,6 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 								(int) al.getLocation().getY() + e.getY());
 				}
 
-				// Point p = new Point();
-				// p.setLocation(e.getX(), e.getY());
-				System.out.println("----x " + p);
 				selected.dragAndDrop(p);
 			}
 		}

@@ -39,7 +39,7 @@ public class NameGenerator {
 			s = "In the deep";
 			break;
 		case 9:
-			s = "Deux milles";
+			s = "Deux mille";
 			break;
 		case 10:
 			s = "Specter";
@@ -113,7 +113,7 @@ public class NameGenerator {
 		case "In the deep":
 			c = Color.pink.brighter();
 			break;
-		case "Deux milles":
+		case "Deux mille":
 			c = Color.red.darker().darker();
 			break;
 		case "Specter":
