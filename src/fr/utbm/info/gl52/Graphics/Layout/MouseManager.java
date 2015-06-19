@@ -103,7 +103,6 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 									.containsAll(
 											road.getPolyline()
 													.getListSegment())) {
-								System.out.println("test");
 								Point p = new Point();
 								for (AbstractLayout<?> al : this.l) {
 									if (al instanceof LayoutNetwork)
@@ -116,11 +115,30 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 										.get(0)), GraphicsLaunch.offset);
 								this.selected.dragAndDrop(p);
 								EventService.getInstance().publish(new AddStopEvent(this.selected));
+								Point pp = p;
+								p.translate(GraphicsLaunch.offset.x, GraphicsLaunch.offset.y);
+								for (Segment s : road
+										.getPolyline().getListSegment())
+								{
+									if (true)
+									{
+										selected = new GraphicStop(new Stop(50,s), GraphicsLaunch.offset);
+										selected.dragAndDrop(p);
+										EventService.getInstance().publish(new AddStopEvent(selected));
+										break;
+									}
+								}
 							}
 						}
 					}
 				}
-
+			}
+			else
+			{
+				if (e.getClickCount() >= 2)
+				{
+					c.remove(selected);
+				}
 			}
 		}
 	}
@@ -161,9 +179,6 @@ public class MouseManager implements MouseListener, MouseMotionListener,
 								(int) al.getLocation().getY() + e.getY());
 				}
 
-				// Point p = new Point();
-				// p.setLocation(e.getX(), e.getY());
-				System.out.println("----x " + p);
 				this.selected.dragAndDrop(p);
 			}
 		}
