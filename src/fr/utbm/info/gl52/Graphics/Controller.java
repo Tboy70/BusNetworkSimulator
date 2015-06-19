@@ -57,9 +57,9 @@ public class Controller implements ISubscriber {
 	/**
 	 * Initialize the main controller.
 	 */
-	private Controller() { 
-		this.model = null;
-		this.viewData = null;
+	private Controller() {
+		this.viewMap = new GraphicsLaunch();
+		this.viewData = new DataLaunch();
 		
 		// Mapview
 		EventService.getInstance().subscribe(LeftClicEvent.class, null, this);
@@ -73,8 +73,6 @@ public class Controller implements ISubscriber {
 		EventService.getInstance().subscribe(DisplayItEvent.class, null, this);
 		EventService.getInstance().subscribe(AddStopEvent.class, null, this);
 		EventService.getInstance().subscribe(AddItineraireEvent.class, null, this);
-		
-		
 	}
 	
 	/**
