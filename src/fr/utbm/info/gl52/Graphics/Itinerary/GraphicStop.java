@@ -73,6 +73,16 @@ public class GraphicStop extends AbstractGraphicElement {
 		
 		return p;
 	}
+	public Point projection(float xA, float yA, float xB, float yB, float xP, float yP)
+	{
+		Point A = new Point();
+		A.setLocation(xA, yA);
+		Point B = new Point();
+		B.setLocation(xB, yB);
+		Point P = new Point();
+		P.setLocation(xP, yP);
+		return this.projection(A,B,P);
+	}
 	public void dragAndDrop(Point p)
 	{
 		float xA = (float) (((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getData().getX());
@@ -114,10 +124,40 @@ public class GraphicStop extends AbstractGraphicElement {
 		}
 		else if (pourcentage == 0)
 		{
+			float minDistance = 1000000000000000.0f;
+			IEdge newEdge = null;
 			for (IEdge e : ((Node<ESRISpatialObject>)s.getEdge().getNodeA()).getEdges())
 			{
-				
+				//TODO Parcourir la liste et récupérer le segment le plus proche dans le noeud de fin est getNodeA()
+				if (((Node<ESRISpatialObject>)s.getEdge().getNodeA()) == e.getNodeB())
+				{
+					float xC = (float) (((Node<ESRISpatialObject>)e.getNodeA()).getData().getX());
+					float yC = (float) (((Node<ESRISpatialObject>)e.getNodeA()).getData().getY());
+					
+					Point C = new Point();
+					C.setLocation(xC, yC);
+					C.translate(- naturalOffset.x, - naturalOffset.y);
+					
+					Point D = this.projection(A,C,p);
+					if (Point.distance(D.x, D.y, C.x, C.y) <= minDistance)
+					{
+						minDistance = (float) Point.distance(D.x, D.y, C.x, C.y);
+						newEdge = e;
+					}
+				}
 			}
+			if (newEdge != null)
+			{
+				this.s.setEdge(newEdge);
+				this.s.setPourcentage(100);
+			}
+		}
+		else if ((distance+distanceB) > fullDistance + 0.01f)
+		{
+			for (IEdge e : ((Node<ESRISpatialObject>)s.getEdge().getNodeB()).getEdges())
+			{
+				//TODO Parcourir la liste et récupérer le segment le plus proche dans le noeud de debut est getNodeB()
+			}			
 		}
 		
 	}
